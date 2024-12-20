@@ -1,0 +1,9 @@
+## Looking Forward 
+1. Develop Technical Skills in Data Visualization and Digital Storytelling
+To improve my ability to create compelling digital humanities projects, I plan to take courses that focus on data visualization and computational tools for storytelling. Specifically, I aim to enroll in a course like Data Science for the Humanities, which combines technical skills with humanistic inquiry. Additionally, I want to explore workshops through Penn Libraries that explain how to use tools like Tableau or Gephi to analyze and present complex datasets. 
+
+2. Deepen My Understanding of Investigative Storytelling
+Inspired by the Printing in Prisons blog, I want to revisit my passion for investigative journalism. I plan to read books like Katherine Boo’s Behind the Beautiful Forevers and Nikole Hannah-Jones’s The 1619 Project to learn how experienced journalists navigate complex narratives while centering marginalized voices. I will also seek out opportunities to write for campus publications or digital platforms, such as The Daily Pennsylvanian, something I have always wanted to do but previously felt unsure about my abilities.
+
+3. Research Projects
+To sustain my engagement with digital humanities, I will actively seek out research opportunities that allow me to collaborate on interdisciplinary projects and explore minoring in Digital Humanities. I plan to connect with Penn’s Price Lab for Digital Humanities to find research initiatives where I can contribute my skills in archival analysis and digital storytelling. Specifically, I will reach out to faculty members whose work aligns with my interests in ethical storytelling and the intersection of technology and history. Collaborating with others will help me refine my skills while contributing to meaningful projects that amplify underrepresented voices and narratives.
