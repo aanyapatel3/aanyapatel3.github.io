@@ -17,7 +17,7 @@ As we navigate the evolving landscape of AI and digital technologies, the insigh
 ## Penn Workshop: 
 I attended the pop-up card workshop at the Kislak Center where we made a holiday Christmas card. The workshop was an incredible reminder of how something creative, like making cards, can bring people together. It was interesting to meet people from different walks of life. There were students like me, but also elderly members of the community, and even a librarian’s mother-in-law. Everyone was focused on their cards, but we were also chatting and helping each other out. It made me realize that even though we were all different, we had something in common. We were all there to learn something new and make something unique. It reminded me of what we talked about in class – how books and art can create communities and help people connect. I loved how welcoming the workshop was. You didn't need to be an artist or creatively gifted to participate. They gave us all the materials and showed us exactly what to do. It made me think about how important it is for everyone to have a chance to be creative, no matter what their background, age, or ability
 \
-![My card](./card1.jpeg)\
+![My card](./card.jpeg)\
 My Card.\
 
 The workshop was a nice break from reading and lectures, and it helped me understand our class material in a new way. Making the pop-up card made me think about the design of books that we had seen earlier in the Kislak Center, specifically the popup obstetrics book. It gave me a true appreciation for how much precision, dedication, and patience it took to construct that book. 
