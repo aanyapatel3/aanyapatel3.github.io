@@ -14,3 +14,19 @@ The workshop reinforced the central themes of our class, specifically the need f
 As we navigate the evolving landscape of AI and digital technologies, the insights from this workshop will continue to shape how I approach the digital humanities and am an intentional participant in this new AI age. It also means striving to ensure that the work I do with digital tools contributes to broader goals of equity and keeping in mind the importance of academic honesty, sourcing transparently, and not further perpetuating biases fueled by AI. 
 
 
+## Penn Workshop: 
+I attended the pop-up card workshop at the Kislak Center where we made a holiday Christmas card. The workshop was an incredible reminder of how something creative, like making cards, can bring people together. It was interesting to meet people from different walks of life. There were students like me, but also elderly members of the community, and even a librarian’s mother-in-law. Everyone was focused on their cards, but we were also chatting and helping each other out. It made me realize that even though we were all different, we had something in common. We were all there to learn something new and make something unique. It reminded me of what we talked about in class – how books and art can create communities and help people connect. I loved how welcoming the workshop was. You didn't need to be an artist or creatively gifted to participate. They gave us all the materials and showed us exactly what to do. It made me think about how important it is for everyone to have a chance to be creative, no matter what their background, age, or ability
+\
+![My card](./card1.jpeg)\
+My Card.\
+
+The workshop was a nice break from reading and lectures, and it helped me understand our class material in a new way. Making the pop-up card made me think about the design of books that we had seen earlier in the Kislak Center, specifically the popup obstetrics book. It gave me a true appreciation for how much precision, dedication, and patience it took to construct that book. 
+
+I also realized that books can be a way for people to express themselves. We were all making the same basic card, but everyone's turned out a little different and was made for different people in their lives.  Some people added extra decorations, such as creating a sparkling star and others made their pop-ups really complicated by adding thinner and differently shaped according flaps to create the pop up. It showed me how books and art can be a way for people to share their ideas and personalities. Overall, the pop-up card workshop was a really cool experience that I would highly recommend to others. It was fun to make something with my hands, and it helped me connect what we're learning in class with the real world. 
+
+Leaving the workshop, I felt a renewed sense of appreciation for the artistry and craftsmanship embedded in every book. It inspired me to want to seek more experiences like this where I interact with different parts of the Penn communities and reconnect with the creative part of me. As I carefully cut and folded the paper, I was reminded of my childhood when I would spend hours making handmade cards for my family and friends. This workshop rekindled the childhood joy of creating something tangible and meaningful. It reminded me of the simple pleasure of working with my hands, transforming ordinary materials into something beautiful and expressive. The act of creating brought a sense of calm and focus that was a welcome break from the demands of academic life. I am going to actively seek out more creative outlets, whether it's attending workshops, joining art clubs, or simply dedicating time to personal artistic projects.
+
+\
+![Finished Card](./card2.jpeg)\
+Finished Card.\
+
