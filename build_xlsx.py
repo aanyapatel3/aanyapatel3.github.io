@@ -23,6 +23,7 @@ SRC = {
     "sdz_fy25":     ("Investing.com - Sandoz FY2025 results", "https://www.investing.com/news/company-news/sandoz-fy-2025-slides-biosimilar-surge-drives-24-stock-gain-93CH-4523555"),
     "sdz_growth":   ("Pharmaceutical Daily - Sandoz 2025/2026 outlook", "https://pharmaceuticaldaily.com/sandoz-reports-7-revenue-growth-in-2025-expands-biosimilars-and-projects-stronger-2026-outlook/"),
     "sdz_invest":   ("Investing.com - Sandoz price/market data", "https://www.investing.com/equities/sandoz"),
+    "gh_stats":     ("stockanalysis.com - GH statistics", "https://stockanalysis.com/stocks/gh/"),
 }
 
 # ---- styling helpers ----
@@ -88,14 +89,15 @@ def add_sheet(name, title, note, headers, rows, widths=None, total_rows=()):
 # ===== 1. Summary =====
 add_sheet(
     "Summary", "Equity Research Summary - ratings & targets (late May 2026)",
-    "Educational exercise; NOT investment advice. Figures from public sources as of late May 2026. 'E' = illustrative analyst estimate.",
+    "Educational exercise; NOT investment advice. Figures from public sources as of late May 2026. 'E' = illustrative estimate. Detail sheets cover Amgen/Danaher/Sandoz; the full Guardant Health model lives in GuardantHealthAnalysis.md.",
     ["Company", "Ticker", "Segment", "Price*", "Rating", "Base 12-mo target", "Implied return**", "Source"],
     [
         ["Amgen", "AMGN (Nasdaq)", "Big-cap biopharma (drugs)", "~$326", "BUY", "~$365", "~+12% + 2.8% yield", "amgn_stats"],
         ["Danaher", "DHR (NYSE)", "Picks & shovels for biopharma", "~$190", "BUY / Accumulate", "~$225", "~+18% + 0.5% yield", "dhr_tikr"],
         ["Sandoz", "SDZ (SIX, Swiss)", "Generics + biosimilars", "~CHF 66", "HOLD", "~CHF 70", "~+6% + 1.2% yield", "sdz_invest"],
+        ["Guardant Health", "GH (Nasdaq)", "Liquid-biopsy diagnostics", "~$127", "BUY (high risk)", "~$150", "~+18% (no dividend)", "gh_stats"],
     ],
-    widths={"A": 12, "B": 16, "C": 30, "D": 10, "E": 16, "F": 18, "G": 22, "H": 38},
+    widths={"A": 16, "B": 16, "C": 30, "D": 10, "E": 16, "F": 18, "G": 22, "H": 38},
 )
 
 # ===== 2. Amgen revenue build =====
