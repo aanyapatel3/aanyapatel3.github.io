@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Greece Trip · July 6–12</title>
+<style>
+  :root{
+    --blue:#1a6fb5;
+    --deep:#0d4a7a;
+    --sea:#e8f4fb;
+    --sand:#fbf7ef;
+    --ink:#22303a;
+    --muted:#5b6b76;
+    --line:#dce6ee;
+    --accent:#e07a3f;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    color:var(--ink);background:var(--sand);line-height:1.6;
+  }
+  a{color:var(--blue);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:780px;margin:0 auto;padding:0 18px 80px}
+
+  /* Hero */
+  .hero{
+    background:linear-gradient(160deg,var(--blue),var(--deep));
+    color:#fff;text-align:center;padding:54px 20px 46px;
+  }
+  .hero .eyebrow{letter-spacing:3px;text-transform:uppercase;font-size:12px;opacity:.85;margin:0}
+  .hero h1{margin:8px 0 6px;font-size:38px;line-height:1.1}
+  .hero p{margin:0;opacity:.92;font-size:16px}
+  .hero .dates{display:inline-block;margin-top:16px;background:rgba(255,255,255,.15);
+    padding:7px 16px;border-radius:30px;font-size:14px;font-weight:600}
+
+  /* Nav */
+  .nav{position:sticky;top:0;z-index:20;background:rgba(251,247,239,.95);
+    backdrop-filter:blur(6px);border-bottom:1px solid var(--line);
+    display:flex;gap:6px;overflow-x:auto;padding:10px 12px}
+  .nav a{white-space:nowrap;font-size:13px;font-weight:600;color:var(--deep);
+    padding:6px 11px;border-radius:20px;background:var(--sea)}
+  .nav a:hover{background:#d6ebf8;text-decoration:none}
+
+  h2{font-size:24px;margin:38px 0 4px;color:var(--deep)}
+  h2 .ic{margin-right:8px}
+  .sub{color:var(--muted);margin:0 0 16px;font-size:15px}
+  h3{font-size:18px;margin:22px 0 8px;color:var(--ink)}
+
+  /* Cards */
+  .card{background:#fff;border:1px solid var(--line);border-radius:14px;
+    padding:16px 18px;margin:12px 0;box-shadow:0 1px 3px rgba(20,60,90,.05)}
+  .day{border-left:5px solid var(--blue)}
+  .day .tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:1px;
+    text-transform:uppercase;color:#fff;background:var(--blue);padding:3px 9px;border-radius:20px}
+  .day h3{margin:10px 0 6px}
+  .day ul{margin:8px 0 0;padding-left:20px}
+  .day li{margin:4px 0}
+
+  .pill{display:inline-block;background:var(--sea);color:var(--deep);font-size:12px;
+    font-weight:600;padding:3px 10px;border-radius:20px;margin:2px 4px 2px 0}
+  .pill.eat{background:#fdeee4;color:#b9551f}
+  .pill.boat{background:#e3f5ec;color:#1d7a4d}
+
+  table{width:100%;border-collapse:collapse;margin:10px 0;font-size:14.5px}
+  th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--deep);font-size:13px;text-transform:uppercase;letter-spacing:.5px}
+  .book{white-space:nowrap;font-weight:600}
+
+  .meal{margin:14px 0;padding:14px 16px;background:#fff;border:1px solid var(--line);
+    border-radius:12px;border-left:5px solid var(--accent)}
+  .meal .when{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--accent)}
+  .meal .spot{font-size:17px;font-weight:700;margin:3px 0 2px}
+  .meal .order{font-size:14px;color:var(--muted)}
+  .meal .order b{color:var(--ink)}
+
+  .note{background:#fff8ec;border:1px solid #f3e2bf;border-radius:12px;
+    padding:12px 16px;margin:14px 0;font-size:14.5px}
+  .note b{color:#9a6a00}
+
+  .star{color:var(--accent)}
+  .foot{text-align:center;color:var(--muted);font-size:13px;margin-top:40px;
+    border-top:1px solid var(--line);padding-top:20px}
+  .check{list-style:none;padding-left:0}
+  .check li{padding:6px 0 6px 28px;position:relative;border-bottom:1px solid var(--line)}
+  .check li:before{content:"☐";position:absolute;left:4px;color:var(--blue);font-size:18px}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <p class="eyebrow">Couples Trip · Cyclades</p>
+  <h1>🇬🇷 Greece, 7 Days</h1>
+  <p>Athens · Naxos · Koufonisia · Paros</p>
+  <span class="dates">July 6 – July 12 &nbsp;·&nbsp; Car-Free</span>
+</div>
+
+<div class="nav">
+  <a href="#overview">Overview</a>
+  <a href="#itinerary">Itinerary</a>
+  <a href="#eat">Dining Plan</a>
+  <a href="#stay">Hotels</a>
+  <a href="#do">Activities</a>
+  <a href="#ferries">Ferries</a>
+  <a href="#cost">Cost</a>
+  <a href="#booking">Book It</a>
+  <a href="#tips">Tips</a>
+</div>
+
+<div class="wrap">
+
+  <!-- OVERVIEW -->
+  <h2 id="overview"><span class="ic">🧭</span>At a Glance</h2>
+  <p class="sub">Relaxed &amp; romantic · beaches, swimming &amp; boat days · no rental car needed anywhere.</p>
+  <div class="card">
+    <span class="pill">✈️ Arrive Athens · Jul 6</span>
+    <span class="pill">🏛️ Athens · 2 nights</span>
+    <span class="pill">🏖️ Naxos · 2 nights</span>
+    <span class="pill boat">🚤 Koufonisia · boat day</span>
+    <span class="pill">⛵ Paros · 2 nights</span>
+    <span class="pill">✈️ Fly home · Jul 12</span>
+  </div>
+  <div class="note"><b>Getting around:</b> Athens = metro + walking · Naxos = local bus + boat · Koufonisia = day cruise · Paros = walk Naoussa + boat. Zero driving.</div>
+
+  <!-- ITINERARY -->
+  <h2 id="itinerary"><span class="ic">📅</span>Day by Day</h2>
+
+  <div class="card day">
+    <span class="tag">Day 1 · Sun Jul 6</span>
+    <h3>Arrive Athens</h3>
+    <ul>
+      <li>Metro/taxi from airport to <b>Plaka</b>, check in &amp; settle.</li>
+      <li>Golden-hour stroll through Plaka &amp; Anafiotika.</li>
+      <li>🍽️ Easy rooftop dinner with lit-up Acropolis views.</li>
+    </ul>
+  </div>
+
+  <div class="card day">
+    <span class="tag">Day 2 · Mon Jul 7</span>
+    <h3>Athens Highlights</h3>
+    <ul>
+      <li><b>Acropolis at 8am</b> (beat heat &amp; crowds) + Acropolis Museum.</li>
+      <li>Lunch in Plaka, browse Monastiraki flea market.</li>
+      <li>Sunset from Lycabettus or Filopappou Hill.</li>
+      <li>🌅 Optional: Cape Sounion sunset (Temple of Poseidon).</li>
+    </ul>
+  </div>
+
+  <div class="card day">
+    <span class="tag">Day 3 · Tue Jul 8</span>
+    <h3>Ferry to Naxos</h3>
+    <ul>
+      <li>Morning fast ferry Athens → Naxos (~3h15).</li>
+      <li>Check in; afternoon swim at Agios Prokopios / Agia Anna (local bus).</li>
+      <li>Sunset at the <b>Portara</b> (marble temple gate).</li>
+    </ul>
+  </div>
+
+  <div class="card day">
+    <span class="tag">Day 4 · Wed Jul 9</span>
+    <h3>🚤 Koufonisia Boat Day</h3>
+    <ul>
+      <li>Full-day cruise from Naxos to <b>Koufonisia &amp; the Small Cyclades</b>.</li>
+      <li>Swim stops in turquoise coves, Pori beach, Kato Koufonisi.</li>
+      <li>Sunset cruise back to Naxos.</li>
+    </ul>
+  </div>
+
+  <div class="card day">
+    <span class="tag">Day 5 · Thu Jul 10</span>
+    <h3>Ferry to Paros</h3>
+    <ul>
+      <li>Short ferry Naxos → Paros (25–50 min).</li>
+      <li>Base in <b>Naoussa</b>; afternoon swim at Kolymbithres.</li>
+      <li>Evening: wander the old harbor lanes.</li>
+    </ul>
+  </div>
+
+  <div class="card day">
+    <span class="tag">Day 6 · Fri Jul 11</span>
+    <h3>Paros Beach + Boat</h3>
+    <ul>
+      <li>⛵ Morning boat trip to <b>Antiparos &amp; Despotiko</b> (or beach day at Santa Maria).</li>
+      <li>Last romantic sunset dinner in Naoussa.</li>
+    </ul>
+  </div>
+
+  <div class="card day">
+    <span class="tag">Day 7 · Sat Jul 12</span>
+    <h3>Return &amp; Fly Home</h3>
+    <ul>
+      <li>Morning fast ferry Paros → Piraeus (~2h40), then airport.</li>
+      <li><b>⚠️ Safe only if your flight is after ~2:30pm.</b> If earlier, sleep near the airport the night before.</li>
+    </ul>
+  </div>
+
+  <!-- DINING PLAN -->
+  <h2 id="eat"><span class="ic">🍽️</span>The Dining Plan</h2>
+  <p class="sub">Built for foodies — what to eat each night, where, and what to order. Restaurant picks from the <a href="https://finduslost.com/" target="_blank">Find Us Lost</a> Greece guides.</p>
+
+  <h3>🏛️ Athens</h3>
+  <div class="meal">
+    <div class="when">Day 1 · Dinner</div>
+    <div class="spot">Rooftop with Acropolis view — Couleur Locale or 360°</div>
+    <div class="order"><b>Order:</b> a few mezze, grilled octopus, Greek salad, a glass of Assyrtiko. Keep it light after the flight.</div>
+  </div>
+  <div class="meal">
+    <div class="when">Day 2 · Lunch</div>
+    <div class="spot">Saita <span class="star">★</span> (Plaka)</div>
+    <div class="order"><b>Order:</b> their signature <i>bakaliaros skordalia</i> (battered salt cod + fierce garlic dip) — a rare authentic Plaka taverna.</div>
+  </div>
+  <div class="meal">
+    <div class="when">Day 2 · Dinner</div>
+    <div class="spot">Akra <span class="star">★</span></div>
+    <div class="order"><b>Order:</b> let the rotating organic daily menu lead. After, wine at <b>Materia Prima</b> (pick your own bottle) or dessert at <b>Kokkion</b> (artisanal gelato).</div>
+  </div>
+  <div class="note"><b>What to eat in Athens:</b> a proper <i>souvlaki/gyro</i> for a cheap lunch, <i>loukoumades</i> (honey doughnuts) for dessert, and Greek coffee. Alt dinner: <b>Taverna ton Filon</b> (classic Greek, modern spin).</div>
+
+  <h3>🏖️ Naxos</h3>
+  <div class="meal">
+    <div class="when">Day 3 · Dinner (arrival)</div>
+    <div class="spot">Kastro Naxian Cuisine <span class="star">★</span></div>
+    <div class="order"><b>Order:</b> <i>saganaki made with melted Naxian gruyère</i>, on the terrace below the Kastro walls overlooking the harbor.</div>
+  </div>
+  <div class="meal">
+    <div class="when">Day 4 · Lunch</div>
+    <div class="spot">On the boat / Kalantos marina</div>
+    <div class="order"><b>Order:</b> whatever's fresh and grilled at the cruise lunch stop — likely fish + salad with a sea view.</div>
+  </div>
+  <div class="meal">
+    <div class="when">Day 4 · Dinner</div>
+    <div class="spot">To Elliniko (Old Town) — or taxi to Axiotissa <span class="star">★</span></div>
+    <div class="order"><b>Order:</b> local Naxian cheeses, slow-cooked lamb, anything with Naxian potatoes. <b>Axiotissa</b> (farm-to-table, FUL favorite) is worth a taxi if you want the standout meal.</div>
+  </div>
+  <div class="note"><b>What to eat in Naxos:</b> famous <i>Naxian potatoes</i>, <i>graviera &amp; arseniko</i> cheeses, and <i>kitron</i> (local citron liqueur) as a digestif. Also great: <b>Dal Professore</b> (fresh pasta, harbor sunset).</div>
+
+  <h3>⛵ Paros (Naoussa)</h3>
+  <div class="meal">
+    <div class="when">Day 5 · Dinner (arrival)</div>
+    <div class="spot">Siparos <span class="star">★</span></div>
+    <div class="order"><b>Order:</b> imaginative seafood pasta with local Parian ingredients. (Quiet-alley alt: <b>Soso</b>, Greek fusion.)</div>
+  </div>
+  <div class="meal">
+    <div class="when">Day 6 · Lunch</div>
+    <div class="spot">Beach / harbor taverna after the boat trip</div>
+    <div class="order"><b>Order:</b> <i>gouna</i> (sun-dried mackerel) — a Parian specialty — with a cold beer.</div>
+  </div>
+  <div class="meal">
+    <div class="when">Day 6 · Dinner (last night)</div>
+    <div class="spot">Sigi Ikthios <span class="star">★</span> (old harbor square)</div>
+    <div class="order"><b>Order:</b> fresh fish by the kilo + ouzo, watching the boats. Institutions nearby: <b>Barbarossa</b> (since the '60s) &amp; <b>Minoa</b> (since 1977).</div>
+  </div>
+  <div class="note"><b>What to eat in Paros:</b> <i>revithada</i> (slow-baked chickpea stew), fresh-caught fish, local Parian wine, and <i>karpouzopita</i> (watermelon pie) for dessert.</div>
+
+  <!-- DINNER CHECKLIST -->
+  <h3>📞 Reserve ahead (peak July)</h3>
+  <ul class="check">
+    <li>Athens Day 2 — <b>Akra</b> dinner</li>
+    <li>Naxos Day 3 — <b>Kastro Naxian Cuisine</b> dinner</li>
+    <li>Naxos Day 4 — <b>Axiotissa</b> (if going) — books out</li>
+    <li>Paros Day 5 — <b>Siparos</b> dinner</li>
+    <li>Paros Day 6 — <b>Sigi Ikthios</b> last-night dinner</li>
+  </ul>
+
+  <!-- HOTELS -->
+  <h2 id="stay"><span class="ic">🛏️</span>Where to Stay</h2>
+  <p class="sub">Find Us Lost picks · mid-range (~€100–200) · book early for July.</p>
+
+  <h3>Athens (2 nights)</h3>
+  <table>
+    <tr><th>Hotel</th><th>Why</th><th class="book">Book</th></tr>
+    <tr><td><b>Shila Athens</b> ★</td><td>Art-filled boutique, rooftop breakfast</td><td class="book"><a href="https://www.booking.com/searchresults.html?ss=Shila+Athens" target="_blank">Search</a></td></tr>
+    <tr><td>Gatsby Athens</td><td>Playful central 5-star, rooftop</td><td class="book"><a href="https://www.booking.com/searchresults.html?ss=Gatsby+Athens" target="_blank">Search</a></td></tr>
+    <tr><td>The Foundry Suites</td><td>Loft-suites in artsy Psiri</td><td class="book"><a href="https://www.booking.com/searchresults.html?ss=The+Foundry+Suites+Athens" target="_blank">Search</a></td></tr>
+  </table>
+
+  <h3>Naxos (2 nights)</h3>
+  <table>
+    <tr><th>Hotel</th><th>Why</th><th class="book">Book</th></tr>
+    <tr><td><b>18 Grapes</b> ★ ($$$)</td><td>Steps from beach, sunset views, pool bar</td><td class="book"><a href="https://www.booking.com/searchresults.html?ss=18+Grapes+Hotel+Naxos" target="_blank">Search</a></td></tr>
+    <tr><td>Opuntia Suites ($$)</td><td>Modern suites, hot tubs, sunset views</td><td class="book"><a href="https://www.booking.com/searchresults.html?ss=Opuntia+Suites+Naxos" target="_blank">Search</a></td></tr>
+    <tr><td>Naxian Collection ($$$)</td><td>Cycladic luxury near Agios Prokopios</td><td class="book"><a href="https://www.booking.com/searchresults.html?ss=Naxian+Collection+Naxos" target="_blank">Search</a></td></tr>
+  </table>
+
+  <h3>Paros — Naoussa (2 nights)</h3>
+  <table>
+    <tr><th>Hotel</th><th>Why</th><th class="book">Book</th></tr>
+    <tr><td><b>Casa Mardiva Terra</b> ★</td><td>In the heart of Naoussa's dining scene</td><td class="book"><a href="https://www.booking.com/searchresults.html?ss=Casa+Mardiva+Terra+Naoussa" target="_blank">Search</a></td></tr>
+    <tr><td>Nefeli's Home</td><td>Charming, central, walkable</td><td class="book"><a href="https://www.booking.com/searchresults.html?ss=Nefelis+Home+Naoussa+Paros" target="_blank">Search</a></td></tr>
+    <tr><td>Ochre Dream</td><td>Stylish, near the old harbor</td><td class="book"><a href="https://www.booking.com/searchresults.html?ss=Ochre+Dream+Naoussa+Paros" target="_blank">Search</a></td></tr>
+  </table>
+
+  <!-- ACTIVITIES -->
+  <h2 id="do"><span class="ic">🎟️</span>Activities to Book</h2>
+  <table>
+    <tr><th>Activity</th><th>When</th><th class="book">Book</th></tr>
+    <tr><td>🚤 Koufonisia day cruise from Naxos</td><td>Day 4</td><td class="book"><a href="https://www.getyourguide.com/koufonisia-l96343/from-naxos-day-cruise-to-koufonisia-t674257/" target="_blank">GetYourGuide</a></td></tr>
+    <tr><td>⛵ Paros → Antiparos &amp; Despotiko boat</td><td>Day 6</td><td class="book"><a href="https://www.getyourguide.com/s/?q=Paros%20Antiparos%20Despotiko%20boat%20trip" target="_blank">GetYourGuide</a></td></tr>
+    <tr><td>🎫 Acropolis skip-the-line + guide</td><td>Day 2</td><td class="book"><a href="https://www.getyourguide.com/s/?q=Acropolis%20skip%20the%20line" target="_blank">GetYourGuide</a></td></tr>
+    <tr><td>🌅 Cape Sounion sunset tour (optional)</td><td>Day 2</td><td class="book"><a href="https://www.getyourguide.com/s/?q=Cape%20Sounion%20sunset%20Athens" target="_blank">GetYourGuide</a></td></tr>
+  </table>
+
+  <!-- FERRIES -->
+  <h2 id="ferries"><span class="ic">⛴️</span>Ferries</h2>
+  <table>
+    <tr><th>Route</th><th>Time</th><th>Notes</th></tr>
+    <tr><td>Athens (Piraeus) → Naxos</td><td>~3h15</td><td>Fast ferry, ~€55–70 pp</td></tr>
+    <tr><td>Naxos ↔ Koufonisia</td><td>40m–1h</td><td>4–5 daily (or the day cruise)</td></tr>
+    <tr><td>Naxos → Paros</td><td>25–50m</td><td>Very frequent, ~€15–25 pp</td></tr>
+    <tr><td>Paros → Athens (Piraeus)</td><td>~2h40</td><td>Flight day — closest island home</td></tr>
+  </table>
+  <p>Book all ferries on <a href="https://www.ferryhopper.com/en/ferries/greece/naxos" target="_blank">Ferryhopper</a>. Prefer <b>Blue Star</b> (stable) or <b>SeaJets</b> (fastest).</p>
+
+  <!-- COST -->
+  <h2 id="cost"><span class="ic">💶</span>Cost Estimate</h2>
+  <p class="sub">For <b>2 people · 6 nights</b> · <b>excludes your already-booked international flights</b>. July is peak season, so these reflect real summer prices.</p>
+  <table>
+    <tr><th>Category</th><th>Detail</th><th>Est. (couple)</th></tr>
+    <tr><td><b>Hotels</b> (6 nights)</td><td>Athens €380 · Naxos €480 · Paros €540 (boutique mid-range, July rates)</td><td>~€1,400</td></tr>
+    <tr><td><b>Ferries</b></td><td>Athens→Naxos €60pp · Naxos→Paros €20pp · Paros→Piraeus €55pp</td><td>~€270</td></tr>
+    <tr><td><b>Activities</b></td><td>Koufonisia cruise €220 · Paros boat €200 · Acropolis €60</td><td>~€480</td></tr>
+    <tr><td><b>Food &amp; drink</b></td><td>Foodie pace, ~€120/day for two (incl. wine)</td><td>~€840</td></tr>
+    <tr><td><b>Local transport</b></td><td>Airport metro, island buses &amp; taxis</td><td>~€155</td></tr>
+    <tr><td><b>Misc</b></td><td>Sunbeds, drinks, tips, sundries</td><td>~€200</td></tr>
+    <tr><td colspan="2"><b>TOTAL (2 people, excl. flights)</b></td><td><b>≈ €3,350</b></td></tr>
+  </table>
+  <div class="note"><b>Realistic range: €2,900 – €4,200</b> for two, depending on hotel tier and how much you splurge on dining. That's roughly <b>€1,450–2,100 per person</b>. To trim: book hotels ASAP, choose shared (not private) boat tours, and mix casual lunches with splurge dinners. Add the optional Cape Sounion tour (~€90/couple) if you do it.</div>
+
+  <!-- BOOKING LINKS -->
+  <h2 id="booking"><span class="ic">🔗</span>All Booking Links</h2>
+  <h3>✈️ Flights</h3>
+  <p>Round-trip to Athens — <b>already booked</b> ✅ (arrive Jul 6, depart Jul 12).</p>
+
+  <h3>⛴️ Ferries — book on Ferryhopper</h3>
+  <table>
+    <tr><td>Athens (Piraeus) → Naxos</td><td class="book"><a href="https://www.ferryhopper.com/en/ferry-routes/direct/piraeus-naxos" target="_blank">Book</a></td></tr>
+    <tr><td>Naxos → Paros</td><td class="book"><a href="https://www.ferryhopper.com/en/ferry-routes/direct/naxos-paros" target="_blank">Book</a></td></tr>
+    <tr><td>Paros → Athens (Piraeus)</td><td class="book"><a href="https://www.ferryhopper.com/en/ferry-routes/direct/paros-athens-piraeus" target="_blank">Book</a></td></tr>
+  </table>
+
+  <h3>🛏️ Hotels — compare &amp; book</h3>
+  <table>
+    <tr><td>Shila Athens</td><td class="book"><a href="https://www.booking.com/searchresults.html?ss=Shila+Athens" target="_blank">Booking</a> · <a href="https://www.google.com/search?q=Shila+Athens+hotel" target="_blank">Google</a></td></tr>
+    <tr><td>Gatsby Athens</td><td class="book"><a href="https://www.booking.com/searchresults.html?ss=Gatsby+Athens" target="_blank">Booking</a> · <a href="https://www.google.com/search?q=Gatsby+Athens+hotel" target="_blank">Google</a></td></tr>
+    <tr><td>18 Grapes (Naxos)</td><td class="book"><a href="https://www.booking.com/searchresults.html?ss=18+Grapes+Hotel+Naxos" target="_blank">Booking</a> · <a href="https://www.google.com/search?q=18+Grapes+Hotel+Naxos" target="_blank">Google</a></td></tr>
+    <tr><td>Opuntia Suites (Naxos)</td><td class="book"><a href="https://www.booking.com/searchresults.html?ss=Opuntia+Suites+Naxos" target="_blank">Booking</a> · <a href="https://www.google.com/search?q=Opuntia+Suites+Naxos" target="_blank">Google</a></td></tr>
+    <tr><td>Casa Mardiva Terra (Naoussa)</td><td class="book"><a href="https://www.booking.com/searchresults.html?ss=Casa+Mardiva+Terra+Naoussa" target="_blank">Booking</a> · <a href="https://www.google.com/search?q=Casa+Mardiva+Terra+Naoussa+Paros" target="_blank">Google</a></td></tr>
+    <tr><td>Ochre Dream (Naoussa)</td><td class="book"><a href="https://www.booking.com/searchresults.html?ss=Ochre+Dream+Naoussa+Paros" target="_blank">Booking</a> · <a href="https://www.google.com/search?q=Ochre+Dream+Naoussa+Paros" target="_blank">Google</a></td></tr>
+    <tr><td colspan="2">Browse all Naoussa hotels: <a href="https://www.booking.com/region/gr/naoussa-paros.html" target="_blank">Booking</a> · all Naxos: <a href="https://www.booking.com/region/gr/naxos.html" target="_blank">Booking</a></td></tr>
+  </table>
+
+  <h3>🎟️ Activities — book on GetYourGuide</h3>
+  <table>
+    <tr><td>🚤 Koufonisia day cruise (Naxos)</td><td class="book"><a href="https://www.getyourguide.com/koufonisia-l96343/from-naxos-day-cruise-to-koufonisia-t674257/" target="_blank">Book</a></td></tr>
+    <tr><td>🚤 Alt: Koufonisia full-day boat trip</td><td class="book"><a href="https://www.getyourguide.com/naxos-l145614/koufonissi-islands-full-day-boat-trip-from-naxos-t117789/" target="_blank">Book</a></td></tr>
+    <tr><td>⛵ Paros → Antiparos &amp; Despotiko</td><td class="book"><a href="https://www.getyourguide.com/s/?q=Paros%20Antiparos%20Despotiko%20boat%20trip" target="_blank">Book</a></td></tr>
+    <tr><td>🎫 Acropolis skip-the-line</td><td class="book"><a href="https://www.getyourguide.com/s/?q=Acropolis%20skip%20the%20line" target="_blank">Book</a></td></tr>
+    <tr><td>🌅 Cape Sounion sunset (optional)</td><td class="book"><a href="https://www.getyourguide.com/s/?q=Cape%20Sounion%20sunset%20Athens" target="_blank">Book</a></td></tr>
+  </table>
+
+  <!-- TIPS -->
+  <h2 id="tips"><span class="ic">💡</span>Quick Tips</h2>
+  <div class="card">
+    <ul>
+      <li><b>Book now:</b> July is peak — ferries, the Naoussa hotels, and the Koufonisia cruise sell out.</li>
+      <li><b>Water shoes</b> for rocky swim coves; reef-safe sunscreen.</li>
+      <li><b>Cash</b> for tavernas, beach bars &amp; small boat operators.</li>
+      <li><b>Naxos buses</b> run often along the beach strip; grab a taxi for remote tavernas.</li>
+      <li>Build buffer on travel days — ferries can run 15–30 min late.</li>
+      <li>Athens airport metro to the center is ~€9 and easy.</li>
+    </ul>
+  </div>
+
+  <div class="foot">
+    Planned for an early-July couples trip · Cyclades, Greece<br>
+    Restaurant &amp; hotel picks adapted from <a href="https://finduslost.com/" target="_blank">Find Us Lost</a> · ferries via Ferryhopper
+  </div>
+
+</div>
+</body>
+</html>
