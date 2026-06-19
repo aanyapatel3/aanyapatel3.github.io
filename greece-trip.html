@@ -86,6 +86,22 @@
   .check{list-style:none;padding-left:0}
   .check li{padding:6px 0 6px 28px;position:relative;border-bottom:1px solid var(--line)}
   .check li:before{content:"☐";position:absolute;left:4px;color:var(--blue);font-size:18px}
+
+  /* Photos */
+  .gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:14px 0}
+  .gallery figure{margin:0}
+  .gallery img{width:100%;height:120px;object-fit:cover;border-radius:10px;display:none}
+  .gallery figcaption{font-size:12px;color:var(--muted);text-align:center;margin-top:3px;font-weight:600}
+  .dayphoto{width:100%;height:170px;object-fit:cover;border-radius:10px;margin:2px 0 10px;display:none}
+  .credit{font-size:10.5px;color:var(--muted);text-align:right;margin:-6px 0 6px}
+
+  /* Timeline */
+  .tl{list-style:none;padding-left:0;margin:6px 0 0}
+  .tl li{position:relative;padding:7px 0 7px 72px;border-bottom:1px dashed var(--line);font-size:14px;line-height:1.45}
+  .tl li:last-child{border-bottom:none}
+  .tl .t{position:absolute;left:0;top:7px;font-weight:700;color:var(--blue);font-size:12.5px}
+  .tl .dist{color:var(--muted);font-size:12.5px}
+  .tl .fud{color:var(--accent);font-weight:700}
 </style>
 </head>
 <body>
@@ -117,12 +133,19 @@
   <div class="card">
     <span class="pill">✈️ Arrive Jul 6 → Naxos</span>
     <span class="pill">🏖️ Naxos · 4 nights (one base!)</span>
-    <span class="pill boat">⛵ Private sailing day</span>
+    <span class="pill boat">⛵ Sailing day</span>
     <span class="pill">⛵ Paros · optional day trip</span>
     <span class="pill">🏛️ Athens · 2 nights</span>
     <span class="pill">✈️ Fly home · Jul 12</span>
   </div>
   <div class="note"><b>Getting around:</b> Athens = metro + walking · Naxos = local bus + boats. <b>You unpack just twice</b> (Naxos, then Athens) — everything else is a day trip. Zero driving.</div>
+
+  <div class="gallery">
+    <figure><img data-wiki="Portara" alt="Naxos"><figcaption>Naxos</figcaption></figure>
+    <figure><img data-wiki="Koufonisia" alt="Koufonisia"><figcaption>Koufonisia</figcaption></figure>
+    <figure><img data-wiki="Naousa, Paros" alt="Paros"><figcaption>Paros (Naoussa)</figcaption></figure>
+    <figure><img data-wiki="Acropolis of Athens" alt="Athens"><figcaption>Athens</figcaption></figure>
+  </div>
 
   <!-- ITINERARY -->
   <h2 id="itinerary"><span class="ic">📅</span>Day by Day</h2>
@@ -130,71 +153,96 @@
   <div class="card day">
     <span class="tag">Day 1 · Sun Jul 6</span>
     <h3>Arrive → Naxos</h3>
-    <ul>
-      <li>Flight departs JFK Jul 5 · 3:40pm → arrives Athens Jul 6. <b>Check your exact ATH arrival time.</b></li>
-      <li>Lands by early afternoon → transfer to Piraeus, afternoon fast ferry to <b>Naxos</b> (~3h15). 🌅 Portara sunset.</li>
-      <li><b>⚠️ Lands late afternoon/evening?</b> Overnight near Piraeus or the airport and take the first morning ferry on Jul 7 (you still get both full island stretches).</li>
+    <img class="dayphoto" data-wiki="Portara" alt="The Portara, Naxos">
+    <ul class="tl">
+      <li><span class="t">~14:00</span> Land at Athens (ATH). <span class="dist">Check your exact arrival time.</span></li>
+      <li><span class="t">+50 min</span> ATH → <b>Piraeus port</b>. <span class="dist">Metro (Line 3→1) ~50 min ~€9, or taxi ~45 min ~€45 · 40 km</span></li>
+      <li><span class="t">15:00</span> Fast ferry <b>Piraeus → Naxos</b>. <span class="dist">~3h15 (SeaJets) · ~100 nm</span></li>
+      <li><span class="t">18:45</span> Port → hotel. <span class="dist">Chora 5-min walk · Agios Prokopios ~10 min taxi, 4 km</span></li>
+      <li><span class="t">19:30</span> Walk to the <b>Portara</b> for sunset. <span class="dist">5 min from the port</span></li>
+      <li><span class="t">21:00</span> <span class="fud">🍽️ Dinner:</span> Kastro Naxian Cuisine — gruyère saganaki. <span class="dist">Old Town, walkable</span></li>
     </ul>
+    <div class="note"><b>⚠️ Late flight?</b> Overnight near Piraeus/the airport and take the first morning ferry Jul 7 — you keep both full island days.</div>
   </div>
 
   <div class="card day">
     <span class="tag">Day 2 · Mon Jul 7</span>
-    <h3>⛵ Private Sailing Day</h3>
-    <ul>
-      <li><b>Private sailboat charter — just the two of you + skipper.</b> Depart Naxos (Agia Anna) for the <b>Small Cyclades / Koufonisia</b>.</li>
-      <li>Swim &amp; snorkel in turquoise bays at your own pace, onboard lunch &amp; drinks, total privacy.</li>
-      <li>Sunset sail back to Naxos; dinner in the Old Town.</li>
+    <h3>⛵ Sailing Day</h3>
+    <img class="dayphoto" data-wiki="Koufonisia" alt="Koufonisia">
+    <ul class="tl">
+      <li><span class="t">09:30</span> To <b>Agia Anna marina</b>. <span class="dist">Beach hotels ~5 min · Chora ~10 min taxi, 6 km</span></li>
+      <li><span class="t">10:00</span> Board a <b>small-group sailboat</b> (intimate, usually ≤10–12 guests) toward the <b>Small Cyclades / Koufonisia</b>.</li>
+      <li><span class="t">11:30</span> Swim &amp; snorkel stops in turquoise bays.</li>
+      <li><span class="t">13:00</span> <span class="fud">🍽️ Lunch onboard</span> — Greek spread &amp; drinks included on most trips.</li>
+      <li><span class="t">17:30</span> Sunset sail back to Naxos.</li>
+      <li><span class="t">21:00</span> <span class="fud">🍽️ Dinner:</span> To Elliniko (Old Town) — local cheeses, slow-cooked lamb.</li>
     </ul>
+    <div class="note">⛵ <b>Two ways to do it:</b> a <b>small-group full-day sail</b> (~€90–150 pp — best value, still relaxed) or a <b>half-day private charter</b> just for you two (~€500–800). Both include swimming &amp; lunch.</div>
   </div>
 
   <div class="card day">
     <span class="tag">Day 3 · Tue Jul 8</span>
     <h3>Naxos Beach Day</h3>
-    <ul>
-      <li>Local bus (~€2) to the sandy west-coast strip: <b>Agios Prokopios → Agia Anna → Plaka Beach</b> — soft sand, shallow turquoise water.</li>
-      <li>Slow lunch at a beach taverna; sunset drinks back in Chora.</li>
-      <li>Stay relaxed — same hotel, no packing.</li>
+    <img class="dayphoto" data-wiki="Naxos" alt="Naxos beaches">
+    <ul class="tl">
+      <li><span class="t">09:30</span> Slow breakfast at the hotel.</li>
+      <li><span class="t">10:30</span> Bus to the beach strip (~€2). <span class="dist">Agios Prokopios 10 min · Agia Anna 12 min · Plaka 18 min — ~5 km of sand</span></li>
+      <li><span class="t">11–15</span> Swim &amp; sunbathe — soft sand, shallow turquoise water.</li>
+      <li><span class="t">13:30</span> <span class="fud">🍽️ Lunch:</span> beach taverna (Gorgona, Agia Anna).</li>
+      <li><span class="t">18:00</span> Sunset drinks back in Chora.</li>
+      <li><span class="t">21:00</span> <span class="fud">🍽️ Dinner:</span> Axiotissa — farm-to-table. <span class="dist">~20 min taxi, 12 km (worth it)</span></li>
     </ul>
   </div>
 
   <div class="card day">
     <span class="tag">Day 4 · Wed Jul 9</span>
     <h3>⛵ Paros Day Trip</h3>
-    <ul>
-      <li>Quick fast ferry Naxos → Paros (25–50 min). Explore <b>Naoussa</b> — Venetian harbor, whitewashed lanes, waterfront lunch.</li>
-      <li>Swim at <b>Kolymbithres</b> (sculpted rock coves) before the evening ferry back.</li>
-      <li>Sleep in Naxos — no packing! (Rather slow down? Stay on Naxos: villages, Temple of Demeter, Mikri Vigla beach.)</li>
+    <img class="dayphoto" data-wiki="Naousa, Paros" alt="Naoussa, Paros">
+    <ul class="tl">
+      <li><span class="t">09:00</span> Fast ferry <b>Naxos → Paros</b> (Parikia). <span class="dist">~30–45 min</span></li>
+      <li><span class="t">09:45</span> Parikia → <b>Naoussa</b>. <span class="dist">Bus/taxi ~20 min, 10 km</span></li>
+      <li><span class="t">10:30</span> Wander Naoussa's Venetian harbor &amp; whitewashed lanes.</li>
+      <li><span class="t">12:00</span> Water-taxi to <b>Kolymbithres</b> beach — sculpted rock coves. <span class="dist">~10 min across the bay</span></li>
+      <li><span class="t">14:00</span> <span class="fud">🍽️ Lunch:</span> Siparos or Sigi Ikthios (fresh seafood).</li>
+      <li><span class="t">17:30</span> Evening ferry back to Naxos (sleep in Naxos — no packing).</li>
+      <li><span class="t">21:00</span> <span class="fud">🍽️ Dinner:</span> Dal Professore — fresh pasta at the harbor.</li>
     </ul>
   </div>
 
   <div class="card day">
     <span class="tag">Day 5 · Thu Jul 10</span>
     <h3>Ferry to Athens</h3>
-    <ul>
-      <li>Late-morning fast ferry Naxos → Piraeus (~3h15).</li>
-      <li>Check into <b>Plaka</b>; golden-hour stroll through Plaka &amp; Anafiotika.</li>
-      <li>🍽️ Rooftop dinner with lit-up Acropolis views.</li>
+    <img class="dayphoto" data-wiki="Plaka" alt="Plaka, Athens">
+    <ul class="tl">
+      <li><span class="t">11:00</span> Fast ferry <b>Naxos → Piraeus</b>. <span class="dist">~3h15</span></li>
+      <li><span class="t">14:30</span> Piraeus → <b>Plaka</b> hotel. <span class="dist">Metro/taxi ~30–40 min, 12 km</span></li>
+      <li><span class="t">16:00</span> Check in; stroll <b>Plaka &amp; Anafiotika</b> (the island-like village under the Acropolis).</li>
+      <li><span class="t">20:30</span> <span class="fud">🍽️ Dinner:</span> rooftop with Acropolis views — Couleur Locale or 360°.</li>
     </ul>
   </div>
 
   <div class="card day">
     <span class="tag">Day 6 · Fri Jul 11</span>
     <h3>Athens Highlights</h3>
-    <ul>
-      <li><b>Acropolis at 8am</b> (beat heat &amp; crowds) + Acropolis Museum.</li>
-      <li>Lunch in Plaka, browse Monastiraki flea market.</li>
-      <li>Sunset from Lycabettus or Filopappou Hill.</li>
-      <li>🌅 Optional: Cape Sounion sunset (Temple of Poseidon).</li>
+    <img class="dayphoto" data-wiki="Acropolis of Athens" alt="Acropolis of Athens">
+    <ul class="tl">
+      <li><span class="t">08:00</span> Walk up to the <b>Acropolis</b> early. <span class="dist">~10–15 min uphill from Plaka</span></li>
+      <li><span class="t">10:00</span> <b>Acropolis Museum</b>. <span class="dist">5-min walk from the exit</span></li>
+      <li><span class="t">13:00</span> <span class="fud">🍽️ Lunch:</span> Saita (Plaka) — bakaliaros skordalia.</li>
+      <li><span class="t">14:30</span> <b>Monastiraki</b> flea market. <span class="dist">10-min walk</span></li>
+      <li><span class="t">19:30</span> Sunset from <b>Filopappou Hill</b> (20-min walk) or Lycabettus (taxi/funicular).</li>
+      <li><span class="t">21:00</span> <span class="fud">🍽️ Last dinner:</span> Akra; nightcap at Materia Prima.</li>
     </ul>
+    <div class="note">🌅 <b>Optional swap:</b> a Cape Sounion sunset (Temple of Poseidon) — ~70 km, ~1h30 each way by tour or KTEL bus.</div>
   </div>
 
   <div class="card day">
     <span class="tag">Day 7 · Sat Jul 12</span>
     <h3>Fly Home ✈️ — ATH→EWR 12:45pm</h3>
-    <ul>
-      <li>Be at the airport by <b>~9:45am</b> (3 hrs before an international flight).</li>
-      <li>Leave Plaka by <b>~8:30am</b> — Metro <b>Line 3 (blue)</b> runs direct from Syntagma/Monastiraki to the airport, ~45 min, ~€9.</li>
-      <li>No flight-day ferry — that's the whole point of ending in Athens. 🎉</li>
+    <ul class="tl">
+      <li><span class="t">08:30</span> Leave Plaka. <span class="dist">Metro Line 3 (blue) direct to airport, ~40–45 min, ~€9</span></li>
+      <li><span class="t">09:45</span> At ATH — 3 hrs before an international flight.</li>
+      <li><span class="t">12:45</span> ✈️ Flight <b>ATH → EWR</b>. No flight-day ferry — that's the whole point of ending in Athens. 🎉</li>
     </ul>
   </div>
 
@@ -286,7 +334,7 @@
   <h2 id="do"><span class="ic">🎟️</span>Activities to Book</h2>
   <table>
     <tr><th>Activity</th><th>When</th><th class="book">Book</th></tr>
-    <tr><td>⛵ <b>Private sailboat charter</b> from Naxos</td><td>Day 2</td><td class="book"><a href="https://www.getyourguide.com/naxos-l145614/sailboat-tours-tc51/" target="_blank">GetYourGuide</a> · <a href="https://naxoscatamaran.com/charters/customized-charter/" target="_blank">Naxos Catamaran</a></td></tr>
+    <tr><td>⛵ <b>Sailboat day</b> (small group <i>or</i> half-day private)</td><td>Day 2</td><td class="book"><a href="https://www.getyourguide.com/naxos-l145614/sailboat-tours-tc51/" target="_blank">GetYourGuide</a> · <a href="https://naxoscatamaran.com/" target="_blank">Naxos Catamaran</a></td></tr>
     <tr><td>⛵ Paros day-trip ferry (round trip)</td><td>Day 4</td><td class="book"><a href="https://www.ferryhopper.com/en/ferry-routes/direct/naxos-paros" target="_blank">Ferryhopper</a></td></tr>
     <tr><td>🎫 Acropolis skip-the-line + guide</td><td>Day 6</td><td class="book"><a href="https://www.getyourguide.com/s/?q=Acropolis%20skip%20the%20line" target="_blank">GetYourGuide</a></td></tr>
     <tr><td>🌅 Cape Sounion sunset tour (optional)</td><td>Day 6</td><td class="book"><a href="https://www.getyourguide.com/s/?q=Cape%20Sounion%20sunset%20Athens" target="_blank">GetYourGuide</a></td></tr>
@@ -310,13 +358,13 @@
     <tr><th>Category</th><th>Detail</th><th>Est. (couple)</th></tr>
     <tr><td><b>Hotels</b> (6 nights)</td><td>Naxos €960 (4 nts) · Athens €380 (2 nts) — boutique mid-range, July rates</td><td>~€1,340</td></tr>
     <tr><td><b>Ferries</b></td><td>Athens→Naxos €60pp · Naxos↔Paros day trip €40pp · Naxos→Piraeus €60pp</td><td>~€320</td></tr>
-    <tr><td><b>Activities</b></td><td><b>Private sailboat charter ~€1,200</b> (whole boat) · Acropolis €60</td><td>~€1,260</td></tr>
+    <tr><td><b>Activities</b></td><td>Small-group sail ~€260 (2 pax) · Acropolis €60</td><td>~€320</td></tr>
     <tr><td><b>Food &amp; drink</b></td><td>Foodie pace, ~€120/day for two (incl. wine)</td><td>~€840</td></tr>
     <tr><td><b>Local transport</b></td><td>Airport metro, island buses &amp; taxis</td><td>~€155</td></tr>
     <tr><td><b>Misc</b></td><td>Sunbeds, drinks, tips, sundries</td><td>~€200</td></tr>
-    <tr><td colspan="2"><b>TOTAL (2 people, excl. flights)</b></td><td><b>≈ €4,100</b></td></tr>
+    <tr><td colspan="2"><b>TOTAL (2 people, excl. flights)</b></td><td><b>≈ €3,175</b></td></tr>
   </table>
-  <div class="note"><b>The private charter is the big variable</b> — a half-day private sail runs ~€600–900, a full day ~€1,000–1,500, and a luxury crewed catamaran with full catering can hit €1,800–2,500. Everything else lands the trip around <b>€2,900</b> for two; the boat sets your final total. To save, a half-day private sail or a small shared sailboat trims it significantly.</div>
+  <div class="note"><b>The sailboat sets your final total.</b> Small-group day sail ~€90–150 pp (used above) keeps it near <b>€3,175</b>. Upgrade to a <b>half-day private</b> (~€500–800) → about €3,500. A full-day private charter (~€1,000–1,500) → around €4,000–4,500. Everything else is ~€2,900 for two.</div>
 
   <!-- BOOKING LINKS -->
   <h2 id="booking"><span class="ic">🔗</span>All Booking Links</h2>
@@ -342,9 +390,9 @@
 
   <h3>🎟️ Activities — book on GetYourGuide</h3>
   <table>
-    <tr><td>⛵ Private sailboat charters (Naxos)</td><td class="book"><a href="https://www.getyourguide.com/naxos-l145614/sailboat-tours-tc51/" target="_blank">GetYourGuide</a></td></tr>
-    <tr><td>⛵ Naxos Catamaran — private charter</td><td class="book"><a href="https://naxoscatamaran.com/charters/customized-charter/" target="_blank">Book</a></td></tr>
-    <tr><td>⛵ Naxos Yachting — private sailing</td><td class="book"><a href="https://naxos-yachting.com/" target="_blank">Book</a></td></tr>
+    <tr><td>⛵ Small-group sailing day (Naxos)</td><td class="book"><a href="https://www.getyourguide.com/naxos-l145614/sailboat-tours-tc51/" target="_blank">GetYourGuide</a></td></tr>
+    <tr><td>⛵ Half-day private — Naxos Catamaran</td><td class="book"><a href="https://naxoscatamaran.com/" target="_blank">Book</a></td></tr>
+    <tr><td>⛵ Naxos Yachting (group or private)</td><td class="book"><a href="https://naxos-yachting.com/" target="_blank">Book</a></td></tr>
     <tr><td>🎫 Acropolis skip-the-line</td><td class="book"><a href="https://www.getyourguide.com/s/?q=Acropolis%20skip%20the%20line" target="_blank">Book</a></td></tr>
     <tr><td>🌅 Cape Sounion sunset (optional)</td><td class="book"><a href="https://www.getyourguide.com/s/?q=Cape%20Sounion%20sunset%20Athens" target="_blank">Book</a></td></tr>
   </table>
@@ -353,7 +401,7 @@
   <h2 id="tips"><span class="ic">💡</span>Quick Tips</h2>
   <div class="card">
     <ul>
-      <li><b>Book now:</b> July is peak — ferries, Naxos hotels, and private boat charters sell out first.</li>
+      <li><b>Book now:</b> July is peak — ferries, Naxos hotels, and boat trips sell out first.</li>
       <li><b>Water shoes</b> for rocky swim coves; reef-safe sunscreen.</li>
       <li><b>Cash</b> for tavernas, beach bars &amp; small boat operators.</li>
       <li><b>Naxos buses</b> run often along the beach strip; grab a taxi for remote tavernas.</li>
@@ -499,6 +547,23 @@
       if(history.length>8) history=history.slice(-8);
     }).catch(function(err){thinking.remove(); btn.disabled=false; add('⚠️ '+err.message,'gb-sys');});
   }
+})();
+</script>
+
+<!-- Photo loader: pulls real images from Wikipedia at load time (runs in your browser) -->
+<script>
+(function(){
+  function load(img){
+    var title=img.getAttribute('data-wiki');
+    var api='https://en.wikipedia.org/w/api.php?action=query&format=json&origin=*&prop=pageimages&piprop=thumbnail&pithumbsize=900&titles='+encodeURIComponent(title);
+    fetch(api).then(function(r){return r.json();}).then(function(d){
+      var pages=d.query&&d.query.pages; if(!pages) return;
+      var p=pages[Object.keys(pages)[0]];
+      if(p&&p.thumbnail&&p.thumbnail.source){ img.src=p.thumbnail.source; img.style.display='block'; }
+    }).catch(function(){});
+  }
+  function run(){ document.querySelectorAll('img[data-wiki]').forEach(load); }
+  if(document.readyState!=='loading') run(); else document.addEventListener('DOMContentLoaded', run);
 })();
 </script>
 </body>
