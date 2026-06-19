@@ -109,7 +109,7 @@
   <a href="#tips">Tips</a>
 </div>
 
-<div class="wrap">
+<div class="wrap" id="trip-content">
 
   <!-- OVERVIEW -->
   <h2 id="overview"><span class="ic">🧭</span>At a Glance</h2>
@@ -379,5 +379,138 @@
   </div>
 
 </div>
+
+<!-- ===================== AI EDIT CHATBOT ===================== -->
+<style>
+  #gb-fab{position:fixed;right:18px;bottom:18px;z-index:50;background:linear-gradient(160deg,var(--blue),var(--deep));
+    color:#fff;border:none;border-radius:30px;padding:13px 18px;font-size:15px;font-weight:700;
+    cursor:pointer;box-shadow:0 4px 16px rgba(13,74,122,.35)}
+  #gb-fab:hover{filter:brightness(1.07)}
+  #gb-panel{position:fixed;right:18px;bottom:74px;z-index:51;width:min(420px,calc(100vw - 28px));
+    height:min(560px,calc(100vh - 110px));background:#fff;border:1px solid var(--line);border-radius:16px;
+    box-shadow:0 12px 40px rgba(13,74,122,.28);display:none;flex-direction:column;overflow:hidden}
+  #gb-panel.open{display:flex}
+  #gb-head{background:linear-gradient(160deg,var(--blue),var(--deep));color:#fff;padding:12px 14px;
+    display:flex;align-items:center;gap:8px}
+  #gb-head b{font-size:15px}
+  #gb-head .sp{flex:1}
+  #gb-head button{background:rgba(255,255,255,.18);color:#fff;border:none;border-radius:8px;
+    padding:5px 9px;font-size:12px;font-weight:600;cursor:pointer}
+  #gb-head button:hover{background:rgba(255,255,255,.3)}
+  #gb-msgs{flex:1;overflow-y:auto;padding:14px;background:var(--sand)}
+  .gb-m{margin:8px 0;padding:9px 12px;border-radius:12px;font-size:14px;line-height:1.5;max-width:88%;white-space:pre-wrap;word-wrap:break-word}
+  .gb-user{background:var(--blue);color:#fff;margin-left:auto;border-bottom-right-radius:4px}
+  .gb-bot{background:#fff;border:1px solid var(--line);border-bottom-left-radius:4px}
+  .gb-sys{background:#fff8ec;border:1px solid #f3e2bf;font-size:12.5px;color:#7a5a00;text-align:center;max-width:100%}
+  .gb-edit{background:#e3f5ec;border:1px solid #bfe6cf;color:#1d7a4d;font-size:12.5px;text-align:center;max-width:100%}
+  #gb-setup{padding:14px;background:var(--sea);border-bottom:1px solid var(--line);font-size:13px}
+  #gb-setup input,#gb-setup select{width:100%;margin-top:5px;padding:8px;border:1px solid var(--line);border-radius:8px;font-size:13px}
+  #gb-setup label{font-weight:600;color:var(--deep);display:block;margin-top:8px}
+  #gb-setup .hint{color:var(--muted);font-size:11.5px;margin-top:6px}
+  #gb-setup button{margin-top:10px;background:var(--blue);color:#fff;border:none;border-radius:8px;padding:8px 14px;font-weight:600;cursor:pointer}
+  #gb-input{display:flex;gap:8px;padding:10px;border-top:1px solid var(--line);background:#fff}
+  #gb-input textarea{flex:1;resize:none;border:1px solid var(--line);border-radius:10px;padding:9px;font-size:14px;font-family:inherit;max-height:90px}
+  #gb-input button{background:var(--blue);color:#fff;border:none;border-radius:10px;padding:0 16px;font-weight:700;cursor:pointer}
+  #gb-input button:disabled{opacity:.5;cursor:default}
+</style>
+
+<button id="gb-fab">💬 Edit with AI</button>
+<div id="gb-panel">
+  <div id="gb-head">
+    <b>✨ Trip Assistant</b><span class="sp"></span>
+    <button id="gb-reset" title="Restore the original plan">Reset</button>
+    <button id="gb-key">Key</button>
+    <button id="gb-close">✕</button>
+  </div>
+  <div id="gb-setup">
+    <label>Anthropic API key <span class="hint">(stored only in this browser)</span></label>
+    <input id="gb-apikey" type="password" placeholder="sk-ant-...">
+    <label>Model</label>
+    <select id="gb-model">
+      <option value="claude-opus-4-8">Opus 4.8 — most capable (default)</option>
+      <option value="claude-sonnet-4-6">Sonnet 4.6 — faster &amp; cheaper</option>
+      <option value="claude-haiku-4-5">Haiku 4.5 — cheapest</option>
+    </select>
+    <div class="hint">Get a key at console.anthropic.com. Each message uses your key and costs a small amount. Edits are saved only on this device — use “Reset” to restore the original.</div>
+    <button id="gb-save">Save &amp; start</button>
+  </div>
+  <div id="gb-msgs"></div>
+  <div id="gb-input">
+    <textarea id="gb-text" rows="1" placeholder="Ask a question or request an edit…"></textarea>
+    <button id="gb-send">Send</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  var KEY_LS='greece_anthropic_key', MODEL_LS='greece_bot_model', CONTENT_LS='greece_trip_content';
+  var content=document.getElementById('trip-content');
+  var ORIGINAL=content.innerHTML;
+  // Restore any previously saved edits
+  try{var saved=localStorage.getItem(CONTENT_LS); if(saved){content.innerHTML=saved;}}catch(e){}
+
+  var $=function(id){return document.getElementById(id);};
+  var panel=$('gb-panel'), msgs=$('gb-msgs'), setup=$('gb-setup'), history=[];
+
+  var SYSTEM=[
+    "You are an assistant embedded in a personal Greece trip-itinerary webpage.",
+    "You will be given the current page content as HTML (the inner HTML of the main content container) plus a user message.",
+    "If the user asks a QUESTION, answer conversationally in plain text with NO HTML.",
+    "If the user asks you to EDIT/CHANGE the page, reply with: (1) a one or two sentence plain-text summary of the change, then (2) the COMPLETE updated content HTML inside a single ```html code fence.",
+    "When editing: return the ENTIRE content, not a fragment. Preserve all existing structure, CSS class names, ids, emoji, tables and links so it still renders. Only change what was asked. Match the existing style and classes for anything you add.",
+    "Never output <script>, <style>, <html>, <head> or <body> tags. Do not add commentary inside the HTML. Keep your prose answer concise and outside the code fence."
+  ].join(" ");
+
+  function add(text, cls){var d=document.createElement('div'); d.className='gb-m '+cls; d.textContent=text; msgs.appendChild(d); msgs.scrollTop=msgs.scrollHeight; return d;}
+
+  function showSetup(){var k=localStorage.getItem(KEY_LS); $('gb-apikey').value=k||''; $('gb-model').value=localStorage.getItem(MODEL_LS)||'claude-opus-4-8'; setup.style.display=(k?'none':'block');}
+
+  $('gb-fab').onclick=function(){panel.classList.toggle('open'); if(panel.classList.contains('open')){showSetup(); if(!msgs.childElementCount){add("Hi! Ask me about your trip, or tell me what to change — e.g. “swap the Naxos hotel to Naxian Collection”, “make day 4 a relaxed beach day”, or “add a budget breakfast spot in Athens”.", 'gb-bot');}}};
+  $('gb-close').onclick=function(){panel.classList.remove('open');};
+  $('gb-key').onclick=function(){setup.style.display=(setup.style.display==='none'?'block':'none');};
+  $('gb-save').onclick=function(){var k=$('gb-apikey').value.trim(); if(!k){return;} localStorage.setItem(KEY_LS,k); localStorage.setItem(MODEL_LS,$('gb-model').value); setup.style.display='none'; add("Key saved. What would you like to do?", 'gb-bot');};
+  $('gb-reset').onclick=function(){if(confirm('Restore the original itinerary? Your AI edits on this device will be discarded.')){content.innerHTML=ORIGINAL; try{localStorage.removeItem(CONTENT_LS);}catch(e){} add("Restored the original plan.", 'gb-edit');}};
+
+  var ta=$('gb-text');
+  ta.addEventListener('input',function(){ta.style.height='auto'; ta.style.height=Math.min(ta.scrollHeight,90)+'px';});
+  ta.addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault(); send();}});
+  $('gb-send').onclick=send;
+
+  function send(){
+    var msg=ta.value.trim(); if(!msg) return;
+    var key=localStorage.getItem(KEY_LS); if(!key){setup.style.display='block'; return;}
+    var model=localStorage.getItem(MODEL_LS)||'claude-opus-4-8';
+    add(msg,'gb-user'); ta.value=''; ta.style.height='auto';
+    var btn=$('gb-send'); btn.disabled=true; var thinking=add('…thinking','gb-bot');
+
+    var userTurn="Current page content HTML:\n\n"+content.innerHTML+"\n\n---\nUser message: "+msg;
+    var messages=history.concat([{role:'user',content:userTurn}]);
+
+    fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'content-type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+      body:JSON.stringify({model:model,max_tokens:32000,system:SYSTEM,messages:messages})
+    }).then(function(r){return r.json();}).then(function(data){
+      thinking.remove(); btn.disabled=false;
+      if(data.error){add('⚠️ '+(data.error.message||'API error'),'gb-sys'); return;}
+      var text=(data.content||[]).filter(function(b){return b.type==='text';}).map(function(b){return b.text;}).join('\n');
+      var m=text.match(/```(?:html)?\s*\n?([\s\S]*?)```/);
+      if(m){
+        var newHtml=m[1].trim();
+        content.innerHTML=newHtml;
+        try{localStorage.setItem(CONTENT_LS,newHtml);}catch(e){}
+        var chat=text.replace(m[0],'').trim();
+        if(chat) add(chat,'gb-bot');
+        add('✅ Page updated (saved on this device — use Reset to undo).','gb-edit');
+        history.push({role:'user',content:msg}); history.push({role:'assistant',content:chat||'(updated the page)'});
+      } else {
+        add(text||'(no response)','gb-bot');
+        history.push({role:'user',content:msg}); history.push({role:'assistant',content:text});
+      }
+      if(history.length>8) history=history.slice(-8);
+    }).catch(function(err){thinking.remove(); btn.disabled=false; add('⚠️ '+err.message,'gb-sys');});
+  }
+})();
+</script>
 </body>
 </html>
