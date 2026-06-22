@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portugal Trip · 10 Days</title>
+<style>
+  :root{
+    --rust:#c2562c;
+    --deep:#8a3417;
+    --sea:#fdeee4;
+    --sand:#fbf6ef;
+    --ink:#2c2622;
+    --muted:#6b5d52;
+    --line:#ecddcd;
+    --accent:#1f7a8c;
+    --gold:#b07d2b;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    color:var(--ink);background:var(--sand);line-height:1.6;
+  }
+  a{color:var(--rust);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:780px;margin:0 auto;padding:0 18px 80px}
+
+  /* Hero */
+  .hero{
+    background:linear-gradient(160deg,var(--rust),var(--deep));
+    color:#fff;text-align:center;padding:54px 20px 46px;
+  }
+  .hero .eyebrow{letter-spacing:3px;text-transform:uppercase;font-size:12px;opacity:.85;margin:0}
+  .hero h1{margin:8px 0 6px;font-size:38px;line-height:1.1}
+  .hero p{margin:0;opacity:.92;font-size:16px}
+  .hero .dates{display:inline-block;margin-top:16px;background:rgba(255,255,255,.15);
+    padding:7px 16px;border-radius:30px;font-size:14px;font-weight:600}
+
+  /* Nav */
+  .nav{position:sticky;top:0;z-index:20;background:rgba(251,246,239,.95);
+    backdrop-filter:blur(6px);border-bottom:1px solid var(--line);
+    display:flex;gap:6px;overflow-x:auto;padding:10px 12px}
+  .nav a{white-space:nowrap;font-size:13px;font-weight:600;color:var(--deep);
+    padding:6px 11px;border-radius:20px;background:var(--sea)}
+  .nav a:hover{background:#fbded0;text-decoration:none}
+
+  h2{font-size:24px;margin:38px 0 4px;color:var(--deep)}
+  h2 .ic{margin-right:8px}
+  .sub{color:var(--muted);margin:0 0 16px;font-size:15px}
+  h3{font-size:18px;margin:22px 0 8px;color:var(--ink)}
+
+  /* Cards */
+  .card{background:#fff;border:1px solid var(--line);border-radius:14px;
+    padding:16px 18px;margin:12px 0;box-shadow:0 1px 3px rgba(120,60,30,.05)}
+  .day{border-left:5px solid var(--rust)}
+  .day .tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:1px;
+    text-transform:uppercase;color:#fff;background:var(--rust);padding:3px 9px;border-radius:20px}
+  .day h3{margin:10px 0 6px}
+  .day ul{margin:8px 0 0;padding-left:20px}
+  .day li{margin:4px 0}
+
+  .pill{display:inline-block;background:var(--sea);color:var(--deep);font-size:12px;
+    font-weight:600;padding:3px 10px;border-radius:20px;margin:2px 4px 2px 0}
+  .pill.eat{background:#fdeee4;color:#b9551f}
+  .pill.boat{background:#e3f1f5;color:#176b7a}
+  .pill.wine{background:#f3e6ef;color:#8a3b6b}
+
+  table{width:100%;border-collapse:collapse;margin:10px 0;font-size:14.5px}
+  th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--deep);font-size:13px;text-transform:uppercase;letter-spacing:.5px}
+  .book{white-space:nowrap;font-weight:600}
+
+  .meal{margin:14px 0;padding:14px 16px;background:#fff;border:1px solid var(--line);
+    border-radius:12px;border-left:5px solid var(--accent)}
+  .meal .when{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--accent)}
+  .meal .spot{font-size:17px;font-weight:700;margin:3px 0 2px}
+  .meal .order{font-size:14px;color:var(--muted)}
+  .meal .order b{color:var(--ink)}
+
+  .note{background:#fff8ec;border:1px solid #f3e2bf;border-radius:12px;
+    padding:12px 16px;margin:14px 0;font-size:14.5px}
+  .note b{color:#9a6a00}
+
+  .star{color:var(--gold)}
+  .foot{text-align:center;color:var(--muted);font-size:13px;margin-top:40px;
+    border-top:1px solid var(--line);padding-top:20px}
+  .check{list-style:none;padding-left:0}
+  .check li{padding:6px 0 6px 28px;position:relative;border-bottom:1px solid var(--line)}
+  .check li:before{content:"☐";position:absolute;left:4px;color:var(--rust);font-size:18px}
+
+  /* Photos */
+  .gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:14px 0}
+  .gallery figure{margin:0}
+  .gallery img{width:100%;height:120px;object-fit:cover;border-radius:10px;display:none}
+  .gallery figcaption{font-size:12px;color:var(--muted);text-align:center;margin-top:3px;font-weight:600}
+  .dayphoto{width:100%;height:170px;object-fit:cover;border-radius:10px;margin:2px 0 10px;display:none}
+  .credit{font-size:10.5px;color:var(--muted);text-align:right;margin:-6px 0 6px}
+
+  /* Timeline */
+  .tl{list-style:none;padding-left:0;margin:6px 0 0}
+  .tl li{position:relative;padding:7px 0 7px 72px;border-bottom:1px dashed var(--line);font-size:14px;line-height:1.45}
+  .tl li:last-child{border-bottom:none}
+  .tl .t{position:absolute;left:0;top:7px;font-weight:700;color:var(--rust);font-size:12.5px}
+  .tl .dist{color:var(--muted);font-size:12.5px}
+  .tl .fud{color:var(--accent);font-weight:700}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <p class="eyebrow">High-End Escape · Portugal</p>
+  <h1>🇵🇹 Portugal, 10 Days</h1>
+  <p>Lisbon · Sintra · Porto · Douro Valley · Algarve</p>
+  <span class="dates">10 Days &nbsp;·&nbsp; Luxury &amp; Coastal</span>
+</div>
+
+<div class="nav">
+  <a href="#overview">Overview</a>
+  <a href="#itinerary">Itinerary</a>
+  <a href="#eat">Dining Plan</a>
+  <a href="#stay">Hotels</a>
+  <a href="#do">Activities</a>
+  <a href="#transport">Getting Around</a>
+  <a href="#cost">Cost</a>
+  <a href="#booking">Book It</a>
+  <a href="#tips">Tips</a>
+  <a href="#vote">🗳️ Family Vote</a>
+</div>
+
+<div class="wrap" id="trip-content">
+
+  <!-- OVERVIEW -->
+  <h2 id="overview"><span class="ic">🧭</span>At a Glance</h2>
+  <p class="sub">Elevated &amp; relaxed · city design hotels, a Douro wine estate, and a luxe Algarve coast finish — north to south, no backtracking.</p>
+  <div class="card">
+    <span class="pill">✈️ Arrive Lisbon (LIS)</span>
+    <span class="pill">🏛️ Lisbon · 3 nights</span>
+    <span class="pill">🏰 Sintra · day trip</span>
+    <span class="pill">🚄 Porto · 3 nights</span>
+    <span class="pill wine">🍷 Douro Valley · wine day</span>
+    <span class="pill">🏖️ Algarve · 3 nights</span>
+    <span class="pill boat">⛵ Benagil caves</span>
+    <span class="pill">✈️ Fly home · Faro (FAO)</span>
+  </div>
+  <div class="note"><b>Why this order:</b> open in <b>Lisbon</b> (easy long-haul arrival), train north to <b>Porto</b> for the Douro, then south to the <b>Algarve</b> to wind down on the coast and fly out of <b>Faro</b>. <b>You unpack just three times.</b> Trains city-to-city; a rental car only for the Algarve coast.</div>
+  <div class="note" style="background:#f3e6ef;border-color:#e2c8da"><b style="color:#8a3b6b">🍷🏖️⛵ Built around what you love:</b> <b>wine tours</b> (a full Douro day with quinta tastings + a private vintage-boat cruise), <b>beaches</b> (the Algarve's golden cliffs &amp; calm coves), and <b>boat days &amp; swimming</b> (Benagil sea caves, a sunset cruise, snorkel stops). Every leg has at least one of the three.</div>
+
+  <div class="gallery">
+    <figure><img data-wiki="Lisbon" alt="Lisbon"><figcaption>Lisbon</figcaption></figure>
+    <figure><img data-wiki="Pena Palace" alt="Sintra"><figcaption>Sintra</figcaption></figure>
+    <figure><img data-wiki="Porto" alt="Porto"><figcaption>Porto &amp; Douro</figcaption></figure>
+    <figure><img data-wiki="Benagil" alt="Algarve"><figcaption>Algarve</figcaption></figure>
+  </div>
+
+  <!-- ITINERARY -->
+  <h2 id="itinerary"><span class="ic">📅</span>Day by Day</h2>
+
+  <div class="card day">
+    <span class="tag">Day 1</span>
+    <h3>Arrive → Lisbon</h3>
+    <img class="dayphoto" data-wiki="Alfama" alt="Alfama, Lisbon">
+    <ul class="tl">
+      <li><span class="t">Midday</span> Land at <b>Lisbon (LIS)</b> — the airport sits right in the city. <span class="dist">Taxi/Uber to center ~15–20 min, ~€15</span></li>
+      <li><span class="t">Afternoon</span> Check in, then ease in with a wander through <b>Chiado &amp; Príncipe Real</b> — boutiques, miradouros (viewpoints), a first <i>pastel de nata</i>.</li>
+      <li><span class="t">6:30pm</span> Sunset at <b>Miradouro de São Pedro de Alcântara</b> with a glass of white port. <a href="https://www.google.com/maps/search/?api=1&query=Miradouro+de+Sao+Pedro+de+Alcantara+Lisbon" target="_blank">📍</a></li>
+      <li><span class="t">8:30pm</span> <span class="fud">🍽️ Dinner:</span> Belcanto (José Avillez, 2★) for a celebratory opener — or the buzzier 100 Maneiras.</li>
+    </ul>
+    <div class="note"><b>Keep night one easy.</b> If your flight lands late, skip Belcanto for arrival night (it books weeks out anyway) and do a relaxed dinner at <b>A Cevicheria</b> or <b>Prado</b> instead — save the tasting menu for Day 2.</div>
+  </div>
+
+  <div class="card day">
+    <span class="tag">Day 2</span>
+    <h3>Lisbon — Alfama &amp; Belém</h3>
+    <img class="dayphoto" data-wiki="Belém Tower" alt="Belém Tower">
+    <ul class="tl">
+      <li><span class="t">9:00am</span> Morning in <b>Alfama</b> — the old Moorish quarter. Ride <b>Tram 28</b> a few stops, climb to <b>Castelo de São Jorge</b> for the city-and-river view.</li>
+      <li><span class="t">12:30pm</span> Taxi to <b>Belém</b>. See the <b>Jerónimos Monastery</b> &amp; <b>Belém Tower</b> (UNESCO). <span class="dist">~15 min from center</span></li>
+      <li><span class="t">1:30pm</span> <span class="fud">🍽️ The pilgrimage:</span> warm <b>Pastéis de Belém</b> straight from the original 1837 bakery.</li>
+      <li><span class="t">3:00pm</span> <b>MAAT</b> riverfront museum + a walk along the Tagus.</li>
+      <li><span class="t">8:30pm</span> <span class="fud">🍽️ Dinner:</span> Belcanto (if not Day 1) or Alma (2★) — Lisbon's two great tasting tables.</li>
+    </ul>
+  </div>
+
+  <div class="card day">
+    <span class="tag">Day 3</span>
+    <h3>🏰 Sintra Day Trip</h3>
+    <img class="dayphoto" data-wiki="Quinta da Regaleira" alt="Quinta da Regaleira, Sintra">
+    <ul class="tl">
+      <li><span class="t">8:30am</span> To <b>Sintra</b> — a fairy-tale of palaces in the hills. <span class="dist">Private driver ~40 min (best), or train from Rossio ~40 min</span> <a href="https://www.google.com/maps/search/?api=1&query=Sintra+Portugal" target="_blank">📍</a></li>
+      <li><span class="t">9:30am</span> <b>Pena Palace</b> early (beat the crowds) — the candy-colored romantic palace on the peak.</li>
+      <li><span class="t">11:30am</span> <b>Quinta da Regaleira</b> — gardens, grottoes &amp; the spiral Initiation Well.</li>
+      <li><span class="t">1:30pm</span> <span class="fud">🍽️ Lunch:</span> Incomum or Tascantiga in Sintra village.</li>
+      <li><span class="t">3:00pm</span> Optional <b>Cabo da Roca</b> (mainland Europe's westernmost point) + <b>Cascais</b> seaside on the way back.</li>
+      <li><span class="t">8:30pm</span> <span class="fud">🍽️ Dinner back in Lisbon:</span> Cervejaria Ramiro — legendary garlic shrimp &amp; seafood, finished with a <i>prego</i> steak roll.</li>
+    </ul>
+    <div class="note">🚗 <b>Worth the splurge:</b> a <b>private driver for Sintra</b> (~€250–350/day) skips the notorious parking &amp; shuttle chaos and lets you add Cabo da Roca + Cascais effortlessly. Pre-book <b>Pena Palace timed tickets</b> regardless.</div>
+  </div>
+
+  <div class="card day">
+    <span class="tag">Day 4</span>
+    <h3>🚄 Train to Porto</h3>
+    <img class="dayphoto" data-wiki="Ribeira, Porto" alt="Ribeira, Porto">
+    <ul class="tl">
+      <li><span class="t">10:00am</span> <b>Alfa Pendular train Lisboa → Porto</b> (Comfort/1st class). <span class="dist">~2h50, station Campanhã/São Bento</span></li>
+      <li><span class="t">1:30pm</span> Check in, lunch, then explore the <b>Ribeira</b> riverfront &amp; the iconic <b>Dom Luís I Bridge</b>.</li>
+      <li><span class="t">4:00pm</span> <b>Livraria Lello</b> (the storybook bookshop) &amp; <b>São Bento</b> station's blue azulejo hall.</li>
+    </ul>
+    <div class="gallery">
+      <figure><img data-wiki="Lello Bookshop" alt="Livraria Lello"><figcaption>Livraria Lello</figcaption></figure>
+      <figure><img data-wiki="São Bento railway station" alt="São Bento station"><figcaption>São Bento azulejos</figcaption></figure>
+    </div>
+    <ul class="tl">
+      <li><span class="t">6:30pm</span> Cross to <b>Vila Nova de Gaia</b> for a <b>port cellar tour &amp; tasting</b> (Graham's, Taylor's or Sandeman) at golden hour.</li>
+      <li><span class="t">8:30pm</span> <span class="fud">🍽️ Dinner:</span> Cantinho do Avillez or Euskalduna Studio.</li>
+    </ul>
+    <div class="note">🚆 <b>Book the Alfa Pendular early</b> on <a href="https://www.cp.pt/passageiros/en" target="_blank">CP.pt</a> for the best fares and Conforto (1st-class) seats. São Bento is right in the center; Campanhã is the main hub — both work.</div>
+  </div>
+
+  <div class="card day">
+    <span class="tag">Day 5</span>
+    <h3>🍷 Douro Valley Wine Day</h3>
+    <img class="dayphoto" data-wiki="Douro" alt="Douro Valley">
+    <ul class="tl">
+      <li><span class="t">8:30am</span> Private chauffeured wine tour into the <b>Douro Valley</b> — the world's oldest demarcated wine region, terraced vineyards plunging to the river. <span class="dist">~1h30 drive each way</span></li>
+      <li><span class="t">10:30am</span> Private guided visit &amp; tasting at a historic <b>quinta</b> — <b>Quinta de Nápoles</b> (Niepoort) or <b>Quinta Nova</b> (one of the "9 must-see wineries in the world").</li>
+      <li><span class="t">12:30pm</span> ⛵ <b>Private vintage-boat cruise</b> on the Douro — a classic 1957 wooden yacht gliding through the terraces (the boat from your luxury-tour quote). Swim/relax stops as you go.</li>
+      <li><span class="t">1:30pm</span> <span class="fud">🍽️ Vineyard lunch</span> with valley views — Quinta Nova's Terraçu's or DOC by Rui Paula on the river, with wine pairing.</li>
+      <li><span class="t">4:00pm</span> Second estate &amp; tasting — Quinta do Crasto or Quinta do Bomfim (Dow's), terrace overlooking the bends.</li>
+      <li><span class="t">8:30pm</span> <span class="fud">🍽️ Dinner back in Porto:</span> Antiqvvm (1★) or, for the full splurge, The Yeatman (2★).</li>
+    </ul>
+    <div class="note">🍇 <b>Make it effortless:</b> a <b>private Douro tour</b> (~€400–600 for two, lunch &amp; tastings + cruise) beats the group vans — exactly the kind of day in your <i>Luxury Tours Portugal</i> quote. <b>Stay over to go deeper:</b> a 1-night add-on at <b>Six Senses Douro Valley</b> (vineyard spa + garden BBQ) turns this into a proper wine escape — highly recommended given how much you love wine days.</div>
+  </div>
+
+  <div class="card day">
+    <span class="tag">Day 6</span>
+    <h3>Porto at Leisure</h3>
+    <img class="dayphoto" data-wiki="Foz do Douro" alt="Foz do Douro, Porto">
+    <ul class="tl">
+      <li><span class="t">9:30am</span> Slow brunch (Zenith or do Norte), then the <b>Bolsa Palace</b> &amp; <b>Clérigos Tower</b> climb.</li>
+      <li><span class="t">12:30pm</span> <span class="fud">🍽️ Lunch:</span> the famous <b>francesinha</b> at Café Santiago — or a perfect <i>bifana</i> at Conga.</li>
+      <li><span class="t">2:30pm</span> Tram to <b>Foz do Douro</b> — where the river meets the Atlantic; oceanfront promenade &amp; a coffee.</li>
+      <li><span class="t">5:00pm</span> Last stroll through <b>Cedofeita</b> design shops &amp; galleries.</li>
+      <li><span class="t">8:30pm</span> <span class="fud">🍽️ Dinner:</span> Pedro Lemos (1★) in Foz, or casual seafood at Marisqueira Antiga.</li>
+    </ul>
+  </div>
+
+  <div class="card day">
+    <span class="tag">Day 7</span>
+    <h3>🏖️ Travel to the Algarve</h3>
+    <img class="dayphoto" data-wiki="Lagos, Portugal" alt="Lagos, Algarve">
+    <ul class="tl">
+      <li><span class="t">Morning</span> <b>Fly Porto → Faro</b> (~1h, fastest) — or train via Lisbon (scenic but ~6–7h). <span class="dist">Pick up a rental car at Faro (FAO)</span></li>
+      <li><span class="t">Afternoon</span> Drive to your coast base (Lagos / Carvoeiro / Vilamoura). Check in, settle into the resort.</li>
+      <li><span class="t">5:00pm</span> First beach: <b>Praia Dona Ana</b> or <b>Praia da Marinha</b> — golden cliffs &amp; turquoise water.</li>
+      <li><span class="t">8:30pm</span> <span class="fud">🍽️ Dinner:</span> resort restaurant or grilled fish on the marina.</li>
+    </ul>
+    <div class="note">✈️ <b>Porto→Faro by air saves a full day</b> vs. the train. A <b>rental car is worth it in the Algarve</b> — beaches and the best restaurants are spread along the coast and not walkable.</div>
+  </div>
+
+  <div class="card day">
+    <span class="tag">Day 8</span>
+    <h3>⛵ Benagil Caves &amp; Beaches</h3>
+    <img class="dayphoto" data-wiki="Benagil" alt="Benagil Cave">
+    <ul class="tl">
+      <li><span class="t">9:30am</span> <b>Boat tour to the Benagil Sea Cave</b> — the famous domed cave with the sky-hole, plus hidden grottoes along the cliffs.</li>
+      <li><span class="t">12:00pm</span> Swim &amp; sunbathe at <b>Praia da Marinha</b> (one of Europe's most beautiful beaches).</li>
+      <li><span class="t">1:30pm</span> <span class="fud">🍽️ Lunch:</span> cliffside at O Bicho or fresh seafood in Carvoeiro.</li>
+      <li><span class="t">4:00pm</span> Spa &amp; pool afternoon at the resort — you've earned it.</li>
+      <li><span class="t">8:00pm</span> <span class="fud">🍽️ Dinner:</span> Vila Joya (2★) or Ocean at Vila Vita (2★) — the Algarve's destination tables.</li>
+    </ul>
+    <div class="note">⛵ <b>Do Benagil right:</b> a <b>small-group or private boat</b> (~€35–60 pp group / ~€250 private) at <b>9–10am</b> beats the midday crowds and lets you actually go inside the cave. Kayak/SUP tours land on the cave beach itself.</div>
+  </div>
+
+  <div class="card day">
+    <span class="tag">Day 9</span>
+    <h3>Lagos &amp; the Cliffs</h3>
+    <img class="dayphoto" data-wiki="Ponta da Piedade" alt="Ponta da Piedade">
+    <ul class="tl">
+      <li><span class="t">9:30am</span> <b>Ponta da Piedade</b> — dramatic ochre rock arches &amp; sea stacks; walk the cliff boardwalk above Lagos.</li>
+      <li><span class="t">12:00pm</span> Old-town <b>Lagos</b> — cobbled streets, the marina, a long lunch.</li>
+      <li><span class="t">3:00pm</span> Beach pick: <b>Praia do Camilo</b> (Lagos) or chic beach club at <b>Quinta do Lago</b>.</li>
+      <li><span class="t">6:30pm</span> Sunset drinks at a cliff bar.</li>
+      <li><span class="t">8:30pm</span> <span class="fud">🍽️ Last dinner:</span> Bon Bon (1★) or a relaxed seafood feast at A Casa do Avô.</li>
+    </ul>
+  </div>
+
+  <div class="card day">
+    <span class="tag">Day 10</span>
+    <h3>Fly Home ✈️ — from Faro</h3>
+    <ul class="tl">
+      <li><span class="t">Morning</span> Slow breakfast, last beach walk, return the rental car at <b>Faro (FAO)</b>.</li>
+      <li><span class="t">Midday</span> ✈️ Fly home from Faro — or connect via Lisbon if needed. <span class="dist">Faro is ~40–60 min from most Algarve bases</span></li>
+    </ul>
+    <div class="note">🛫 <b>Faro has direct flights</b> to many European hubs; for long-haul you'll likely connect through Lisbon. Leave a comfortable buffer to drop the car. 🎉</div>
+  </div>
+
+  <!-- DINING PLAN -->
+  <h2 id="eat"><span class="ic">🍽️</span>The Dining Plan</h2>
+  <p class="sub">Built for foodies — what to eat each city, where, and what to order. Picks from <a href="https://finduslost.com/" target="_blank">Find Us Lost</a> + <a href="https://www.ourtravelpassport.com/" target="_blank">Our Travel Passport</a> + your Beli recs. Tap <b>📋 Menu</b> on any spot.</p>
+
+  <h3>🏛️ Lisbon (3 nights)</h3>
+  <div class="meal">
+    <div class="when">Day 1 · Dinner (arrival)</div>
+    <div class="spot">Belcanto <span class="star">★★</span> — or 100 Maneiras / A Cevicheria if landing late</div>
+    <div class="order"><b>Order:</b> José Avillez's tasting menu at <i>Belcanto</i> (book weeks ahead). Lower-key but excellent: <i>100 Maneiras</i> (playful tasting) or <i>A Cevicheria</i> (no-reservations ceviche under a giant octopus).<br>📋 <a href="https://www.google.com/search?q=Belcanto+Lisbon+menu" target="_blank">Belcanto</a> · <a href="https://www.google.com/search?q=100+Maneiras+Lisbon+menu" target="_blank">100 Maneiras</a> · <a href="https://www.google.com/search?q=A+Cevicheria+Lisbon+menu" target="_blank">A Cevicheria</a><br>📍 <a href="https://www.google.com/maps/search/?api=1&query=Belcanto+Lisbon" target="_blank">Belcanto</a></div>
+  </div>
+  <div class="meal">
+    <div class="when">Day 2 · Lunch (Belém)</div>
+    <div class="spot">Pastéis de Belém <span class="star">★</span></div>
+    <div class="order"><b>Order:</b> warm <i>pastéis de nata</i> with cinnamon, straight from the original 1837 bakery. (Manteigaria in town is the great rival — try both.) <a href="https://www.google.com/maps/search/?api=1&query=Pasteis+de+Belem+Lisbon" target="_blank">📍 Map</a></div>
+  </div>
+  <div class="meal">
+    <div class="when">Day 2 · Dinner</div>
+    <div class="spot">Alma <span class="star">★★</span> (or Prado)</div>
+    <div class="order"><b>Order:</b> Henrique Sá Pessoa's tasting at <i>Alma</i>. For a lighter, produce-driven night go to <i>Prado</i> (natural wine, farm-to-table).<br>📋 <a href="https://www.google.com/search?q=Alma+restaurant+Lisbon+menu" target="_blank">Alma</a> · <a href="https://www.google.com/search?q=Prado+restaurant+Lisbon+menu" target="_blank">Prado</a></div>
+  </div>
+  <div class="meal">
+    <div class="when">Day 3 · Dinner (Sintra day)</div>
+    <div class="spot">Cervejaria Ramiro <span class="star">★</span></div>
+    <div class="order"><b>Order:</b> garlic shrimp, <i>gambas</i>, percebes (goose barnacles), tiger prawns — then the legendary <i>prego no pão</i> (steak roll) to finish, the Ramiro way. <a href="https://www.google.com/search?q=Cervejaria+Ramiro+Lisbon+menu" target="_blank">📋 Menu</a> · <a href="https://www.google.com/maps/search/?api=1&query=Cervejaria+Ramiro+Lisbon" target="_blank">📍 Map</a></div>
+  </div>
+  <div class="note"><b>What to eat in Lisbon:</b> <i>pastéis de nata</i>, <i>bacalhau</i> (salt cod, a thousand ways), grilled sardines, <i>bifana</i> sandwiches, and a glass of vinho verde.<br>🟢 <b>Your Beli faves</b> (tap for menus): <a href="https://www.google.com/search?q=Time+Out+Market+Lisbon" target="_blank">Time Out Market</a> (foodhall — best of the city) · <a href="https://www.google.com/search?q=Boa-Bao+Lisbon+menu" target="_blank">Boa-Bao</a> · <a href="https://www.google.com/search?q=O+Frade+Lisbon+menu" target="_blank">O Frade</a> · <a href="https://www.google.com/search?q=Solar+dos+Presuntos+Lisbon+menu" target="_blank">Solar dos Presuntos</a> · <a href="https://www.google.com/search?q=Pasteis+de+Belem+vs+Manteigaria" target="_blank">Manteigaria</a></div>
+
+  <h3>🍷 Porto &amp; Douro (3 nights)</h3>
+  <div class="meal">
+    <div class="when">Day 4 · Dinner (arrival)</div>
+    <div class="spot">Cozinha das Flores <span class="star">★</span> / Euskalduna Studio <span class="star">★</span> <span style="font-size:11px;color:#176b7a">· your Beli</span></div>
+    <div class="order"><b>Order:</b> Nuno Mendes's contemporary Portuguese at <i>Cozinha das Flores</i> (+ the cult cocktail bar Flôr next door), or the tiny tasting counter at <i>Euskalduna Studio</i> — both on your Beli list. Easier night-one bite: <i>Taberna dos Mercadores</i> in the Ribeira.<br>📋 <a href="https://cozinhadasflores.com/" target="_blank">Cozinha das Flores</a> · <a href="http://www.euskaldunastudio.pt/" target="_blank">Euskalduna Studio</a> · <a href="https://tabernadosmercadores.shop/" target="_blank">Taberna dos Mercadores</a></div>
+  </div>
+  <div class="meal">
+    <div class="when">Day 5 · Lunch (Douro Valley)</div>
+    <div class="spot">Quinta Nova / DOC by Rui Paula <span class="star">★</span></div>
+    <div class="order"><b>Order:</b> a long vineyard lunch over the river — regional dishes paired with the estate's own wines. <i>DOC</i> sits right on the Douro's edge.<br>📋 <a href="https://www.google.com/search?q=DOC+Rui+Paula+Douro+menu" target="_blank">DOC by Rui Paula</a> · <a href="https://www.google.com/search?q=Quinta+Nova+restaurant+Douro" target="_blank">Quinta Nova</a></div>
+  </div>
+  <div class="meal">
+    <div class="when">Day 5 · Dinner</div>
+    <div class="spot">The Yeatman <span class="star">★★</span> / Antiqvvm <span class="star">★</span> <span style="font-size:11px;color:#176b7a">· your Beli</span></div>
+    <div class="order"><b>Order:</b> the gastronomic tasting at <i>The Yeatman</i> (epic Gaia views + a legendary Portuguese wine list) or <i>Antiqvvm</i> in a garden villa above the river — both on your Beli list.<br>📋 <a href="https://www.google.com/search?q=The+Yeatman+restaurant+Porto+menu" target="_blank">The Yeatman</a> · <a href="http://www.antiqvvm.pt/" target="_blank">Antiqvvm</a></div>
+  </div>
+  <div class="meal">
+    <div class="when">Day 6 · Lunch</div>
+    <div class="spot">Casa de Chá da Boa Nova <span class="star">★★</span> (Rui Paula) — seaside</div>
+    <div class="order"><b>Order:</b> the seafood-led tasting in Siza Vieira's iconic cliff house over the Atlantic (the lunch in your luxury-tour quote). Quicker city option: the signature <i>francesinha</i> at <i>Café Santiago</i>.<br>📋 <a href="https://www.google.com/search?q=Casa+de+Cha+da+Boa+Nova+Rui+Paula+menu" target="_blank">Casa de Chá da Boa Nova</a> · <a href="https://www.google.com/search?q=Cafe+Santiago+Porto+francesinha" target="_blank">Café Santiago</a></div>
+  </div>
+  <div class="meal">
+    <div class="when">Day 6 · Dinner (last in Porto)</div>
+    <div class="spot">Pedro Lemos <span class="star">★</span> / Le Monument <span class="star">★</span> <span style="font-size:11px;color:#176b7a">· your Beli</span></div>
+    <div class="order"><b>Order:</b> finish at <i>Pedro Lemos</i> (1★) in leafy Foz, or <i>Le Monument</i> — chef Julien Montbabut's French-Portuguese table inside Maison Albar Le Monumental Palace (where your tour stays). Both saved on your Beli.<br>📋 <a href="https://www.pedrolemos.net/" target="_blank">Pedro Lemos</a> · <a href="https://www.maison-albar-hotels-le-monumental-palace.com/pt/page/le-monument.3809.html" target="_blank">Le Monument</a></div>
+  </div>
+  <div class="note"><b>What to eat in Porto:</b> <i>francesinha</i>, <i>bifana</i>, fresh seafood at Foz, and of course <b>port wine</b> tastings in Gaia (tawny + vintage). Brunch hot spots: Zenith, do Norte.<br>🟢 <b>Your Beli list — Porto</b> (tap for site): <a href="https://www.maison-albar-hotels-le-monumental-palace.com/pt/page/le-monument.3809.html" target="_blank">Le Monument</a> · <a href="http://www.euskaldunastudio.pt/" target="_blank">Euskalduna Studio</a> · <a href="http://www.antiqvvm.pt/" target="_blank">Antiqvvm</a> · <a href="https://www.pedrolemos.net/" target="_blank">Pedro Lemos</a> · <a href="http://cozinhadasflores.com/" target="_blank">Cozinha das Flores</a> · <a href="https://omarestaurante.pt/" target="_blank">OMA</a> · <a href="https://indiferente.pt/" target="_blank">InDiferente</a> · <a href="https://tabernadosmercadores.shop/" target="_blank">Taberna dos Mercadores</a> · <a href="https://www.instagram.com/patagorda.porto/" target="_blank">Pata Gorda</a> · <a href="https://letsumai.com/widget/fauno" target="_blank">Fauno</a> · <a href="https://www.facebook.com/RestauranteCHAMA/" target="_blank">Chama</a> · <a href="https://www.instagram.com/damapedecabra/" target="_blank">DAMA pé de cabra</a> · <a href="https://letsumai.com/widget/genuino-vinho-natural-e-boa-comida" target="_blank">Genuíno (wine bar)</a> · <a href="http://grutaporto.com/" target="_blank">Gruta</a> · <a href="http://mistu.pt/" target="_blank">MISTU</a> · <a href="http://patio44.pt/" target="_blank">Pátio 44</a> · <a href="https://www.apegorestaurante.com/" target="_blank">Apego</a> · <a href="http://www.grancruzhouse.pt/restaurant" target="_blank">Casario</a> · <a href="https://atrevorestaurante.com/" target="_blank">Atrevo</a> · <a href="http://www.cumplicesteakhouse.com/" target="_blank">Cúmplice (steakhouse)</a></div>
+
+  <h3>🏖️ Algarve (3 nights)</h3>
+  <div class="meal">
+    <div class="when">Day 7 · Dinner (arrival)</div>
+    <div class="spot">Vista <span class="star">★</span> (Bela Vista, Praia da Rocha) <span style="font-size:11px;color:#176b7a">· your #1 Beli</span></div>
+    <div class="order"><b>Order:</b> your top Algarve Beli pick (9.6) — the 1-Michelin-star tasting at <i>Vista</i>, right in the Bela Vista hotel above Praia da Rocha. Easier night: grilled <i>dourada</i>/<i>robalo</i> on the Portimão marina.<br>📋 <a href="https://www.google.com/search?q=Vista+restaurant+Bela+Vista+Praia+da+Rocha+menu" target="_blank">Vista</a> · <a href="https://www.google.com/search?q=Restaurante+F+Praia+da+Rocha" target="_blank">Restaurante F</a></div>
+  </div>
+  <div class="meal">
+    <div class="when">Day 8 · Dinner (the big one)</div>
+    <div class="spot">Vila Joya <span class="star">★★</span> / Ocean at Vila Vita <span class="star">★★</span></div>
+    <div class="order"><b>Order:</b> the tasting menu at <i>Vila Joya</i> (oceanfront, one of the world's celebrated tables) or <i>Ocean</i> at Vila Vita Parc. The Algarve's two-star destinations.<br>📋 <a href="https://www.google.com/search?q=Vila+Joya+restaurant+Algarve+menu" target="_blank">Vila Joya</a> · <a href="https://www.google.com/search?q=Ocean+Vila+Vita+Parc+menu" target="_blank">Ocean</a></div>
+  </div>
+  <div class="meal">
+    <div class="when">Day 9 · Last dinner</div>
+    <div class="spot">Bon Bon <span class="star">★</span> / A Casa do Avô</div>
+    <div class="order"><b>Order:</b> refined Algarvian at <i>Bon Bon</i> (1★, Carvoeiro), or go casual-delicious with a seafood <i>cataplana</i> feast at a local <i>marisqueira</i>.<br>📋 <a href="https://www.google.com/search?q=Bon+Bon+restaurant+Carvoeiro+menu" target="_blank">Bon Bon</a></div>
+  </div>
+  <div class="note"><b>What to eat in the Algarve:</b> <i>cataplana</i> (seafood stew), grilled fish, clams <i>à Bulhão Pato</i>, <i>percebes</i>, and almond-and-fig sweets.<br>🟢 <b>Your Beli list — Algarve (Portimão)</b> (tap for search): <a href="https://www.google.com/search?q=Vista+restaurant+Bela+Vista+Praia+da+Rocha+Portimao" target="_blank">Vista</a> (9.6 — the 1★ at Bela Vista, your hotel pick!) · <a href="https://www.google.com/search?q=NUMA+Restaurante+Portimao" target="_blank">NUMA</a> (8.5) · <a href="https://www.google.com/search?q=Restaurante+F+Praia+da+Rocha+Portimao" target="_blank">Restaurante F</a> (8.5) · <a href="https://www.google.com/search?q=NoSoloAgua+Portimao" target="_blank">NoSoloÁgua</a> (7.4 — beach club) · <a href="https://www.google.com/search?q=AllGarbe+restaurant+Portimao" target="_blank">AllGarbe</a></div>
+
+  <h3>🌍 International &amp; ethnic eats (you asked!)</h3>
+  <p class="sub">Portugal's food scene goes way beyond bacalhau — and several are already on your Beli. A few standouts when you want a change of flavor:</p>
+  <div class="note" style="background:#e3f1f5;border-color:#bcdfe6">
+    <b style="color:#176b7a">🏛️ Lisbon:</b> <a href="https://www.google.com/search?q=Boa-Bao+Lisbon+menu" target="_blank">Boa-Bao</a> (pan-Asian, your Beli) · <a href="https://www.google.com/search?q=A+Cevicheria+Lisbon" target="_blank">A Cevicheria</a> (Peruvian) · <a href="https://www.google.com/search?q=Tasca+Kome+Lisbon" target="_blank">Tasca Kome</a> (Japanese) · <a href="https://www.google.com/search?q=Cantina+Peruana+Lisbon" target="_blank">Cantina Peruana</a> · great <b>Goan &amp; Mozambican</b> spots (<a href="https://www.google.com/search?q=Cantinho+do+Aziz+Lisbon" target="_blank">Cantinho do Aziz</a>).<br>
+    <b style="color:#176b7a">🍷 Porto:</b> <a href="http://grutaporto.com/" target="_blank">Gruta</a> (Brazilian, your Beli) · <a href="http://mistu.pt/" target="_blank">MISTU</a> (Mediterranean, your Beli) · <a href="https://letsumai.com/widget/fauno" target="_blank">Fauno</a> (contemporary European, your Beli) · plus excellent Japanese (<a href="https://www.google.com/search?q=Shiko+restaurant+Porto" target="_blank">Shiko</a>) &amp; Nikkei.<br>
+    <b style="color:#176b7a">🏖️ Algarve:</b> <a href="https://www.google.com/search?q=NoSoloAgua+Portimao" target="_blank">NoSoloÁgua</a> (Asian beach club, your Beli) · <a href="https://www.google.com/search?q=Restaurante+F+Praia+da+Rocha" target="_blank">Restaurante F</a> (Portuguese-Italian, your Beli) · plenty of Brazilian &amp; pan-Asian along the coast.
+  </div>
+
+  <!-- DINNER CHECKLIST -->
+  <h3>📞 Reserve well ahead</h3>
+  <ul class="check">
+    <li>Lisbon — <b>Belcanto</b> (2★, books weeks out)</li>
+    <li>Lisbon — <b>Alma</b> (2★)</li>
+    <li>Sintra — <b>Pena Palace</b> timed entry tickets</li>
+    <li>Porto — <b>The Yeatman</b> dinner (Day 5)</li>
+    <li>Douro — <b>private wine tour</b> + vineyard lunch (Day 5)</li>
+    <li>Algarve — <b>Vila Joya / Ocean</b> (Day 8)</li>
+    <li>Algarve — <b>Benagil boat tour</b> (Day 8 morning)</li>
+  </ul>
+
+  <h3>📋 Menus &amp; 📞 Reservations — quick reference</h3>
+  <p class="sub">Every spot below: tap <b>📋</b> for the menu, <b>📞</b> to reserve (most luxe tables book on their own site or TheFork).</p>
+  <table>
+    <tr><th>Restaurant</th><th>City</th><th class="book">Links</th></tr>
+    <tr><td><b>Belcanto</b> ★★</td><td>Lisbon</td><td class="book"><a href="https://www.belcanto.pt/en/menu/" target="_blank">📋</a> · <a href="https://www.belcanto.pt/en/reservations/" target="_blank">📞</a></td></tr>
+    <tr><td><b>Alma</b> ★★</td><td>Lisbon</td><td class="book"><a href="https://www.almalisboa.pt/en/menus/" target="_blank">📋</a> · <a href="https://www.almalisboa.pt/en/reservations/" target="_blank">📞</a></td></tr>
+    <tr><td>Cervejaria Ramiro</td><td>Lisbon</td><td class="book"><a href="https://www.cervejariaramiro.com/menu/" target="_blank">📋</a> · <a href="https://www.cervejariaramiro.com/" target="_blank">📞</a></td></tr>
+    <tr><td>A Cevicheria</td><td>Lisbon</td><td class="book"><a href="https://www.google.com/search?q=A+Cevicheria+Lisbon+menu" target="_blank">📋</a> · <a href="https://www.google.com/search?q=A+Cevicheria+Lisbon+reservation" target="_blank">📞</a></td></tr>
+    <tr><td>Boa-Bao <small>(Asian)</small></td><td>Lisbon</td><td class="book"><a href="https://boabao.pt/menu/" target="_blank">📋</a> · <a href="https://boabao.pt/" target="_blank">📞</a></td></tr>
+    <tr><td>The Yeatman ★★</td><td>Porto</td><td class="book"><a href="https://www.the-yeatman-hotel.com/en/gastronomy/gastronomic-restaurant/" target="_blank">📋</a> · <a href="https://www.the-yeatman-hotel.com/en/gastronomy/gastronomic-restaurant/" target="_blank">📞</a></td></tr>
+    <tr><td>Cozinha das Flores <small>· your Beli</small></td><td>Porto</td><td class="book"><a href="http://cozinhadasflores.com/" target="_blank">📋</a> · <a href="http://cozinhadasflores.com/" target="_blank">📞</a></td></tr>
+    <tr><td>Euskalduna Studio <small>· your Beli</small></td><td>Porto</td><td class="book"><a href="http://www.euskaldunastudio.pt/" target="_blank">📋</a> · <a href="http://www.euskaldunastudio.pt/" target="_blank">📞</a></td></tr>
+    <tr><td>Antiqvvm ★ <small>· your Beli</small></td><td>Porto</td><td class="book"><a href="http://www.antiqvvm.pt/" target="_blank">📋</a> · <a href="http://www.antiqvvm.pt/" target="_blank">📞</a></td></tr>
+    <tr><td>Pedro Lemos ★ <small>· your Beli</small></td><td>Porto</td><td class="book"><a href="https://www.pedrolemos.net/" target="_blank">📋</a> · <a href="https://www.pedrolemos.net/" target="_blank">📞</a></td></tr>
+    <tr><td>Le Monument <small>· your Beli</small></td><td>Porto</td><td class="book"><a href="https://www.maison-albar-hotels-le-monumental-palace.com/pt/page/le-monument.3809.html" target="_blank">📋</a> · <a href="https://www.maison-albar-hotels-le-monumental-palace.com/pt/page/le-monument.3809.html" target="_blank">📞</a></td></tr>
+    <tr><td>Casa de Chá da Boa Nova ★★</td><td>Porto</td><td class="book"><a href="https://casadechadaboanova.pt/en/" target="_blank">📋</a> · <a href="https://casadechadaboanova.pt/en/" target="_blank">📞</a></td></tr>
+    <tr><td>DOC by Rui Paula</td><td>Douro</td><td class="book"><a href="https://ruipaula.pt/restaurante/doc/" target="_blank">📋</a> · <a href="https://ruipaula.pt/restaurante/doc/" target="_blank">📞</a></td></tr>
+    <tr><td><b>Vista</b> ★ <small>· your #1 Beli</small></td><td>Algarve</td><td class="book"><a href="https://www.vistarestaurante.com/en/menus/" target="_blank">📋</a> · <a href="https://www.vistarestaurante.com/en/reservations/" target="_blank">📞</a></td></tr>
+    <tr><td>Vila Joya ★★</td><td>Algarve</td><td class="book"><a href="https://www.vilajoya.com/en/restaurant-vila-joya/" target="_blank">📋</a> · <a href="https://www.vilajoya.com/en/restaurant-vila-joya/" target="_blank">📞</a></td></tr>
+    <tr><td>Ocean (Vila Vita) ★★</td><td>Algarve</td><td class="book"><a href="https://www.vilavitaparc.com/en/dining/ocean" target="_blank">📋</a> · <a href="https://www.vilavitaparc.com/en/dining/ocean" target="_blank">📞</a></td></tr>
+    <tr><td>Bon Bon ★</td><td>Algarve</td><td class="book"><a href="https://www.bonbon.pt/en/menu/" target="_blank">📋</a> · <a href="https://www.bonbon.pt/en/" target="_blank">📞</a></td></tr>
+    <tr><td>Restaurante F <small>· your Beli</small></td><td>Algarve</td><td class="book"><a href="https://www.google.com/search?q=Restaurante+F+Praia+da+Rocha+menu" target="_blank">📋</a> · <a href="https://www.google.com/search?q=Restaurante+F+Praia+da+Rocha+reservation" target="_blank">📞</a></td></tr>
+  </table>
+  <div class="note">💡 <b>How to reserve the big ones:</b> Belcanto, Alma, The Yeatman, Vila Joya &amp; Vista take bookings on their own sites (or <a href="https://www.thefork.com/" target="_blank">TheFork</a>) — do these <b>4–6 weeks out</b>. The casual Beli spots you can usually grab a few days ahead or walk in early.</div>
+
+  <!-- HOTELS -->
+  <h2 id="stay"><span class="ic">🛏️</span>Where to Stay</h2>
+  <p class="sub">High-end picks from Find Us Lost &amp; Our Travel Passport · book early for the design boutiques &amp; resorts.</p>
+  <p class="sub">Click a link to see live availability &amp; prices for your dates (2 guests). Set your exact dates in the link.</p>
+
+  <h3>Lisbon — 3 nights</h3>
+  <p class="sub" style="margin-bottom:6px">Stay central in <b>Chiado / Príncipe Real / Avenida</b> — walkable to everything.</p>
+  <table>
+    <tr><th>Hotel</th><th>Where / why</th><th class="book">Check dates</th></tr>
+    <tr><td><b>Bairro Alto Hotel</b> ★ ($$$$)</td><td>🏛️ <b>Chiado</b> · Leading Hotels of the World — iconic rooftop over the river, perfect location</td><td class="book"><a href="https://www.booking.com/searchresults.html?ss=Bairro+Alto+Hotel+Lisbon&group_adults=2&no_rooms=1&group_children=0" target="_blank">Check</a></td></tr>
+    <tr><td><b>Verride Palácio Santa Catarina</b> ★ ($$$$)</td><td>🏛️ <b>Bica</b> · restored palace with a showstopping rooftop &amp; pool — most romantic in town</td><td class="book"><a href="https://www.booking.com/searchresults.html?ss=Verride+Palacio+Santa+Catarina+Lisbon&group_adults=2&no_rooms=1&group_children=0" target="_blank">Check</a></td></tr>
+    <tr><td>Memmo Príncipe Real ($$$)</td><td>🌳 <b>Príncipe Real</b> · chic design hotel, hillside pool &amp; terrace, great breakfast</td><td class="book"><a href="https://www.booking.com/searchresults.html?ss=Memmo+Principe+Real+Lisbon&group_adults=2&no_rooms=1&group_children=0" target="_blank">Check</a></td></tr>
+    <tr><td>The Lumiares ($$$)</td><td>🏛️ <b>Bairro Alto</b> · suite-style hotel with a buzzy rooftop restaurant</td><td class="book"><a href="https://www.booking.com/searchresults.html?ss=The+Lumiares+Hotel+Lisbon&group_adults=2&no_rooms=1&group_children=0" target="_blank">Check</a></td></tr>
+    <tr><td>Four Seasons Ritz Lisbon ($$$$)</td><td>👑 <b>Avenida</b> · grand classic luxury, spa &amp; rooftop running track, impeccable service</td><td class="book"><a href="https://www.booking.com/searchresults.html?ss=Four+Seasons+Ritz+Lisbon&group_adults=2&no_rooms=1&group_children=0" target="_blank">Check</a></td></tr>
+    <tr><td colspan="3">Browse all 4–5★: <a href="https://www.booking.com/searchresults.html?ss=Chiado+Lisbon&group_adults=2&no_rooms=1&group_children=0&nflt=class%3D5%3Bclass%3D4" target="_blank">Lisbon luxury stays</a></td></tr>
+  </table>
+  <div class="note">🛏️ <b>Top pick:</b> <b>Bairro Alto Hotel</b> or <b>Verride</b> for the rooftop-and-location combo. Want a quieter, leafy base? <b>Memmo Príncipe Real</b>. Old-world grandeur? <b>Four Seasons Ritz</b>.</div>
+
+  <h3>Porto — 3 nights</h3>
+  <p class="sub" style="margin-bottom:6px">Stay in the <b>historic center</b> or across in <b>Gaia</b> for the wine cellars &amp; river views.</p>
+  <table>
+    <tr><th>Hotel</th><th>Where / why</th><th class="book">Check dates</th></tr>
+    <tr><td><b>The Yeatman</b> ★ ($$$$)</td><td>🍷 <b>Gaia</b> · wine-themed luxury, 2★ restaurant, infinity pool facing the Porto skyline — the splurge</td><td class="book"><a href="https://www.booking.com/searchresults.html?ss=The+Yeatman+Porto&group_adults=2&no_rooms=1&group_children=0" target="_blank">Check</a></td></tr>
+    <tr><td><b>Torel Avantgarde</b> ★ ($$$)</td><td>🎨 <b>Center</b> · artful design hotel with pool &amp; river views, beautifully done</td><td class="book"><a href="https://www.booking.com/searchresults.html?ss=Torel+Avantgarde+Porto&group_adults=2&no_rooms=1&group_children=0" target="_blank">Check</a></td></tr>
+    <tr><td>Maison Albar Le Monumental Palace ($$$$)</td><td>🏛️ <b>Avenida dos Aliados</b> · grand Belle Époque palace, central &amp; lavish, spa</td><td class="book"><a href="https://www.booking.com/searchresults.html?ss=Maison+Albar+Le+Monumental+Palace+Porto&group_adults=2&no_rooms=1&group_children=0" target="_blank">Check</a></td></tr>
+    <tr><td>PortoBay Flores ($$$)</td><td>🌿 <b>Center</b> · restored 16th-c. palace with a garden courtyard &amp; pool</td><td class="book"><a href="https://www.booking.com/searchresults.html?ss=PortoBay+Flores+Porto&group_adults=2&no_rooms=1&group_children=0" target="_blank">Check</a></td></tr>
+    <tr><td>The Lodge Hotel ($$$)</td><td>🍷 <b>Gaia</b> · boutique with a pool &amp; one of the best Porto-skyline views</td><td class="book"><a href="https://www.booking.com/searchresults.html?ss=The+Lodge+Hotel+Porto+Gaia&group_adults=2&no_rooms=1&group_children=0" target="_blank">Check</a></td></tr>
+    <tr><td colspan="3">Douro overnight option: <a href="https://www.booking.com/searchresults.html?ss=Six+Senses+Douro+Valley&group_adults=2&no_rooms=1&group_children=0" target="_blank">Six Senses Douro Valley</a></td></tr>
+  </table>
+  <div class="note">🍷 <b>Top pick:</b> <b>The Yeatman</b> if you want the full wine-country-luxury experience (and that pool view). For a stylish in-the-action base, <b>Torel Avantgarde</b> or <b>Maison Albar</b>.</div>
+
+  <h3>Algarve — 3 nights</h3>
+  <p class="sub" style="margin-bottom:6px">Choose your coast: <b>Lagos/Carvoeiro</b> (dramatic cliffs) or <b>Quinta do Lago/Vilamoura</b> (polished resort scene).</p>
+  <table>
+    <tr><th>Hotel</th><th>Where / why</th><th class="book">Check dates</th></tr>
+    <tr><td><b>Vila Vita Parc</b> ★ ($$$$)</td><td>🌊 <b>Porches</b> · clifftop Relais &amp; Châteaux resort, multiple pools, 2★ Ocean restaurant — the icon</td><td class="book"><a href="https://www.booking.com/searchresults.html?ss=Vila+Vita+Parc+Algarve&group_adults=2&no_rooms=1&group_children=0" target="_blank">Check</a></td></tr>
+    <tr><td><b>Bela Vista Hotel &amp; Spa</b> ★ ($$$$)</td><td>🏖️ <b>Portimão</b> · Relais &amp; Châteaux beachfront mansion, intimate &amp; elegant, great spa</td><td class="book"><a href="https://www.booking.com/searchresults.html?ss=Bela+Vista+Hotel+Spa+Portimao&group_adults=2&no_rooms=1&group_children=0" target="_blank">Check</a></td></tr>
+    <tr><td>Conrad Algarve ($$$$)</td><td>⛳ <b>Quinta do Lago</b> · sleek 5★ near the best beach clubs &amp; golf, big spa</td><td class="book"><a href="https://www.booking.com/searchresults.html?ss=Conrad+Algarve+Quinta+do+Lago&group_adults=2&no_rooms=1&group_children=0" target="_blank">Check</a></td></tr>
+    <tr><td>Pine Cliffs (Luxury Collection) ($$$$)</td><td>🌊 <b>Albufeira</b> · clifftop resort with a beach elevator, family-and-couples favorite</td><td class="book"><a href="https://www.booking.com/searchresults.html?ss=Pine+Cliffs+Resort+Albufeira&group_adults=2&no_rooms=1&group_children=0" target="_blank">Check</a></td></tr>
+    <tr><td>Vila Joya ($$$$)</td><td>🍽️ <b>Albufeira</b> · tiny boutique built around its 2★ restaurant — for the food-first traveler</td><td class="book"><a href="https://www.booking.com/searchresults.html?ss=Vila+Joya+Algarve&group_adults=2&no_rooms=1&group_children=0" target="_blank">Check</a></td></tr>
+    <tr><td colspan="3">Browse all 5★: <a href="https://www.booking.com/searchresults.html?ss=Algarve+Portugal&group_adults=2&no_rooms=1&group_children=0&nflt=class%3D5" target="_blank">Algarve luxury resorts</a></td></tr>
+  </table>
+  <div class="note">🏖️ <b>Top pick for you:</b> <b>Bela Vista Hotel &amp; Spa</b> (Portimão / Praia da Rocha) — intimate beachfront luxury, and its restaurant <b>Vista</b> is your #1 Algarve Beli (9.6). It also puts your other Portimão Beli picks (Restaurante F, NUMA, NoSoloÁgua) minutes away and sits right by the Benagil boat departures. Want a bigger resort scene instead? <b>Vila Vita Parc</b> for the clifftop wow factor.</div>
+
+  <!-- ACTIVITIES -->
+  <h2 id="do"><span class="ic">🎟️</span>Activities to Book</h2>
+  <table>
+    <tr><th>Activity</th><th>When</th><th class="book">Book</th></tr>
+    <tr><td>🏰 <b>Sintra private driver</b> + Pena Palace tickets</td><td>Day 3</td><td class="book"><a href="https://www.getyourguide.com/sintra-l2738/" target="_blank">GetYourGuide</a> · <a href="https://www.parquesdesintra.pt/en/" target="_blank">Pena tickets</a></td></tr>
+    <tr><td>🍷 <b>Port cellar tour &amp; tasting</b> (Gaia)</td><td>Day 4</td><td class="book"><a href="https://www.getyourguide.com/porto-l1466/?q=port%20cellar%20tasting" target="_blank">GetYourGuide</a></td></tr>
+    <tr><td>🍇 <b>Private Douro Valley wine tour</b> + lunch + cruise</td><td>Day 5</td><td class="book"><a href="https://www.getyourguide.com/porto-l1466/?q=douro%20valley%20private%20wine" target="_blank">GetYourGuide</a></td></tr>
+    <tr><td>⛵ <b>Benagil Cave boat tour</b> (small group / private)</td><td>Day 8</td><td class="book"><a href="https://www.getyourguide.com/s/?q=Benagil%20cave%20boat%20tour" target="_blank">GetYourGuide</a></td></tr>
+    <tr><td>🚣 Benagil kayak / SUP (land inside the cave)</td><td>Day 8</td><td class="book"><a href="https://www.getyourguide.com/s/?q=Benagil%20kayak" target="_blank">GetYourGuide</a></td></tr>
+    <tr><td>🐬 Dolphin watching from Lagos (optional)</td><td>Day 9</td><td class="book"><a href="https://www.getyourguide.com/s/?q=Lagos%20dolphin%20watching" target="_blank">GetYourGuide</a></td></tr>
+    <tr><td>🌅 <b>Sunset yacht / catamaran cruise</b> (Algarve coast)</td><td>Day 9</td><td class="book"><a href="https://www.getyourguide.com/s/?q=Algarve%20sunset%20cruise" target="_blank">GetYourGuide</a></td></tr>
+    <tr><td>⛵ Private vintage-boat cruise (Douro)</td><td>Day 5</td><td class="book"><a href="https://www.getyourguide.com/porto-l1466/?q=douro%20boat%20cruise" target="_blank">GetYourGuide</a></td></tr>
+  </table>
+
+  <!-- TRANSPORT -->
+  <h2 id="transport"><span class="ic">🚆</span>Getting Around</h2>
+  <table>
+    <tr><th>Leg</th><th>Best way</th><th>Time</th></tr>
+    <tr><td>Airport → central Lisbon</td><td>Taxi / Uber</td><td>~15–20 min</td></tr>
+    <tr><td>Lisbon ↔ Sintra (day trip)</td><td>Private driver (best) or train from Rossio</td><td>~40 min</td></tr>
+    <tr><td>Lisbon → Porto</td><td><b>Alfa Pendular train</b> (Conforto/1st)</td><td>~2h50</td></tr>
+    <tr><td>Porto ↔ Douro Valley</td><td>Private tour / driver</td><td>~1h30 each way</td></tr>
+    <tr><td>Porto → Faro (Algarve)</td><td><b>Fly</b> (fastest) or train via Lisbon</td><td>~1h flight</td></tr>
+    <tr><td>Around the Algarve</td><td><b>Rental car</b> (beaches are spread out)</td><td>—</td></tr>
+    <tr><td>Algarve → home</td><td>Fly from <b>Faro (FAO)</b></td><td>—</td></tr>
+  </table>
+  <p>Book trains on <a href="https://www.cp.pt/passageiros/en" target="_blank">CP.pt</a> · flights on the airline or a comparison site · rental car at Faro airport.</p>
+
+  <h3>📏 How far is everything?</h3>
+  <p class="sub">Real distances &amp; drive/transit times so you can picture the days.</p>
+  <table>
+    <tr><th>From → To</th><th>Distance</th><th>Time</th></tr>
+    <tr><td>Lisbon airport (LIS) → Chiado (center)</td><td>7 km</td><td>~15–20 min taxi</td></tr>
+    <tr><td>Lisbon center → Belém</td><td>7 km</td><td>~15 min taxi · 25 min tram</td></tr>
+    <tr><td>Lisbon → Sintra</td><td>30 km</td><td>~40 min car/train</td></tr>
+    <tr><td>Sintra → Cabo da Roca → Cascais</td><td>~20 km loop</td><td>~25–35 min</td></tr>
+    <tr><td>Lisbon → Porto</td><td>313 km</td><td><b>~2h50 train</b> · 3h drive</td></tr>
+    <tr><td>Porto center → Vila Nova de Gaia (port lodges)</td><td>1–2 km</td><td>~10 min walk over the bridge</td></tr>
+    <tr><td>Porto → Douro Valley (Pinhão)</td><td>~110 km</td><td>~1h30 drive</td></tr>
+    <tr><td>Porto → Foz do Douro (ocean)</td><td>6 km</td><td>~20 min tram</td></tr>
+    <tr><td>Porto → Faro (Algarve)</td><td>550 km</td><td><b>~1h flight</b> · 5h drive</td></tr>
+    <tr><td>Faro airport → Portimão / Praia da Rocha</td><td>65 km</td><td>~45–55 min drive</td></tr>
+    <tr><td>Portimão → Benagil cave</td><td>15 km</td><td>~20 min drive (boats also from Portimão)</td></tr>
+    <tr><td>Portimão → Praia da Marinha</td><td>17 km</td><td>~22 min drive</td></tr>
+    <tr><td>Portimão → Lagos (Ponta da Piedade)</td><td>20 km</td><td>~25 min drive</td></tr>
+    <tr><td>Portimão → Quinta do Lago / Vilamoura</td><td>50–60 km</td><td>~40–50 min drive</td></tr>
+  </table>
+  <div class="note">📍 Every restaurant &amp; sight has a <b>📍 Map</b> link — tap it for live directions &amp; the exact distance from wherever you are.</div>
+
+  <!-- COST -->
+  <h2 id="cost"><span class="ic">💶</span>Cost Estimate</h2>
+  <p class="sub">For <b>2 people · 9 nights</b> · <b>excludes international flights</b>. Reflects a <b>high-end</b> pace (5★ / design boutiques, Michelin dinners, private tours).</p>
+  <table>
+    <tr><th>Category</th><th>Detail</th><th>Est. (couple)</th></tr>
+    <tr><td><b>Hotels</b> (9 nights)</td><td>Lisbon ~€1,350 (3) · Porto ~€1,500 (3) · Algarve ~€1,950 (3) — 5★ / boutique</td><td>~€4,800</td></tr>
+    <tr><td><b>Trains &amp; flight</b></td><td>Lisbon→Porto Alfa (2, 1st) ~€140 · Porto→Faro flight (2) ~€200</td><td>~€340</td></tr>
+    <tr><td><b>Rental car</b> (Algarve, 4 days)</td><td>Compact/SUV + fuel + tolls</td><td>~€350</td></tr>
+    <tr><td><b>Private tours</b></td><td>Sintra driver ~€300 · Douro private day ~€500 · Benagil boat ~€120</td><td>~€920</td></tr>
+    <tr><td><b>Food &amp; drink</b></td><td>High-end pace incl. 3–4 Michelin dinners + tastings, ~€220/day for two</td><td>~€2,200</td></tr>
+    <tr><td><b>Local transport</b></td><td>Taxis, trams, port tastings, sundries</td><td>~€300</td></tr>
+    <tr><td colspan="2"><b>TOTAL (2 people, excl. intl. flights)</b></td><td><b>≈ €8,910</b></td></tr>
+  </table>
+  <div class="note"><b>The dial:</b> swap a couple of Michelin dinners for great casual seafood and choose the boutique (not the palace) tier and you land closer to <b>~€6,500</b>. Go all-in — Four Seasons Ritz, The Yeatman, Vila Vita, every tasting menu — and it's <b>~€11,000+</b>. The numbers above are a comfortable luxury middle.</div>
+
+  <!-- BOOKING LINKS -->
+  <h2 id="booking"><span class="ic">🔗</span>All Booking Links</h2>
+  <h3>✈️ Flights</h3>
+  <p>Long-haul into <b>Lisbon (LIS)</b>, home out of <b>Faro (FAO)</b> — book an <b>open-jaw / multi-city</b> ticket so you don't backtrack. Internal <b>Porto → Faro</b> hop on TAP / Ryanair.</p>
+
+  <h3>🚆 Trains — book on CP.pt</h3>
+  <table>
+    <tr><td>Lisbon → Porto (Alfa Pendular) — Day 4</td><td class="book"><a href="https://www.cp.pt/passageiros/en" target="_blank">Book</a></td></tr>
+    <tr><td>Lisbon ↔ Sintra (regional) — Day 3</td><td class="book"><a href="https://www.cp.pt/passageiros/en" target="_blank">Book</a></td></tr>
+  </table>
+
+  <h3>🛏️ Hotels — check your dates</h3>
+  <table>
+    <tr><td>Lisbon · Bairro Alto / Verride / Memmo</td><td class="book"><a href="https://www.booking.com/searchresults.html?ss=Chiado+Lisbon&group_adults=2&no_rooms=1&group_children=0&nflt=class%3D5%3Bclass%3D4" target="_blank">Booking</a></td></tr>
+    <tr><td>Porto · The Yeatman / Torel / Maison Albar</td><td class="book"><a href="https://www.booking.com/searchresults.html?ss=Porto+Portugal&group_adults=2&no_rooms=1&group_children=0&nflt=class%3D5%3Bclass%3D4" target="_blank">Booking</a></td></tr>
+    <tr><td>Algarve · Vila Vita / Bela Vista / Conrad</td><td class="book"><a href="https://www.booking.com/searchresults.html?ss=Algarve+Portugal&group_adults=2&no_rooms=1&group_children=0&nflt=class%3D5" target="_blank">Booking</a></td></tr>
+  </table>
+
+  <h3>🎟️ Activities — book on GetYourGuide</h3>
+  <table>
+    <tr><td>🏰 Sintra day (private driver + Pena)</td><td class="book"><a href="https://www.getyourguide.com/sintra-l2738/" target="_blank">GetYourGuide</a></td></tr>
+    <tr><td>🍷 Port cellar tasting (Gaia)</td><td class="book"><a href="https://www.getyourguide.com/porto-l1466/?q=port%20cellar%20tasting" target="_blank">Book</a></td></tr>
+    <tr><td>🍇 Private Douro Valley wine tour</td><td class="book"><a href="https://www.getyourguide.com/porto-l1466/?q=douro%20valley%20private%20wine" target="_blank">Book</a></td></tr>
+    <tr><td>⛵ Benagil Cave boat tour</td><td class="book"><a href="https://www.getyourguide.com/s/?q=Benagil%20cave%20boat%20tour" target="_blank">Book</a></td></tr>
+  </table>
+
+  <!-- TIPS -->
+  <h2 id="tips"><span class="ic">💡</span>Quick Tips</h2>
+  <div class="card">
+    <ul>
+      <li><b>Book the marquee tables early:</b> Belcanto, Alma, The Yeatman, Vila Joya book out weeks ahead — lock them before you fly.</li>
+      <li><b>Open-jaw flight</b> (in Lisbon, out Faro) saves a day and a backtrack.</li>
+      <li><b>Lisbon &amp; Porto are hilly</b> — pack comfortable shoes for the cobblestones; the heels can wait for dinner.</li>
+      <li><b>Pre-book Sintra's Pena Palace</b> timed entry and go right at opening.</li>
+      <li><b>Benagil at 9–10am</b> beats the crowds and the midday boat traffic.</li>
+      <li><b>Rent the car only in the Algarve</b> — you don't want one in the cities.</li>
+      <li><b>Tipping:</b> ~5–10% at restaurants is generous and appreciated.</li>
+      <li><b>Shoulder season (May/Jun, Sep/Oct)</b> is ideal — warm coast, fewer crowds, better rates.</li>
+    </ul>
+  </div>
+
+  <div class="foot">
+    Planned for a high-end 10-day Portugal family trip · Lisbon · Porto · Douro · Algarve<br>
+    Restaurant picks from your <a href="https://beliapp.co/app/aanyap" target="_blank">Beli</a> + <a href="https://finduslost.com/" target="_blank">Find Us Lost</a> &amp; <a href="https://www.ourtravelpassport.com/" target="_blank">Our Travel Passport</a> · luxury Douro elements from your Luxury Tours Portugal quote · trains via CP.pt
+  </div>
+
+</div>
+
+<!-- ===================== FAMILY VOTE & REQUESTS ===================== -->
+<style>
+  #vote-wrap{max-width:780px;margin:0 auto;padding:0 18px 40px}
+  .fv-setup{background:var(--sea);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:12px 0}
+  .fv-setup label{font-weight:600;color:var(--deep);display:block;margin-top:10px;font-size:14px}
+  .fv-setup input{width:100%;margin-top:5px;padding:9px;border:1px solid var(--line);border-radius:9px;font-size:14px}
+  .fv-setup .hint{color:var(--muted);font-size:12px;margin-top:8px;line-height:1.5}
+  .fv-setup button{margin-top:12px;background:var(--rust);color:#fff;border:none;border-radius:9px;padding:9px 16px;font-weight:700;cursor:pointer}
+  .fv-who{font-size:13px;color:var(--muted);margin:6px 0 0}
+  .fv-who b{color:var(--ink)}
+  .fv-who a{cursor:pointer}
+  .fv-cat{margin:18px 0 4px;font-size:16px;color:var(--deep);font-weight:700}
+  .fv-opt{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin:8px 0}
+  .fv-opt .lbl{flex:1;font-size:14.5px;line-height:1.4}
+  .fv-opt .lbl small{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+  .fv-vote{display:flex;align-items:center;gap:7px;white-space:nowrap}
+  .fv-btn{background:var(--sea);color:var(--deep);border:1px solid var(--line);border-radius:20px;
+    padding:6px 12px;font-size:13px;font-weight:700;cursor:pointer;transition:.12s}
+  .fv-btn:hover{background:#fbded0}
+  .fv-btn.on{background:var(--rust);color:#fff;border-color:var(--rust)}
+  .fv-cnt{min-width:20px;text-align:center;font-weight:800;color:var(--deep);font-size:15px}
+  .fv-names{font-size:11.5px;color:var(--muted);margin:-2px 0 6px 2px}
+  .fv-add{display:flex;gap:8px;margin:8px 0 4px;flex-wrap:wrap}
+  .fv-add select,.fv-add input{padding:8px;border:1px solid var(--line);border-radius:9px;font-size:13.5px}
+  .fv-add input{flex:1;min-width:160px}
+  .fv-add button{background:var(--accent);color:#fff;border:none;border-radius:9px;padding:8px 14px;font-weight:700;cursor:pointer}
+  .fv-req{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:8px 0;border-left:5px solid var(--accent)}
+  .fv-req .meta{font-size:12px;color:var(--muted);margin-bottom:4px}
+  .fv-req .meta b{color:var(--accent)}
+  .fv-reqform{display:flex;gap:8px;margin:10px 0}
+  .fv-reqform textarea{flex:1;resize:none;border:1px solid var(--line);border-radius:10px;padding:9px;font-size:14px;font-family:inherit;min-height:42px}
+  .fv-reqform button{background:var(--accent);color:#fff;border:none;border-radius:10px;padding:0 16px;font-weight:700;cursor:pointer}
+  .fv-status{font-size:12px;color:var(--muted);text-align:right;margin-top:6px}
+  .fv-status b{color:#1d7a4d}
+</style>
+
+<div id="vote-wrap">
+  <h2 id="vote" style="color:var(--deep);font-size:24px;margin:38px 0 4px"><span style="margin-right:8px">🗳️</span>Family Vote &amp; Requests</h2>
+  <p class="sub" style="color:var(--muted);margin:0 0 12px;font-size:15px">Everyone votes live on the same board — pick the hotels, wine days, beaches, boats &amp; restaurants you want, add your own ideas, and drop requests. Tallies sync across the whole family in real time.</p>
+
+  <div class="fv-setup" id="fv-setup">
+    <b style="color:var(--deep)">Join the family vote</b>
+    <label>Your name</label>
+    <input id="fv-name" placeholder="e.g. Aanya">
+    <label>Shared board link <span style="font-weight:400;color:var(--muted)">(one person sets this up, everyone pastes the same)</span></label>
+    <input id="fv-db" placeholder="https://your-project-default-rtdb.firebaseio.com">
+    <div class="hint">
+      <b>One-time setup (free, ~3 min, do once for the whole family):</b><br>
+      1. Go to <a href="https://console.firebase.google.com/" target="_blank">console.firebase.google.com</a> → <b>Add project</b> (any name).<br>
+      2. Build → <b>Realtime Database</b> → <b>Create Database</b> → start in <b>test mode</b>.<br>
+      3. Copy the database URL at the top (looks like <i>https://xxx-default-rtdb.firebaseio.com</i>) and paste it above.<br>
+      4. Share that same URL with your family so everyone votes on one board. <span style="color:#9a6a00">(The link is the only "password" — keep it within the family.)</span>
+    </div>
+    <button id="fv-save">Save &amp; join</button>
+  </div>
+
+  <div id="fv-app" style="display:none">
+    <p class="fv-who">Voting as <b id="fv-mename"></b> · <a id="fv-change">change</a> &nbsp;·&nbsp; <a id="fv-refresh">refresh</a></p>
+    <div id="fv-board"></div>
+
+    <div class="fv-add">
+      <select id="fv-idea-cat"></select>
+      <input id="fv-idea-label" placeholder="Add your own idea to vote on…">
+      <button id="fv-idea-add">➕ Add idea</button>
+    </div>
+
+    <h3 style="font-size:18px;margin:24px 0 6px;color:var(--ink)">📝 Requests &amp; notes for the trip</h3>
+    <p class="sub" style="color:var(--muted);margin:0 0 8px;font-size:14px">Anything you want on this trip — a dietary need, a must-do, a budget note, “let’s do a spa afternoon.” Everyone can 👍 these too.</p>
+    <div class="fv-reqform">
+      <textarea id="fv-req-text" placeholder="Type a request for the trip…"></textarea>
+      <button id="fv-req-add">Post</button>
+    </div>
+    <div id="fv-reqs"></div>
+
+    <p class="fv-status" id="fv-status">Connecting…</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var NAME_LS='portugal_fv_name', DB_LS='portugal_fv_db';
+  var $=function(id){return document.getElementById(id);};
+
+  var CATS=[
+    {key:'lisbon-hotel', icon:'🛏️', title:'Lisbon Hotel'},
+    {key:'porto-hotel',  icon:'🛏️', title:'Porto Hotel'},
+    {key:'algarve-hotel',icon:'🛏️', title:'Algarve Hotel'},
+    {key:'wine',         icon:'🍷', title:'Wine Experiences'},
+    {key:'beach-boat',   icon:'🏖️', title:'Beach · Boat · Swimming'},
+    {key:'dining',       icon:'🍽️', title:'Restaurants & Big Dinners'},
+    {key:'day',          icon:'🗺️', title:'Day-Trip Ideas'}
+  ];
+  var OPTS=[
+    {id:'lh-bairro',cat:'lisbon-hotel',label:'Bairro Alto Hotel',sub:'Chiado · iconic rooftop'},
+    {id:'lh-verride',cat:'lisbon-hotel',label:'Verride Palácio Santa Catarina',sub:'Bica · palace + pool rooftop'},
+    {id:'lh-memmo',cat:'lisbon-hotel',label:'Memmo Príncipe Real',sub:'leafy · design hotel'},
+    {id:'lh-fs',cat:'lisbon-hotel',label:'Four Seasons Ritz',sub:'Avenida · grand luxury'},
+
+    {id:'ph-yeatman',cat:'porto-hotel',label:'The Yeatman',sub:'Gaia · wine luxury + pool view'},
+    {id:'ph-albar',cat:'porto-hotel',label:'Maison Albar Le Monumental Palace',sub:'central · Belle Époque'},
+    {id:'ph-torel',cat:'porto-hotel',label:'Torel Avantgarde',sub:'center · design + river views'},
+    {id:'ph-sixsenses',cat:'porto-hotel',label:'Six Senses Douro Valley (1-night add-on)',sub:'vineyard resort + spa'},
+
+    {id:'ah-bela',cat:'algarve-hotel',label:'Bela Vista Hotel & Spa',sub:'Portimão · home of Vista (your #1 Beli)'},
+    {id:'ah-vilavita',cat:'algarve-hotel',label:'Vila Vita Parc',sub:'clifftop resort · 2★ Ocean'},
+    {id:'ah-conrad',cat:'algarve-hotel',label:'Conrad Algarve',sub:'Quinta do Lago · beach clubs'},
+    {id:'ah-pinecliffs',cat:'algarve-hotel',label:'Pine Cliffs',sub:'Albufeira · clifftop, beach lift'},
+
+    {id:'w-douro',cat:'wine',label:'Private Douro Valley wine day',sub:'quinta tastings + lunch'},
+    {id:'w-cruise',cat:'wine',label:'Private vintage-boat Douro cruise',sub:'1957 wooden yacht'},
+    {id:'w-grahams',cat:'wine',label:"Graham's port lodge tasting (Gaia)",sub:'tawny + vintage'},
+    {id:'w-quintanova',cat:'wine',label:'Quinta Nova visit & tasting',sub:'"9 must-see wineries"'},
+    {id:'w-sixsenses',cat:'wine',label:'Six Senses Douro overnight',sub:'go deeper on wine country'},
+
+    {id:'b-benagilboat',cat:'beach-boat',label:'Benagil sea cave boat tour',sub:'the famous domed cave'},
+    {id:'b-benagilkayak',cat:'beach-boat',label:'Benagil kayak / SUP',sub:'land inside the cave'},
+    {id:'b-marinha',cat:'beach-boat',label:'Praia da Marinha beach day',sub:'top-rated beach'},
+    {id:'b-piedade',cat:'beach-boat',label:'Ponta da Piedade cliffs (Lagos)',sub:'arches + boardwalk'},
+    {id:'b-sunset',cat:'beach-boat',label:'Algarve sunset yacht cruise',sub:'drinks aboard'},
+    {id:'b-dolphin',cat:'beach-boat',label:'Dolphin watching (Lagos)',sub:'Atlantic boat trip'},
+
+    {id:'d-belcanto',cat:'dining',label:'Belcanto ★★ (Lisbon)',sub:'José Avillez tasting'},
+    {id:'d-ramiro',cat:'dining',label:'Cervejaria Ramiro (Lisbon)',sub:'legendary seafood'},
+    {id:'d-yeatman',cat:'dining',label:'The Yeatman ★★ (Porto)',sub:'wine-paired tasting'},
+    {id:'d-cozinha',cat:'dining',label:'Cozinha das Flores (Porto)',sub:'your Beli · Nuno Mendes'},
+    {id:'d-lemonument',cat:'dining',label:'Le Monument (Porto)',sub:'your Beli · French-Portuguese'},
+    {id:'d-vista',cat:'dining',label:'Vista ★ (Algarve)',sub:'your #1 Beli (9.6)'},
+    {id:'d-vilajoya',cat:'dining',label:'Vila Joya ★★ (Algarve)',sub:'oceanfront tasting'},
+
+    {id:'day-sintra',cat:'day',label:'Sintra palaces day',sub:'Pena + Regaleira'},
+    {id:'day-arrabida',cat:'day',label:'Arrábida wine + beach + boat day',sub:'near Lisbon (wine & swim combo)'},
+    {id:'day-cascais',cat:'day',label:'Cascais + Cabo da Roca',sub:'seaside + westernmost point'},
+    {id:'day-gaia',cat:'day',label:'Gaia port-lodge crawl',sub:'multiple cellar tastings'}
+  ];
+
+  var state={options:{}, ideas:{}, requests:{}}, timer=null;
+  function dbBase(){var u=localStorage.getItem(DB_LS)||''; return u.replace(/\/+$/,'');}
+  function me(){return localStorage.getItem(NAME_LS)||'';}
+  function keyOf(n){return (n||'').toLowerCase().replace(/[^a-z0-9]/g,'')||'anon';}
+
+  function api(path,method,body){
+    var url=dbBase()+'/family-trip/'+path+'.json';
+    return fetch(url,{method:method, body:(body!==undefined?JSON.stringify(body):undefined)});
+  }
+  function readAll(){
+    return api('','GET').then(function(r){return r.json();}).then(function(d){
+      d=d||{}; state.options=d.options||{}; state.ideas=d.ideas||{}; state.requests=d.requests||{};
+      return state;
+    });
+  }
+
+  function votesFor(id){var v=state.options[id]; return v?Object.keys(v).map(function(k){return v[k];}):[];}
+  function iVoted(id){var v=state.options[id]; return !!(v && v[keyOf(me())]);}
+
+  function toggleVote(id){
+    var k=keyOf(me());
+    if(iVoted(id)){ api('options/'+id+'/'+k,'DELETE').then(refresh); }
+    else { api('options/'+id+'/'+k,'PUT',me()).then(refresh); }
+  }
+
+  function optEl(o){
+    var wrap=document.createElement('div'); wrap.className='fv-opt';
+    var lbl=document.createElement('div'); lbl.className='lbl';
+    lbl.innerHTML=o.label+(o.sub?('<small>'+o.sub+'</small>'):'');
+    var vote=document.createElement('div'); vote.className='fv-vote';
+    var cnt=document.createElement('span'); cnt.className='fv-cnt'; cnt.textContent=votesFor(o.id).length;
+    var btn=document.createElement('button'); btn.className='fv-btn'+(iVoted(o.id)?' on':'');
+    btn.textContent=iVoted(o.id)?'👍 Voted':'👍 Vote';
+    btn.onclick=function(){toggleVote(o.id);};
+    vote.appendChild(cnt); vote.appendChild(btn);
+    wrap.appendChild(lbl); wrap.appendChild(vote);
+    var holder=document.createElement('div');
+    holder.appendChild(wrap);
+    var names=votesFor(o.id);
+    if(names.length){var n=document.createElement('div'); n.className='fv-names'; n.textContent='✓ '+names.join(', '); holder.appendChild(n);}
+    return holder;
+  }
+
+  function render(){
+    var board=$('fv-board'); board.innerHTML='';
+    // merge custom ideas into options list
+    var all=OPTS.slice();
+    Object.keys(state.ideas).forEach(function(pid){
+      var it=state.ideas[pid];
+      if(it&&it.label) all.push({id:'idea_'+pid,cat:it.cat||'day',label:it.label,sub:'added by '+(it.by||'family')});
+    });
+    CATS.forEach(function(c){
+      var items=all.filter(function(o){return o.cat===c.key;});
+      if(!items.length) return;
+      var h=document.createElement('div'); h.className='fv-cat'; h.textContent=c.icon+' '+c.title;
+      board.appendChild(h);
+      // sort by votes desc
+      items.sort(function(a,b){return votesFor(b.id).length-votesFor(a.id).length;});
+      items.forEach(function(o){board.appendChild(optEl(o));});
+    });
+    // requests
+    var rl=$('fv-reqs'); rl.innerHTML='';
+    var keys=Object.keys(state.requests).sort(function(a,b){return (state.requests[b].ts||0)-(state.requests[a].ts||0);});
+    if(!keys.length){rl.innerHTML='<p class="sub" style="color:var(--muted);font-size:13.5px">No requests yet — be the first.</p>';}
+    keys.forEach(function(pid){
+      var r=state.requests[pid]; if(!r) return;
+      var id='req_'+pid;
+      var box=document.createElement('div'); box.className='fv-req';
+      var meta=document.createElement('div'); meta.className='meta';
+      meta.innerHTML='<b>'+(r.by||'Family')+'</b> · '+(r.ts?new Date(r.ts).toLocaleDateString():'');
+      var txt=document.createElement('div'); txt.textContent=r.text||'';
+      var vrow=document.createElement('div'); vrow.className='fv-vote'; vrow.style.marginTop='8px';
+      var cnt=document.createElement('span'); cnt.className='fv-cnt'; cnt.textContent=votesFor(id).length;
+      var btn=document.createElement('button'); btn.className='fv-btn'+(iVoted(id)?' on':''); btn.textContent=iVoted(id)?'👍 Voted':'👍';
+      btn.onclick=function(){toggleVote(id);};
+      vrow.appendChild(cnt); vrow.appendChild(btn);
+      box.appendChild(meta); box.appendChild(txt); box.appendChild(vrow);
+      var nm=votesFor(id); if(nm.length){var n=document.createElement('div'); n.className='fv-names'; n.style.marginTop='4px'; n.textContent='✓ '+nm.join(', '); box.appendChild(n);}
+      rl.appendChild(box);
+    });
+    $('fv-status').innerHTML='<b>● Live</b> · synced '+new Date().toLocaleTimeString();
+  }
+
+  function refresh(){return readAll().then(render).catch(function(){$('fv-status').textContent='⚠️ Could not reach the board — check the link.';});}
+
+  function fillCatSelect(){var s=$('fv-idea-cat'); s.innerHTML=''; CATS.forEach(function(c){var o=document.createElement('option'); o.value=c.key; o.textContent=c.icon+' '+c.title; s.appendChild(o);});}
+
+  function start(){
+    $('fv-setup').style.display='none'; $('fv-app').style.display='block';
+    $('fv-mename').textContent=me();
+    fillCatSelect();
+    refresh();
+    if(timer) clearInterval(timer);
+    timer=setInterval(refresh,4000);
+  }
+  function showSetup(){$('fv-app').style.display='none'; $('fv-setup').style.display='block'; $('fv-name').value=me(); $('fv-db').value=localStorage.getItem(DB_LS)||'';}
+
+  $('fv-save').onclick=function(){
+    var n=$('fv-name').value.trim(), db=$('fv-db').value.trim();
+    if(!n){$('fv-name').focus(); return;}
+    if(!/^https?:\/\//.test(db)){$('fv-db').focus(); return;}
+    localStorage.setItem(NAME_LS,n); localStorage.setItem(DB_LS,db); start();
+  };
+  $('fv-change').onclick=showSetup;
+  $('fv-refresh').onclick=refresh;
+
+  $('fv-idea-add').onclick=function(){
+    var label=$('fv-idea-label').value.trim(); if(!label) return;
+    var cat=$('fv-idea-cat').value;
+    api('ideas','POST',{cat:cat,label:label,by:me()}).then(function(){$('fv-idea-label').value=''; refresh();});
+  };
+  $('fv-idea-label').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault(); $('fv-idea-add').click();}});
+
+  $('fv-req-add').onclick=function(){
+    var t=$('fv-req-text').value.trim(); if(!t) return;
+    api('requests','POST',{text:t,by:me(),ts:Date.now()}).then(function(){$('fv-req-text').value=''; refresh();});
+  };
+
+  // boot
+  if(me() && /^https?:\/\//.test(localStorage.getItem(DB_LS)||'')) start(); else showSetup();
+})();
+</script>
+
+<!-- ===================== AI EDIT CHATBOT ===================== -->
+<style>
+  #gb-fab{position:fixed;right:18px;bottom:18px;z-index:50;background:linear-gradient(160deg,var(--rust),var(--deep));
+    color:#fff;border:none;border-radius:30px;padding:13px 18px;font-size:15px;font-weight:700;
+    cursor:pointer;box-shadow:0 4px 16px rgba(138,52,23,.35)}
+  #gb-fab:hover{filter:brightness(1.07)}
+  #gb-panel{position:fixed;right:18px;bottom:74px;z-index:51;width:min(420px,calc(100vw - 28px));
+    height:min(560px,calc(100vh - 110px));background:#fff;border:1px solid var(--line);border-radius:16px;
+    box-shadow:0 12px 40px rgba(138,52,23,.28);display:none;flex-direction:column;overflow:hidden}
+  #gb-panel.open{display:flex}
+  #gb-head{background:linear-gradient(160deg,var(--rust),var(--deep));color:#fff;padding:12px 14px;
+    display:flex;align-items:center;gap:8px}
+  #gb-head b{font-size:15px}
+  #gb-head .sp{flex:1}
+  #gb-head button{background:rgba(255,255,255,.18);color:#fff;border:none;border-radius:8px;
+    padding:5px 9px;font-size:12px;font-weight:600;cursor:pointer}
+  #gb-head button:hover{background:rgba(255,255,255,.3)}
+  #gb-msgs{flex:1;overflow-y:auto;padding:14px;background:var(--sand)}
+  .gb-m{margin:8px 0;padding:9px 12px;border-radius:12px;font-size:14px;line-height:1.5;max-width:88%;white-space:pre-wrap;word-wrap:break-word}
+  .gb-user{background:var(--rust);color:#fff;margin-left:auto;border-bottom-right-radius:4px}
+  .gb-bot{background:#fff;border:1px solid var(--line);border-bottom-left-radius:4px}
+  .gb-sys{background:#fff8ec;border:1px solid #f3e2bf;font-size:12.5px;color:#7a5a00;text-align:center;max-width:100%}
+  .gb-edit{background:#e3f1f5;border:1px solid #bcdfe6;color:#176b7a;font-size:12.5px;text-align:center;max-width:100%}
+  #gb-setup{padding:14px;background:var(--sea);border-bottom:1px solid var(--line);font-size:13px}
+  #gb-setup input,#gb-setup select{width:100%;margin-top:5px;padding:8px;border:1px solid var(--line);border-radius:8px;font-size:13px}
+  #gb-setup label{font-weight:600;color:var(--deep);display:block;margin-top:8px}
+  #gb-setup .hint{color:var(--muted);font-size:11.5px;margin-top:6px}
+  #gb-setup button{margin-top:10px;background:var(--rust);color:#fff;border:none;border-radius:8px;padding:8px 14px;font-weight:600;cursor:pointer}
+  #gb-input{display:flex;gap:8px;padding:10px;border-top:1px solid var(--line);background:#fff}
+  #gb-input textarea{flex:1;resize:none;border:1px solid var(--line);border-radius:10px;padding:9px;font-size:14px;font-family:inherit;max-height:90px}
+  #gb-input button{background:var(--rust);color:#fff;border:none;border-radius:10px;padding:0 16px;font-weight:700;cursor:pointer}
+  #gb-input button:disabled{opacity:.5;cursor:default}
+</style>
+
+<button id="gb-fab">💬 Edit with AI</button>
+<div id="gb-panel">
+  <div id="gb-head">
+    <b>✨ Trip Assistant</b><span class="sp"></span>
+    <button id="gb-reset" title="Restore the original plan">Reset</button>
+    <button id="gb-key">Key</button>
+    <button id="gb-close">✕</button>
+  </div>
+  <div id="gb-setup">
+    <label>Anthropic API key <span class="hint">(stored only in this browser)</span></label>
+    <input id="gb-apikey" type="password" placeholder="sk-ant-...">
+    <label>Model</label>
+    <select id="gb-model">
+      <option value="claude-opus-4-8">Opus 4.8 — most capable (default)</option>
+      <option value="claude-sonnet-4-6">Sonnet 4.6 — faster &amp; cheaper</option>
+      <option value="claude-haiku-4-5">Haiku 4.5 — cheapest</option>
+    </select>
+    <div class="hint">Get a key at console.anthropic.com. Each message uses your key and costs a small amount. Edits are saved only on this device — use “Reset” to restore the original.</div>
+    <button id="gb-save">Save &amp; start</button>
+  </div>
+  <div id="gb-msgs"></div>
+  <div id="gb-input">
+    <textarea id="gb-text" rows="1" placeholder="Ask a question or request an edit…"></textarea>
+    <button id="gb-send">Send</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  var KEY_LS='portugal_anthropic_key', MODEL_LS='portugal_bot_model', CONTENT_LS='portugal_trip_content';
+  var content=document.getElementById('trip-content');
+  var ORIGINAL=content.innerHTML;
+  // Restore any previously saved edits
+  try{var saved=localStorage.getItem(CONTENT_LS); if(saved){content.innerHTML=saved;}}catch(e){}
+
+  var $=function(id){return document.getElementById(id);};
+  var panel=$('gb-panel'), msgs=$('gb-msgs'), setup=$('gb-setup'), history=[];
+
+  var SYSTEM=[
+    "You are an assistant embedded in a personal Portugal trip-itinerary webpage.",
+    "You will be given the current page content as HTML (the inner HTML of the main content container) plus a user message.",
+    "If the user asks a QUESTION, answer conversationally in plain text with NO HTML.",
+    "If the user asks you to EDIT/CHANGE the page, reply with: (1) a one or two sentence plain-text summary of the change, then (2) the COMPLETE updated content HTML inside a single ```html code fence.",
+    "When editing: return the ENTIRE content, not a fragment. Preserve all existing structure, CSS class names, ids, emoji, tables and links so it still renders. Only change what was asked. Match the existing style and classes for anything you add.",
+    "Never output <script>, <style>, <html>, <head> or <body> tags. Do not add commentary inside the HTML. Keep your prose answer concise and outside the code fence."
+  ].join(" ");
+
+  function add(text, cls){var d=document.createElement('div'); d.className='gb-m '+cls; d.textContent=text; msgs.appendChild(d); msgs.scrollTop=msgs.scrollHeight; return d;}
+
+  function showSetup(){var k=localStorage.getItem(KEY_LS); $('gb-apikey').value=k||''; $('gb-model').value=localStorage.getItem(MODEL_LS)||'claude-opus-4-8'; setup.style.display=(k?'none':'block');}
+
+  $('gb-fab').onclick=function(){panel.classList.toggle('open'); if(panel.classList.contains('open')){showSetup(); if(!msgs.childElementCount){add("Hi! Ask me about your trip, or tell me what to change — e.g. “swap the Porto hotel to Torel Avantgarde”, “make day 6 a beach day”, or “add a vegetarian dinner in Lisbon”.", 'gb-bot');}}};
+  $('gb-close').onclick=function(){panel.classList.remove('open');};
+  $('gb-key').onclick=function(){setup.style.display=(setup.style.display==='none'?'block':'none');};
+  $('gb-save').onclick=function(){var k=$('gb-apikey').value.trim(); if(!k){return;} localStorage.setItem(KEY_LS,k); localStorage.setItem(MODEL_LS,$('gb-model').value); setup.style.display='none'; add("Key saved. What would you like to do?", 'gb-bot');};
+  $('gb-reset').onclick=function(){if(confirm('Restore the original itinerary? Your AI edits on this device will be discarded.')){content.innerHTML=ORIGINAL; try{localStorage.removeItem(CONTENT_LS);}catch(e){} add("Restored the original plan.", 'gb-edit');}};
+
+  var ta=$('gb-text');
+  ta.addEventListener('input',function(){ta.style.height='auto'; ta.style.height=Math.min(ta.scrollHeight,90)+'px';});
+  ta.addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault(); send();}});
+  $('gb-send').onclick=send;
+
+  function send(){
+    var msg=ta.value.trim(); if(!msg) return;
+    var key=localStorage.getItem(KEY_LS); if(!key){setup.style.display='block'; return;}
+    var model=localStorage.getItem(MODEL_LS)||'claude-opus-4-8';
+    add(msg,'gb-user'); ta.value=''; ta.style.height='auto';
+    var btn=$('gb-send'); btn.disabled=true; var thinking=add('…thinking','gb-bot');
+
+    var userTurn="Current page content HTML:\n\n"+content.innerHTML+"\n\n---\nUser message: "+msg;
+    var messages=history.concat([{role:'user',content:userTurn}]);
+
+    fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'content-type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+      body:JSON.stringify({model:model,max_tokens:32000,system:SYSTEM,messages:messages})
+    }).then(function(r){return r.json();}).then(function(data){
+      thinking.remove(); btn.disabled=false;
+      if(data.error){add('⚠️ '+(data.error.message||'API error'),'gb-sys'); return;}
+      var text=(data.content||[]).filter(function(b){return b.type==='text';}).map(function(b){return b.text;}).join('\n');
+      var m=text.match(/```(?:html)?\s*\n?([\s\S]*?)```/);
+      if(m){
+        var newHtml=m[1].trim();
+        content.innerHTML=newHtml;
+        try{localStorage.setItem(CONTENT_LS,newHtml);}catch(e){}
+        var chat=text.replace(m[0],'').trim();
+        if(chat) add(chat,'gb-bot');
+        add('✅ Page updated (saved on this device — use Reset to undo).','gb-edit');
+        history.push({role:'user',content:msg}); history.push({role:'assistant',content:chat||'(updated the page)'});
+      } else {
+        add(text||'(no response)','gb-bot');
+        history.push({role:'user',content:msg}); history.push({role:'assistant',content:text});
+      }
+      if(history.length>8) history=history.slice(-8);
+    }).catch(function(err){thinking.remove(); btn.disabled=false; add('⚠️ '+err.message,'gb-sys');});
+  }
+})();
+</script>
+
+<!-- Photo loader: pulls real images from Wikipedia at load time (runs in your browser) -->
+<script>
+(function(){
+  function load(img){
+    var title=img.getAttribute('data-wiki');
+    var api='https://en.wikipedia.org/w/api.php?action=query&format=json&origin=*&prop=pageimages&piprop=thumbnail&pithumbsize=900&titles='+encodeURIComponent(title);
+    fetch(api).then(function(r){return r.json();}).then(function(d){
+      var pages=d.query&&d.query.pages; if(!pages) return;
+      var p=pages[Object.keys(pages)[0]];
+      if(p&&p.thumbnail&&p.thumbnail.source){ img.src=p.thumbnail.source; img.style.display='block'; }
+    }).catch(function(){});
+  }
+  function run(){ document.querySelectorAll('img[data-wiki]').forEach(load); }
+  if(document.readyState!=='loading') run(); else document.addEventListener('DOMContentLoaded', run);
+})();
+</script>
+</body>
+</html>
