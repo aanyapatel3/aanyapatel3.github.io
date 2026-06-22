@@ -690,27 +690,26 @@
 
 <div id="vote-wrap">
   <h2 id="vote" style="color:var(--deep);font-size:24px;margin:38px 0 4px"><span style="margin-right:8px">🗳️</span>Family Vote &amp; Requests</h2>
-  <p class="sub" style="color:var(--muted);margin:0 0 12px;font-size:15px">Everyone votes live on the same board — pick the hotels, wine days, beaches, boats &amp; restaurants you want, add your own ideas, and drop requests. Tallies sync across the whole family in real time.</p>
+  <p class="sub" style="color:var(--muted);margin:0 0 12px;font-size:15px">Pick the hotels, wine days, beaches, boats &amp; restaurants you want, add your own ideas, and drop requests. Then tap <b>📤 Share with family</b> to send your picks — open anyone’s shared link and everyone’s votes merge together. Works on any phone, no apps or accounts.</p>
 
   <div class="fv-setup" id="fv-setup">
-    <b style="color:var(--deep)" id="fv-setup-title">Join the family board</b>
+    <b style="color:var(--deep)" id="fv-setup-title">Start voting</b>
     <label>Your name</label>
     <input id="fv-name" placeholder="e.g. Aanya">
-    <div class="hint" id="fv-hint"><b>No accounts. No setup.</b> One person taps <b>Create our board</b> below and gets an invite link to drop in the family chat. Everyone who opens that link lands on the same live board — just type your name and start voting &amp; commenting.</div>
-    <button id="fv-create">✨ Create our board</button>
-    <button id="fv-join" style="display:none;background:var(--accent)">Join board</button>
+    <div class="hint" id="fv-hint"><b>No accounts. No setup.</b> Enter your name and start. Vote on the options, add ideas &amp; requests, then tap <b>Share with family</b> — when others open your link, all the votes merge. Pass links back and forth to stay in sync.</div>
+    <button id="fv-start">Start →</button>
     <div class="hint" id="fv-status2"></div>
   </div>
 
   <div id="fv-invitebox" style="display:none;background:#e3f1f5;border:1px solid #bcdfe6;border-radius:12px;padding:14px 16px;margin:12px 0">
-    <b style="color:#176b7a">✅ Board created — share this link with your family:</b>
+    <b style="color:#176b7a">📤 Share this link in your family chat — it carries everyone’s votes so far:</b>
     <input id="fv-invite-url" readonly style="width:100%;margin-top:8px;padding:9px;border:1px solid var(--line);border-radius:9px;font-size:13px">
-    <button id="fv-invite-copy" style="margin-top:10px;background:var(--accent);color:#fff;border:none;border-radius:9px;padding:9px 16px;font-weight:700;cursor:pointer">📋 Copy invite link</button>
+    <button id="fv-invite-copy" style="margin-top:10px;background:var(--accent);color:#fff;border:none;border-radius:9px;padding:9px 16px;font-weight:700;cursor:pointer">📋 Copy link</button>
     <span id="fv-copied" style="color:#1d7a4d;font-weight:700;font-size:13px;margin-left:8px"></span>
   </div>
 
   <div id="fv-app" style="display:none">
-    <p class="fv-who">Voting as <b id="fv-mename"></b> · <a id="fv-change">change</a> &nbsp;·&nbsp; <a id="fv-refresh">refresh</a> &nbsp;·&nbsp; <a id="fv-invite">📤 copy invite link</a></p>
+    <p class="fv-who">Voting as <b id="fv-mename"></b> · <a id="fv-change">change name</a> &nbsp;·&nbsp; <a id="fv-invite">📤 share with family</a></p>
     <div id="fv-board"></div>
 
     <div class="fv-add">
@@ -796,37 +795,33 @@
     {id:'day-gaia',cat:'day',label:'Gaia port-lodge crawl',sub:'multiple cellar tastings'}
   ];
 
-  // Zero-setup shared backend: anonymous JSON stores (no account, no console).
-  // boardId is "provider:id". Primary store returns the new id in the BODY (robust to
-  // cross-origin header limits); jsonblob is a fallback.
-  var EC='https://json.extendsclass.com/bin', JB='https://jsonblob.com/api/jsonBlob';
-  var state={options:{}, ideas:{}, requests:{}, comments:{}}, timer=null, boardId='';
+  // No external server: votes live in this browser (localStorage) and sync across the
+  // family through a share link that carries the merged state. Works everywhere, no setup.
+  var STATE_LS='portugal_fv_state';
+  var state={options:{}, ideas:{}, requests:{}, comments:{}};
   function me(){return localStorage.getItem(NAME_LS)||'';}
   function keyOf(n){return (n||'').toLowerCase().replace(/[^a-z0-9]/g,'')||'anon';}
   function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,7);}
-  function blank(){return {options:{},ideas:{},requests:{},comments:{}};}
   function norm(s){s=s||{}; s.options=s.options||{}; s.ideas=s.ideas||{}; s.requests=s.requests||{}; s.comments=s.comments||{}; return s;}
 
-  function prov(){var i=boardId.indexOf(':'); return i<0?'jb':boardId.slice(0,i);}
-  function bid(){var i=boardId.indexOf(':'); return i<0?boardId:boardId.slice(i+1);}
-  function urlFor(){return prov()==='ec' ? (EC+'/'+bid()) : (JB+'/'+bid());}
+  function loadLocal(){try{return norm(JSON.parse(localStorage.getItem(STATE_LS)||'{}'));}catch(e){return norm({});}}
+  function save(){try{localStorage.setItem(STATE_LS, JSON.stringify(state));}catch(e){}}
+  function mutate(fn){fn(state); save(); render();}
 
-  function createBoard(){
-    // ExtendsClass first — the id comes back in the JSON body (no Location/CORS header needed)
-    return fetch(EC,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(blank())})
-      .then(function(r){ if(!r.ok) throw new Error('ec'); return r.json(); })
-      .then(function(j){ var id=j&&(j.id||j.Id||j._id); if(!id) throw new Error('ec-id'); return 'ec:'+id; })
-      .catch(function(){
-        // Fallback: jsonblob (id in the Location header)
-        return fetch(JB,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(blank())})
-          .then(function(r){ if(!r.ok) throw new Error('jb'); var loc=r.headers.get('Location')||''; var id=loc.split('/').pop(); if(!id) throw new Error('jb-id'); return 'jb:'+id; });
-      });
+  function mergeInto(dst,src){
+    dst=norm(dst); src=norm(src);
+    Object.keys(src.options).forEach(function(id){
+      dst.options[id]=dst.options[id]||{};
+      Object.keys(src.options[id]).forEach(function(k){ dst.options[id][k]=src.options[id][k]; });
+    });
+    ['ideas','requests','comments'].forEach(function(coll){
+      Object.keys(src[coll]).forEach(function(pid){ if(!dst[coll][pid]) dst[coll][pid]=src[coll][pid]; });
+    });
+    return dst;
   }
-
-  function load(){return fetch(urlFor(),{headers:{'Accept':'application/json'}}).then(function(r){if(!r.ok) throw new Error('board'); return r.json();});}
-  function persist(s){return fetch(urlFor(),{method:'PUT',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(s)});}
-  function mutate(fn){return load().then(function(s){s=norm(s); fn(s); return persist(s);}).then(function(){return readAll().then(render);}).catch(function(){$('fv-status').textContent='⚠️ Sync hiccup — please try again.';});}
-  function readAll(){return load().then(function(d){state=norm(d); return state;});}
+  function encodeState(){ return btoa(unescape(encodeURIComponent(JSON.stringify(state)))); }
+  function decodeState(str){ return JSON.parse(decodeURIComponent(escape(atob(str)))); }
+  function shareURL(){ return location.origin+location.pathname+'#b='+encodeState(); }
 
   function votesFor(id){var v=state.options[id]; return v?Object.keys(v).map(function(k){return v[k];}):[];}
   function iVoted(id){var v=state.options[id]; return !!(v && v[keyOf(me())]);}
@@ -903,76 +898,69 @@
       var txt=document.createElement('div'); txt.textContent=c.text||'';
       box.appendChild(meta); box.appendChild(txt); cl.appendChild(box);
     });
-    $('fv-status').innerHTML='<b>● Live</b> · synced '+new Date().toLocaleTimeString();
+    var voters={}; Object.keys(state.options).forEach(function(id){Object.keys(state.options[id]).forEach(function(k){voters[k]=1;});});
+    var nv=Object.keys(voters).length;
+    $('fv-status').innerHTML='💾 Saved on this device'+(nv?(' · '+nv+' '+(nv===1?'person has':'people have')+' voted here'):'')+' · tap <b>📤 share with family</b> to sync everyone';
   }
-
-  function refresh(){return readAll().then(render).catch(function(){$('fv-status').textContent='⚠️ Could not reach the board.';});}
 
   function fillCatSelect(){var s=$('fv-idea-cat'); s.innerHTML=''; CATS.forEach(function(c){var o=document.createElement('option'); o.value=c.key; o.textContent=c.icon+' '+c.title; s.appendChild(o);});}
 
-  function inviteURL(){return location.origin+location.pathname+'#board='+boardId;}
-  function copy(t){if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){},function(){prompt('Copy this invite link:',t);});}else{prompt('Copy this invite link:',t);}}
+  function copy(t){if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){},function(){prompt('Copy this link to share:',t);});}else{prompt('Copy this link to share:',t);}}
+  function doShare(){
+    var url=shareURL();
+    $('fv-invite-url').value=url; $('fv-invitebox').style.display='block';
+    if(navigator.share){navigator.share({title:'Portugal trip — family vote',url:url}).catch(function(){copy(url);});}
+    else{copy(url);}
+    $('fv-copied').textContent='Copied!'; setTimeout(function(){$('fv-copied').textContent='';},2500);
+  }
 
   function start(){
     $('fv-setup').style.display='none'; $('fv-app').style.display='block';
     $('fv-mename').textContent=me();
     fillCatSelect();
-    refresh();
-    if(timer) clearInterval(timer);
-    timer=setInterval(refresh,4000);
+    state=loadLocal();
+    render();
   }
-  function showSetup(joining){
+  function showSetup(){
     $('fv-app').style.display='none'; $('fv-setup').style.display='block'; $('fv-name').value=me();
-    if(joining){
-      $('fv-setup-title').textContent='Join the family board';
-      $('fv-hint').innerHTML='<b>You’re invited!</b> Just enter your name to join your family’s board and start voting &amp; commenting — nothing else to set up.';
-      $('fv-create').style.display='none'; $('fv-join').style.display='inline-block';
-    } else {
-      $('fv-setup-title').textContent='Start the family board';
-      $('fv-hint').innerHTML='<b>No accounts. No setup.</b> Tap <b>Create our board</b>, then share the invite link in the family chat. Everyone who opens it joins the same live board.';
-      $('fv-create').style.display='inline-block'; $('fv-join').style.display='none';
-    }
   }
 
-  $('fv-create').onclick=function(){
-    var n=$('fv-name').value.trim(); if(!n){$('fv-name').focus(); return;}
-    localStorage.setItem(NAME_LS,n); $('fv-status2').textContent='Creating your board…';
-    createBoard()
-      .then(function(id){boardId=id; localStorage.setItem(BOARD_LS,id); try{location.hash='board='+id;}catch(e){} $('fv-invite-url').value=inviteURL(); $('fv-invitebox').style.display='block'; $('fv-status2').textContent=''; start();})
-      .catch(function(){$('fv-status2').textContent='⚠️ Could not create the board — please try again in a moment.';});
-  };
-  $('fv-join').onclick=function(){
+  $('fv-start').onclick=function(){
     var n=$('fv-name').value.trim(); if(!n){$('fv-name').focus(); return;}
     localStorage.setItem(NAME_LS,n); start();
   };
-  $('fv-change').onclick=function(){showSetup(!!boardId);};
-  $('fv-refresh').onclick=refresh;
-  $('fv-invite').onclick=function(){copy(inviteURL());};
-  $('fv-invite-copy').onclick=function(){copy(inviteURL()); $('fv-copied').textContent='Copied!'; setTimeout(function(){$('fv-copied').textContent='';},2000);};
+  $('fv-change').onclick=function(){showSetup();};
+  $('fv-invite').onclick=doShare;
+  $('fv-invite-copy').onclick=function(){copy(shareURL()); $('fv-copied').textContent='Copied!'; setTimeout(function(){$('fv-copied').textContent='';},2500);};
 
   $('fv-idea-add').onclick=function(){
     var label=$('fv-idea-label').value.trim(); if(!label) return; var cat=$('fv-idea-cat').value;
-    mutate(function(s){s.ideas[uid()]={cat:cat,label:label,by:me()};}).then(function(){$('fv-idea-label').value='';});
+    mutate(function(s){s.ideas[uid()]={cat:cat,label:label,by:me()};}); $('fv-idea-label').value='';
   };
   $('fv-idea-label').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault(); $('fv-idea-add').click();}});
 
   $('fv-req-add').onclick=function(){
     var t=$('fv-req-text').value.trim(); if(!t) return;
-    mutate(function(s){s.requests[uid()]={text:t,by:me(),ts:Date.now()};}).then(function(){$('fv-req-text').value='';});
+    mutate(function(s){s.requests[uid()]={text:t,by:me(),ts:Date.now()};}); $('fv-req-text').value='';
   };
   $('fv-cmt-add').onclick=function(){
     var t=$('fv-cmt-text').value.trim(); if(!t) return;
-    mutate(function(s){s.comments[uid()]={text:t,by:me(),ts:Date.now()};}).then(function(){$('fv-cmt-text').value='';});
+    mutate(function(s){s.comments[uid()]={text:t,by:me(),ts:Date.now()};}); $('fv-cmt-text').value='';
   };
   $('fv-cmt-text').addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault(); $('fv-cmt-add').click();}});
 
-  // boot — board id can arrive via the shared invite link (#board=...) or local storage
+  // boot — a shared link (#b=...) carries everyone's merged votes; merge it into this device
   (function(){
-    var m=(location.hash||'').match(/board=([A-Za-z0-9:_\-]+)/);
-    if(m){ boardId=m[1]; localStorage.setItem(BOARD_LS, boardId); }
-    else { boardId=localStorage.getItem(BOARD_LS)||''; }
-    if(boardId && me()) start();
-    else showSetup(!!boardId);
+    state=loadLocal();
+    var m=(location.hash||'').match(/[#&]b=([^&]+)/);
+    if(m){
+      try{
+        var incoming=decodeState(decodeURIComponent(m[1]));
+        state=mergeInto(state, incoming); save();
+        try{history.replaceState(null,'',location.pathname+location.search+'#vote');}catch(e){}
+      }catch(e){}
+    }
+    if(me()) start(); else showSetup();
   })();
 })();
 </script>
