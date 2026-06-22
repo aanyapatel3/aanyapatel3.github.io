@@ -569,6 +569,104 @@
 
 </div>
 
+<!-- ===================== AUTO-LINKER: makes every place a link ===================== -->
+<script>
+(function(){
+  // name -> URL. Restaurants/hotels use their site or a search; sights use Google Maps.
+  function maps(q){return 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(q+' Portugal');}
+  var L={
+    // Lisbon sights
+    'Chiado':maps('Chiado Lisbon'),'Príncipe Real':maps('Principe Real Lisbon'),'Alfama':maps('Alfama Lisbon'),
+    'Tram 28':maps('Tram 28 Lisbon'),'Castelo de São Jorge':maps('Castelo de Sao Jorge Lisbon'),
+    'Belém':maps('Belem Lisbon'),'Jerónimos Monastery':maps('Jeronimos Monastery Lisbon'),
+    'Belém Tower':maps('Belem Tower Lisbon'),'MAAT':maps('MAAT museum Lisbon'),
+    'Miradouro de São Pedro de Alcântara':maps('Miradouro de Sao Pedro de Alcantara Lisbon'),
+    // Lisbon food
+    'Belcanto':'https://www.belcanto.pt/en/','100 Maneiras':'https://www.restaurante100maneiras.com/',
+    'A Cevicheria':'https://www.google.com/search?q=A+Cevicheria+Lisbon','Prado':'https://www.pradorestaurante.com/',
+    'Alma':'https://www.almalisboa.pt/en/','Pastéis de Belém':'https://pasteisdebelem.pt/en/',
+    'Manteigaria':'https://www.google.com/search?q=Manteigaria+Lisbon','Cervejaria Ramiro':'https://www.cervejariaramiro.com/',
+    'Time Out Market':'https://www.timeoutmarket.com/lisboa/en/','Boa-Bao':'https://boabao.pt/',
+    'Tasca Kome':'https://www.google.com/search?q=Tasca+Kome+Lisbon',
+    // Sintra
+    'Sintra':maps('Sintra'),'Pena Palace':maps('Pena Palace Sintra'),'Quinta da Regaleira':maps('Quinta da Regaleira Sintra'),
+    'Monserrate':maps('Monserrate Palace Sintra'),'Cabo da Roca':maps('Cabo da Roca'),'Cascais':maps('Cascais'),
+    'Incomum':'https://www.google.com/search?q=Incomum+Sintra','Tascantiga':'https://www.google.com/search?q=Tascantiga+Sintra',
+    // Porto sights
+    'Ribeira':maps('Ribeira Porto'),'Dom Luís I Bridge':maps('Dom Luis I Bridge Porto'),
+    'Livraria Lello':'https://www.livrarialello.pt/en/','São Bento':maps('Sao Bento railway station Porto'),
+    'Vila Nova de Gaia':maps('Vila Nova de Gaia'),'Bolsa Palace':maps('Palacio da Bolsa Porto'),
+    'Clérigos Tower':maps('Clerigos Tower Porto'),'Foz do Douro':maps('Foz do Douro Porto'),
+    'Cedofeita':maps('Cedofeita Porto'),'Graham':'https://www.grahams-port.com/en/visit-us',
+    'Taylor':'https://www.taylor.pt/en/visit-us','Sandeman':'https://www.sandeman.com/',
+    // Porto food
+    'Cozinha das Flores':'http://cozinhadasflores.com/','Euskalduna Studio':'http://www.euskaldunastudio.pt/',
+    'Taberna dos Mercadores':'https://tabernadosmercadores.shop/','Antiqvvm':'http://www.antiqvvm.pt/',
+    'The Yeatman':'https://www.the-yeatman-hotel.com/en/','Casa de Chá da Boa Nova':'https://casadechadaboanova.pt/en/',
+    'Café Santiago':'https://www.google.com/search?q=Cafe+Santiago+Porto','Pedro Lemos':'https://www.pedrolemos.net/',
+    'Le Monument':'https://www.maison-albar-hotels-le-monumental-palace.com/pt/page/le-monument.3809.html',
+    'Cantinho do Avillez':'https://www.cantinhodoavillez.pt/en/','Conga':'https://www.google.com/search?q=Conga+bifanas+Porto',
+    'Zenith':'https://www.google.com/search?q=Zenith+brunch+Porto','Marisqueira Antiga':'https://www.google.com/search?q=Marisqueira+Antiga+Porto',
+    'Gruta':'http://grutaporto.com/','MISTU':'http://mistu.pt/','Fauno':'https://letsumai.com/widget/fauno',
+    'OMA':'https://omarestaurante.pt/','Shiko':'https://www.google.com/search?q=Shiko+restaurant+Porto',
+    // Douro
+    'Douro Valley':maps('Douro Valley'),'Quinta de Nápoles':'https://www.niepoort-vinhos.com/','Quinta Nova':'https://www.quintanova.com/en/',
+    'Quinta do Crasto':'https://www.quintadocrasto.pt/en/','Quinta do Bomfim':'https://www.bomfim1896.com/',
+    'DOC by Rui Paula':'https://ruipaula.pt/restaurante/doc/','Six Senses Douro Valley':'https://www.sixsenses.com/en/resorts/douro-valley',
+    // Algarve
+    'Faro':maps('Faro Airport'),'Lagos':maps('Lagos Algarve'),'Carvoeiro':maps('Carvoeiro Algarve'),
+    'Vilamoura':maps('Vilamoura Algarve'),'Praia Dona Ana':maps('Praia Dona Ana Lagos'),
+    'Praia da Marinha':maps('Praia da Marinha Algarve'),'Benagil':maps('Benagil cave Algarve'),
+    'Ponta da Piedade':maps('Ponta da Piedade Lagos'),'Praia do Camilo':maps('Praia do Camilo Lagos'),
+    'Quinta do Lago':maps('Quinta do Lago Algarve'),'Portimão':maps('Portimao Algarve'),'Praia da Rocha':maps('Praia da Rocha Portimao'),
+    'Vila Joya':'https://www.vilajoya.com/en/','Ocean at Vila Vita':'https://www.vilavitaparc.com/en/dining/ocean',
+    'Bon Bon':'https://www.bonbon.pt/en/','A Casa do Avô':'https://www.google.com/search?q=A+Casa+do+Avo+Algarve',
+    'Vista':'https://www.vistarestaurante.com/en/','Restaurante F':'https://www.google.com/search?q=Restaurante+F+Praia+da+Rocha',
+    'NUMA':'https://www.google.com/search?q=NUMA+Restaurante+Portimao','NoSoloÁgua':'https://www.google.com/search?q=NoSoloAgua+Portimao',
+    'AllGarbe':'https://www.google.com/search?q=AllGarbe+restaurant+Portimao','O Bicho':'https://www.google.com/search?q=O+Bicho+Carvoeiro'
+  };
+  // longest names first so e.g. "Praia da Marinha" wins before "Praia"
+  var keys=Object.keys(L).sort(function(a,b){return b.length-a.length;});
+
+  function linkify(root){
+    if(!root) return;
+    var walker=document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+      acceptNode:function(n){
+        if(!n.nodeValue||!n.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+        var p=n.parentNode;
+        while(p&&p!==root){ // skip text already inside links, the chatbot, scripts, headings/nav
+          var t=p.tagName;
+          if(t==='A'||t==='SCRIPT'||t==='STYLE'||t==='BUTTON'||t==='TEXTAREA'||t==='INPUT'||t==='H2') return NodeFilter.FILTER_REJECT;
+          p=p.parentNode;
+        }
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    });
+    var nodes=[],n; while((n=walker.nextNode())) nodes.push(n);
+    var done={};
+    nodes.forEach(function(node){
+      for(var i=0;i<keys.length;i++){
+        var key=keys[i]; if(done[key]) continue; // each place linked once
+        var idx=node.nodeValue.indexOf(key);
+        if(idx<0) continue;
+        // word-ish boundary check
+        var before=node.nodeValue[idx-1], after=node.nodeValue[idx+key.length];
+        if(before&&/[A-Za-zÀ-ÿ]/.test(before)) continue;
+        if(after&&/[A-Za-zÀ-ÿ]/.test(after)) continue;
+        var a=document.createElement('a');
+        a.href=L[key]; a.target='_blank'; a.rel='noopener'; a.textContent=key;
+        var post=node.splitText(idx); post.nodeValue=post.nodeValue.slice(key.length);
+        node.parentNode.insertBefore(a, post);
+        done[key]=1;
+        return; // one match per text node pass; re-walk handles the rest
+      }
+    });
+  }
+  function run(){ linkify(document.getElementById('trip-content')); }
+  if(document.readyState!=='loading') setTimeout(run,300); else document.addEventListener('DOMContentLoaded',function(){setTimeout(run,300);});
+})();
+</script>
+
 <!-- ===================== FAMILY VOTE & REQUESTS ===================== -->
 <style>
   #vote-wrap{max-width:780px;margin:0 auto;padding:0 18px 40px}
@@ -643,6 +741,14 @@
     </div>
     <div id="fv-reqs"></div>
 
+    <h3 style="font-size:18px;margin:24px 0 6px;color:var(--ink)">💬 Family discussion</h3>
+    <p class="sub" style="color:var(--muted);margin:0 0 8px;font-size:14px">A running comment thread — chat about the plan, ask questions, react to ideas. Everyone sees it live.</p>
+    <div class="fv-reqform">
+      <textarea id="fv-cmt-text" placeholder="Add a comment…"></textarea>
+      <button id="fv-cmt-add">Send</button>
+    </div>
+    <div id="fv-cmts"></div>
+
     <p class="fv-status" id="fv-status">Connecting…</p>
   </div>
 </div>
@@ -704,7 +810,7 @@
     {id:'day-gaia',cat:'day',label:'Gaia port-lodge crawl',sub:'multiple cellar tastings'}
   ];
 
-  var state={options:{}, ideas:{}, requests:{}}, timer=null;
+  var state={options:{}, ideas:{}, requests:{}, comments:{}}, timer=null;
   function dbBase(){var u=localStorage.getItem(DB_LS)||''; return u.replace(/\/+$/,'');}
   function me(){return localStorage.getItem(NAME_LS)||'';}
   function keyOf(n){return (n||'').toLowerCase().replace(/[^a-z0-9]/g,'')||'anon';}
@@ -715,7 +821,7 @@
   }
   function readAll(){
     return api('','GET').then(function(r){return r.json();}).then(function(d){
-      d=d||{}; state.options=d.options||{}; state.ideas=d.ideas||{}; state.requests=d.requests||{};
+      d=d||{}; state.options=d.options||{}; state.ideas=d.ideas||{}; state.requests=d.requests||{}; state.comments=d.comments||{};
       return state;
     });
   }
@@ -784,6 +890,18 @@
       var nm=votesFor(id); if(nm.length){var n=document.createElement('div'); n.className='fv-names'; n.style.marginTop='4px'; n.textContent='✓ '+nm.join(', '); box.appendChild(n);}
       rl.appendChild(box);
     });
+    // comments
+    var cl=$('fv-cmts'); cl.innerHTML='';
+    var ck=Object.keys(state.comments).sort(function(a,b){return (state.comments[a].ts||0)-(state.comments[b].ts||0);});
+    if(!ck.length){cl.innerHTML='<p class="sub" style="color:var(--muted);font-size:13.5px">No comments yet — start the conversation.</p>';}
+    ck.forEach(function(pid){
+      var c=state.comments[pid]; if(!c) return;
+      var box=document.createElement('div'); box.className='fv-req'; box.style.borderLeftColor='var(--gold)';
+      var meta=document.createElement('div'); meta.className='meta';
+      meta.innerHTML='<b style="color:var(--gold)">'+(c.by||'Family')+'</b> · '+(c.ts?new Date(c.ts).toLocaleString():'');
+      var txt=document.createElement('div'); txt.textContent=c.text||'';
+      box.appendChild(meta); box.appendChild(txt); cl.appendChild(box);
+    });
     $('fv-status').innerHTML='<b>● Live</b> · synced '+new Date().toLocaleTimeString();
   }
 
@@ -821,6 +939,11 @@
     var t=$('fv-req-text').value.trim(); if(!t) return;
     api('requests','POST',{text:t,by:me(),ts:Date.now()}).then(function(){$('fv-req-text').value=''; refresh();});
   };
+  $('fv-cmt-add').onclick=function(){
+    var t=$('fv-cmt-text').value.trim(); if(!t) return;
+    api('comments','POST',{text:t,by:me(),ts:Date.now()}).then(function(){$('fv-cmt-text').value=''; refresh();});
+  };
+  $('fv-cmt-text').addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault(); $('fv-cmt-add').click();}});
 
   // boot
   if(me() && /^https?:\/\//.test(localStorage.getItem(DB_LS)||'')) start(); else showSetup();
