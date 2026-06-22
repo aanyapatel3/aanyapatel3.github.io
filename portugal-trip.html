@@ -122,7 +122,6 @@
   <a href="#stay">Hotels</a>
   <a href="#do">Activities</a>
   <a href="#transport">Getting Around</a>
-  <a href="#cost">Cost</a>
   <a href="#booking">Book It</a>
   <a href="#tips">Tips</a>
   <a href="#vote">🗳️ Family Vote</a>
@@ -506,21 +505,6 @@
   </table>
   <div class="note">📍 Every restaurant &amp; sight has a <b>📍 Map</b> link — tap it for live directions &amp; the exact distance from wherever you are.</div>
 
-  <!-- COST -->
-  <h2 id="cost"><span class="ic">💶</span>Cost Estimate</h2>
-  <p class="sub">For <b>2 people · 9 nights</b> · <b>excludes international flights</b>. Reflects an <b>upscale</b> pace (5★ / design boutiques, Michelin dinners, private tours).</p>
-  <table>
-    <tr><th>Category</th><th>Detail</th><th>Est. (couple)</th></tr>
-    <tr><td><b>Hotels</b> (9 nights)</td><td>Lisbon ~€1,350 (3) · Porto ~€1,500 (3) · Algarve ~€1,950 (3) — 5★ / boutique</td><td>~€4,800</td></tr>
-    <tr><td><b>Trains &amp; flight</b></td><td>Lisbon→Porto Alfa (2, 1st) ~€140 · Porto→Faro flight (2) ~€200</td><td>~€340</td></tr>
-    <tr><td><b>Rental car</b> (Algarve, 4 days)</td><td>Compact/SUV + fuel + tolls</td><td>~€350</td></tr>
-    <tr><td><b>Private tours</b></td><td>Sintra driver ~€300 · Douro private day ~€500 · Benagil boat ~€120</td><td>~€920</td></tr>
-    <tr><td><b>Food &amp; drink</b></td><td>Upscale pace incl. 3–4 Michelin dinners + tastings, ~€220/day for two</td><td>~€2,200</td></tr>
-    <tr><td><b>Local transport</b></td><td>Taxis, trams, port tastings, sundries</td><td>~€300</td></tr>
-    <tr><td colspan="2"><b>TOTAL (2 people, excl. intl. flights)</b></td><td><b>≈ €8,910</b></td></tr>
-  </table>
-  <div class="note"><b>The dial:</b> swap a couple of Michelin dinners for great casual seafood and choose the boutique (not the palace) tier and you land closer to <b>~€6,500</b>. Go all-in — Four Seasons Ritz, The Yeatman, Vila Vita, every tasting menu — and it's <b>~€11,000+</b>. The numbers above are a comfortable upscale middle.</div>
-
   <!-- BOOKING LINKS -->
   <h2 id="booking"><span class="ic">🔗</span>All Booking Links</h2>
   <h3>✈️ Flights</h3>
@@ -812,8 +796,10 @@
     {id:'day-gaia',cat:'day',label:'Gaia port-lodge crawl',sub:'multiple cellar tastings'}
   ];
 
-  // Zero-setup shared backend: an anonymous JSON store (no account, no console).
-  var BASE='https://jsonblob.com/api/jsonBlob';
+  // Zero-setup shared backend: anonymous JSON stores (no account, no console).
+  // boardId is "provider:id". Primary store returns the new id in the BODY (robust to
+  // cross-origin header limits); jsonblob is a fallback.
+  var EC='https://json.extendsclass.com/bin', JB='https://jsonblob.com/api/jsonBlob';
   var state={options:{}, ideas:{}, requests:{}, comments:{}}, timer=null, boardId='';
   function me(){return localStorage.getItem(NAME_LS)||'';}
   function keyOf(n){return (n||'').toLowerCase().replace(/[^a-z0-9]/g,'')||'anon';}
@@ -821,8 +807,24 @@
   function blank(){return {options:{},ideas:{},requests:{},comments:{}};}
   function norm(s){s=s||{}; s.options=s.options||{}; s.ideas=s.ideas||{}; s.requests=s.requests||{}; s.comments=s.comments||{}; return s;}
 
-  function load(){return fetch(BASE+'/'+boardId,{headers:{'Accept':'application/json'}}).then(function(r){if(!r.ok) throw new Error('board'); return r.json();});}
-  function persist(s){return fetch(BASE+'/'+boardId,{method:'PUT',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(s)});}
+  function prov(){var i=boardId.indexOf(':'); return i<0?'jb':boardId.slice(0,i);}
+  function bid(){var i=boardId.indexOf(':'); return i<0?boardId:boardId.slice(i+1);}
+  function urlFor(){return prov()==='ec' ? (EC+'/'+bid()) : (JB+'/'+bid());}
+
+  function createBoard(){
+    // ExtendsClass first — the id comes back in the JSON body (no Location/CORS header needed)
+    return fetch(EC,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(blank())})
+      .then(function(r){ if(!r.ok) throw new Error('ec'); return r.json(); })
+      .then(function(j){ var id=j&&(j.id||j.Id||j._id); if(!id) throw new Error('ec-id'); return 'ec:'+id; })
+      .catch(function(){
+        // Fallback: jsonblob (id in the Location header)
+        return fetch(JB,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(blank())})
+          .then(function(r){ if(!r.ok) throw new Error('jb'); var loc=r.headers.get('Location')||''; var id=loc.split('/').pop(); if(!id) throw new Error('jb-id'); return 'jb:'+id; });
+      });
+  }
+
+  function load(){return fetch(urlFor(),{headers:{'Accept':'application/json'}}).then(function(r){if(!r.ok) throw new Error('board'); return r.json();});}
+  function persist(s){return fetch(urlFor(),{method:'PUT',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(s)});}
   function mutate(fn){return load().then(function(s){s=norm(s); fn(s); return persist(s);}).then(function(){return readAll().then(render);}).catch(function(){$('fv-status').textContent='⚠️ Sync hiccup — please try again.';});}
   function readAll(){return load().then(function(d){state=norm(d); return state;});}
 
@@ -935,10 +937,9 @@
   $('fv-create').onclick=function(){
     var n=$('fv-name').value.trim(); if(!n){$('fv-name').focus(); return;}
     localStorage.setItem(NAME_LS,n); $('fv-status2').textContent='Creating your board…';
-    fetch(BASE,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(blank())})
-      .then(function(r){var loc=r.headers.get('Location')||''; var id=loc.split('/').pop(); if(!id) throw new Error('no id'); return id;})
-      .then(function(id){boardId=id; localStorage.setItem(BOARD_LS,id); try{location.hash='board='+id;}catch(e){} $('fv-invite-url').value=inviteURL(); $('fv-invitebox').style.display='block'; start();})
-      .catch(function(){$('fv-status2').textContent='⚠️ Could not create the board — check your connection and try again.';});
+    createBoard()
+      .then(function(id){boardId=id; localStorage.setItem(BOARD_LS,id); try{location.hash='board='+id;}catch(e){} $('fv-invite-url').value=inviteURL(); $('fv-invitebox').style.display='block'; $('fv-status2').textContent=''; start();})
+      .catch(function(){$('fv-status2').textContent='⚠️ Could not create the board — please try again in a moment.';});
   };
   $('fv-join').onclick=function(){
     var n=$('fv-name').value.trim(); if(!n){$('fv-name').focus(); return;}
@@ -967,7 +968,7 @@
 
   // boot — board id can arrive via the shared invite link (#board=...) or local storage
   (function(){
-    var m=(location.hash||'').match(/board=([A-Za-z0-9_\-]+)/);
+    var m=(location.hash||'').match(/board=([A-Za-z0-9:_\-]+)/);
     if(m){ boardId=m[1]; localStorage.setItem(BOARD_LS, boardId); }
     else { boardId=localStorage.getItem(BOARD_LS)||''; }
     if(boardId && me()) start();
