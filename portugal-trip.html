@@ -878,45 +878,57 @@
   }
   function showSetup(){
     $('fv-app').style.display='none'; $('fv-setup').style.display='block'; $('fv-name').value=me();
+    var s=$('fv-status2'); if(s) s.textContent='Ready ✓ — enter your name and tap Start.';
   }
 
-  $('fv-start').onclick=function(){
+  // safe binding: a missing element can never break initialization
+  function on(id,fn){var el=$(id); if(el){el.onclick=fn;}}
+  function key(id,fn){var el=$(id); if(el){el.addEventListener('keydown',fn);}}
+
+  on('fv-start',function(){
     var n=$('fv-name').value.trim(); if(!n){$('fv-name').focus(); return;}
     localStorage.setItem(NAME_LS,n); start();
-  };
-  $('fv-change').onclick=function(){showSetup();};
-  $('fv-invite').onclick=doShare;
-  $('fv-invite-copy').onclick=function(){copy(shareURL()); $('fv-copied').textContent='Copied!'; setTimeout(function(){$('fv-copied').textContent='';},2500);};
+  });
+  on('fv-change',function(){showSetup();});
+  on('fv-invite',doShare);
+  on('fv-invite-copy',function(){copy(shareURL()); $('fv-copied').textContent='Copied!'; setTimeout(function(){$('fv-copied').textContent='';},2500);});
 
-  $('fv-idea-add').onclick=function(){
+  on('fv-idea-add',function(){
     var label=$('fv-idea-label').value.trim(); if(!label) return; var cat=$('fv-idea-cat').value;
     mutate(function(s){s.ideas[uid()]={cat:cat,label:label,by:me()};}); $('fv-idea-label').value='';
-  };
-  $('fv-idea-label').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault(); $('fv-idea-add').click();}});
+  });
+  key('fv-idea-label',function(e){if(e.key==='Enter'){e.preventDefault(); $('fv-idea-add').click();}});
 
-  $('fv-req-add').onclick=function(){
+  on('fv-req-add',function(){
     var t=$('fv-req-text').value.trim(); if(!t) return;
     mutate(function(s){s.requests[uid()]={text:t,by:me(),ts:Date.now()};}); $('fv-req-text').value='';
-  };
-  $('fv-cmt-add').onclick=function(){
+  });
+  on('fv-cmt-add',function(){
     var t=$('fv-cmt-text').value.trim(); if(!t) return;
     mutate(function(s){s.comments[uid()]={text:t,by:me(),ts:Date.now()};}); $('fv-cmt-text').value='';
-  };
-  $('fv-cmt-text').addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault(); $('fv-cmt-add').click();}});
+  });
+  key('fv-cmt-text',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault(); $('fv-cmt-add').click();}});
 
   // boot — a shared link (#b=...) carries everyone's merged votes; merge it into this device
-  (function(){
-    state=loadLocal();
-    var m=(location.hash||'').match(/[#&]b=([^&]+)/);
-    if(m){
-      try{
-        var incoming=decodeState(decodeURIComponent(m[1]));
-        state=mergeInto(state, incoming); save();
-        try{history.replaceState(null,'',location.pathname+location.search+'#vote');}catch(e){}
-      }catch(e){}
+  function boot(){
+    try{
+      state=loadLocal();
+      var m=(location.hash||'').match(/[#&]b=([^&]+)/);
+      if(m){
+        try{
+          var incoming=decodeState(decodeURIComponent(m[1]));
+          state=mergeInto(state, incoming); save();
+          try{history.replaceState(null,'',location.pathname+location.search+'#vote');}catch(e){}
+        }catch(e){}
+      }
+      if(me()) start(); else showSetup();
+    }catch(err){
+      var s=$('fv-status2'); if(s) s.textContent='⚠️ '+((err&&err.message)||err);
+      var a=$('fv-app'); if(a) a.style.display='none';
+      var su=$('fv-setup'); if(su) su.style.display='block';
     }
-    if(me()) start(); else showSetup();
-  })();
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',boot); else boot();
 })();
 </script>
 
