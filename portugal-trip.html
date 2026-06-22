@@ -124,7 +124,7 @@
   <a href="#transport">Getting Around</a>
   <a href="#booking">Book It</a>
   <a href="#tips">Tips</a>
-  <a href="#vote">🗳️ Family Vote</a>
+  <a href="#options">🗂️ Options</a>
 </div>
 
 <div class="wrap" id="trip-content">
@@ -313,6 +313,9 @@
       <tr><td><b>Taberna Carolina</b></td><td>Chiado · cozy <b>tasca</b> with really good food</td><td class="book"><a href="https://www.google.com/maps/search/?api=1&query=Taberna+Carolina+Chiado+Lisbon" target="_blank">📍</a></td></tr>
       <tr><td><b>Galeto</b></td><td>Iconic <b>24-hr diner</b> (Saldanha) — retro counter, late-night classic</td><td class="book"><a href="https://www.google.com/maps/search/?api=1&query=Galeto+restaurant+Lisbon" target="_blank">📍</a></td></tr>
       <tr><td><b>Zubir</b></td><td><b>Churrasqueira</b> — Portuguese grilled <b>chicken</b></td><td class="book"><a href="https://www.google.com/maps/search/?api=1&query=Zubir+churrasqueira+Lisbon" target="_blank">📍</a></td></tr>
+      <tr><td><b>A Valenciana</b></td><td>Campo de Ourique · beloved grilled <b>chicken</b> &amp; Portuguese plates</td><td class="book"><a href="https://www.google.com/maps/search/?api=1&query=A+Valenciana+restaurant+Lisbon" target="_blank">📍</a></td></tr>
+      <tr><td><b>Frangasqueira Nacional</b></td><td>Bairro Alto · piri-piri <b>BBQ chicken</b> — grab takeaway for a picnic</td><td class="book"><a href="https://www.google.com/maps/search/?api=1&query=Frangasqueira+Nacional+Lisbon" target="_blank">📍</a></td></tr>
+      <tr><td><b>Tasca Bica</b></td><td>Bairro Alto · Portuguese · signature <b>6-day dry-aged chicken</b></td><td class="book"><a href="https://www.google.com/maps/search/?api=1&query=Tasca+Bica+Lisbon" target="_blank">📍</a></td></tr>
       <tr><td><b>Manteigaria</b> <span class="star">★</span></td><td>Your favorite <b>pastéis de nata</b> — warm, crisp, fresh from the oven</td><td class="book"><a href="https://www.google.com/maps/search/?api=1&query=Manteigaria+Lisbon" target="_blank">📍</a></td></tr>
       <tr><td><b>Maruoko</b></td><td>Near Belém · cult <b>Japanese bakery</b> (Day 2)</td><td class="book"><a href="https://www.google.com/maps/search/?api=1&query=Maruoko+Belem+Lisbon" target="_blank">📍</a></td></tr>
     </table>
@@ -607,331 +610,88 @@
 })();
 </script>
 
-<!-- ===================== FAMILY VOTE & REQUESTS ===================== -->
-<style>
-  #vote-wrap{max-width:780px;margin:0 auto;padding:0 18px 40px}
-  .fv-setup{background:var(--sea);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:12px 0}
-  .fv-setup label{font-weight:600;color:var(--deep);display:block;margin-top:10px;font-size:14px}
-  .fv-setup input{width:100%;margin-top:5px;padding:9px;border:1px solid var(--line);border-radius:9px;font-size:14px}
-  .fv-setup .hint{color:var(--muted);font-size:12px;margin-top:8px;line-height:1.5}
-  .fv-setup button{margin-top:12px;background:var(--rust);color:#fff;border:none;border-radius:9px;padding:9px 16px;font-weight:700;cursor:pointer}
-  .fv-who{font-size:13px;color:var(--muted);margin:6px 0 0}
-  .fv-who b{color:var(--ink)}
-  .fv-who a{cursor:pointer}
-  .fv-cat{margin:18px 0 4px;font-size:16px;color:var(--deep);font-weight:700}
-  .fv-opt{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin:8px 0}
-  .fv-opt .lbl{flex:1;font-size:14.5px;line-height:1.4}
-  .fv-opt .lbl small{display:block;color:var(--muted);font-size:12px;margin-top:2px}
-  .fv-vote{display:flex;align-items:center;gap:7px;white-space:nowrap}
-  .fv-btn{background:var(--sea);color:var(--deep);border:1px solid var(--line);border-radius:20px;
-    padding:6px 12px;font-size:13px;font-weight:700;cursor:pointer;transition:.12s}
-  .fv-btn:hover{background:#fbded0}
-  .fv-btn.on{background:var(--rust);color:#fff;border-color:var(--rust)}
-  .fv-cnt{min-width:20px;text-align:center;font-weight:800;color:var(--deep);font-size:15px}
-  .fv-names{font-size:11.5px;color:var(--muted);margin:-2px 0 6px 2px}
-  .fv-add{display:flex;gap:8px;margin:8px 0 4px;flex-wrap:wrap}
-  .fv-add select,.fv-add input{padding:8px;border:1px solid var(--line);border-radius:9px;font-size:13.5px}
-  .fv-add input{flex:1;min-width:160px}
-  .fv-add button{background:var(--accent);color:#fff;border:none;border-radius:9px;padding:8px 14px;font-weight:700;cursor:pointer}
-  .fv-req{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:8px 0;border-left:5px solid var(--accent)}
-  .fv-req .meta{font-size:12px;color:var(--muted);margin-bottom:4px}
-  .fv-req .meta b{color:var(--accent)}
-  .fv-reqform{display:flex;gap:8px;margin:10px 0}
-  .fv-reqform textarea{flex:1;resize:none;border:1px solid var(--line);border-radius:10px;padding:9px;font-size:14px;font-family:inherit;min-height:42px}
-  .fv-reqform button{background:var(--accent);color:#fff;border:none;border-radius:10px;padding:0 16px;font-weight:700;cursor:pointer}
-  .fv-status{font-size:12px;color:var(--muted);text-align:right;margin-top:6px}
-  .fv-status b{color:#1d7a4d}
-</style>
+<!-- ===================== ALL OPTIONS (static) ===================== -->
+<div class="wrap">
+  <h2 id="options"><span class="ic">🗂️</span>All the Options</h2>
+  <p class="sub">Everything on the table for each part of the trip — browse and pick what you like. (Menus, maps &amp; booking links are in the sections above.)</p>
 
-<div id="vote-wrap">
-  <h2 id="vote" style="color:var(--deep);font-size:24px;margin:38px 0 4px"><span style="margin-right:8px">🗳️</span>Family Vote &amp; Requests</h2>
-  <p class="sub" style="color:var(--muted);margin:0 0 12px;font-size:15px">Pick the hotels, wine days, beaches, boats &amp; restaurants you want, add your own ideas, and drop requests. Then tap <b>📤 Share with family</b> to send your picks — open anyone’s shared link and everyone’s votes merge together. Works on any phone, no apps or accounts.</p>
+  <h3>🛏️ Lisbon Hotel</h3>
+  <div class="card"><ul>
+    <li><b>Bairro Alto Hotel</b> — Chiado · iconic rooftop</li>
+    <li><b>Verride Palácio Santa Catarina</b> — Bica · palace + pool rooftop</li>
+    <li><b>Memmo Príncipe Real</b> — leafy · design hotel</li>
+    <li><b>Four Seasons Ritz</b> — Avenida · grand classic</li>
+  </ul></div>
 
-  <div class="fv-setup" id="fv-setup">
-    <b style="color:var(--deep)" id="fv-setup-title">Start voting</b>
-    <label>Your name</label>
-    <input id="fv-name" placeholder="e.g. Aanya">
-    <div class="hint" id="fv-hint"><b>No accounts. No setup.</b> Enter your name and start. Vote on the options, add ideas &amp; requests, then tap <b>Share with family</b> — when others open your link, all the votes merge. Pass links back and forth to stay in sync.</div>
-    <button id="fv-start">Start →</button>
-    <div class="hint" id="fv-status2"></div>
+  <h3>🍷 Douro Valley Stay</h3>
+  <div class="card"><ul>
+    <li><b>Six Senses Douro Valley</b> — your pick · spa + vineyard pool</li>
+    <li><b>Quinta Nova</b> — working wine estate with rooms <i>(alt)</i></li>
+    <li><b>Quinta de la Rosa</b> — riverside winery stay <i>(alt)</i></li>
+  </ul></div>
+
+  <h3>🛏️ Porto Hotel</h3>
+  <div class="card"><ul>
+    <li><b>The Yeatman</b> — Gaia · wine retreat + pool view</li>
+    <li><b>Maison Albar Le Monumental Palace</b> — central · Belle Époque</li>
+    <li><b>Torel Avantgarde</b> — center · design + river views</li>
+  </ul></div>
+
+  <h3>🍇 Wine Experiences</h3>
+  <div class="card"><ul>
+    <li>🚂 <b>Scenic train</b> Régua → Pinhão</li>
+    <li><b>Private Douro Valley wine day</b> — quinta tastings + lunch</li>
+    <li>⛵ <b>Douro river / rabelo boat cruise</b> from Pinhão</li>
+    <li><b>Graham's</b> port lodge tasting (Gaia)</li>
+    <li><b>Quinta Nova</b> visit &amp; tasting · <b>Quinta de Nápoles</b> (Niepoort) · <b>Quinta do Bomfim</b> (Dow's)</li>
+    <li>Vertical <b>port tasting</b> in the Six Senses Wine Library</li>
+  </ul></div>
+
+  <h3>🍽️ Restaurants &amp; Big Dinners</h3>
+  <div class="card">
+    <p style="margin:0 0 4px;font-weight:700;color:var(--deep)">🏛️ Lisbon</p>
+    <ul style="margin-top:0">
+      <li><b>Belcanto</b> ★★ · <b>Alma</b> ★★ — tasting menus</li>
+      <li><b>Cervejaria Ramiro</b> — legendary seafood</li>
+      <li><b>O Trevo</b> &amp; <b>O Afonso</b> — bifanas (Bourdain favorite)</li>
+      <li><b>A Valenciana</b>, <b>Frangasqueira Nacional</b>, <b>Tasca Bica</b>, <b>Zubir</b> — grilled / piri-piri chicken</li>
+      <li><b>Karater</b> (Georgian) · <b>Taberna Carolina</b> (Chiado tasca) · <b>Galeto</b> (24-hr diner)</li>
+      <li><b>Manteigaria</b> — pastéis de nata · <b>Maruoko</b> — Japanese bakery (Belém)</li>
+    </ul>
+    <p style="margin:10px 0 4px;font-weight:700;color:var(--deep)">🍷 Douro Valley</p>
+    <ul style="margin-top:0">
+      <li><b>DOC by Rui Paula</b> ★ — riverside · the marquee dinner</li>
+      <li><b>Castas e Pratos</b> · <b>Cais da Villa</b> · <b>Quinta do Vallado</b> (Régua)</li>
+      <li><b>Wine House</b> (Quinta da Pacheca) · <b>Cantina</b> (Quinta do Ventozelo) · <b>Terraçu's</b> (Quinta Nova)</li>
+      <li><b>Cozinha da Clara</b> / <b>Rabelos</b> (Pinhão) · <b>Toca da Raposa</b> ★ (splurge)</li>
+      <li>Six Senses resort dining + the garden BBQ night</li>
+    </ul>
+    <p style="margin:10px 0 4px;font-weight:700;color:var(--deep)">🏙️ Porto</p>
+    <ul style="margin-top:0">
+      <li><b>The Yeatman</b> ★★ — wine-paired tasting</li>
+      <li><b>Cozinha das Flores</b> · <b>Euskalduna Studio</b> · <b>Antiqvvm</b> — your Beli</li>
+      <li><b>Pedro Lemos</b> ★ · <b>Le Monument</b> — your Beli</li>
+      <li><b>Café Santiago</b> — the famous francesinha</li>
+      <li>+ your full Porto Beli list in the Dining Plan above</li>
+    </ul>
   </div>
 
-  <div id="fv-invitebox" style="display:none;background:#e3f1f5;border:1px solid #bcdfe6;border-radius:12px;padding:14px 16px;margin:12px 0">
-    <b style="color:#176b7a">📤 Share this link in your family chat — it carries everyone’s votes so far:</b>
-    <input id="fv-invite-url" readonly style="width:100%;margin-top:8px;padding:9px;border:1px solid var(--line);border-radius:9px;font-size:13px">
-    <button id="fv-invite-copy" style="margin-top:10px;background:var(--accent);color:#fff;border:none;border-radius:9px;padding:9px 16px;font-weight:700;cursor:pointer">📋 Copy link</button>
-    <span id="fv-copied" style="color:#1d7a4d;font-weight:700;font-size:13px;margin-left:8px"></span>
-  </div>
+  <h3>🍸 Lisbon Cocktail Bars</h3>
+  <div class="card"><ul>
+    <li><b>Baz</b> · <b>Boavista Social Club</b> · <b>Vago</b> · <b>Bodega Chafa</b> · <b>Cascavel</b> · <b>House of Eor</b></li>
+  </ul></div>
 
-  <div id="fv-app" style="display:none">
-    <p class="fv-who">Voting as <b id="fv-mename"></b> · <a id="fv-change">change name</a> &nbsp;·&nbsp; <a id="fv-invite">📤 share with family</a></p>
-    <div id="fv-board"></div>
-
-    <div class="fv-add">
-      <select id="fv-idea-cat"></select>
-      <input id="fv-idea-label" placeholder="Add your own idea to vote on…">
-      <button id="fv-idea-add">➕ Add idea</button>
-    </div>
-
-    <h3 style="font-size:18px;margin:24px 0 6px;color:var(--ink)">📝 Requests &amp; notes for the trip</h3>
-    <p class="sub" style="color:var(--muted);margin:0 0 8px;font-size:14px">Anything you want on this trip — a dietary need, a must-do, a budget note, “let’s do a spa afternoon.” Everyone can 👍 these too.</p>
-    <div class="fv-reqform">
-      <textarea id="fv-req-text" placeholder="Type a request for the trip…"></textarea>
-      <button id="fv-req-add">Post</button>
-    </div>
-    <div id="fv-reqs"></div>
-
-    <h3 style="font-size:18px;margin:24px 0 6px;color:var(--ink)">💬 Family discussion</h3>
-    <p class="sub" style="color:var(--muted);margin:0 0 8px;font-size:14px">A running comment thread — chat about the plan, ask questions, react to ideas. Everyone sees it live.</p>
-    <div class="fv-reqform">
-      <textarea id="fv-cmt-text" placeholder="Add a comment…"></textarea>
-      <button id="fv-cmt-add">Send</button>
-    </div>
-    <div id="fv-cmts"></div>
-
-    <p class="fv-status" id="fv-status">Connecting…</p>
-  </div>
+  <h3>🗺️ Day-Trip &amp; Extra Ideas</h3>
+  <div class="card"><ul>
+    <li><b>Sintra palaces</b> — Pena + Quinta da Regaleira</li>
+    <li><b>Praia do Guincho</b> — wild Atlantic beach by Cascais</li>
+    <li><b>Cascais + Cabo da Roca</b> — seaside + westernmost point of Europe</li>
+    <li><b>LX Factory</b> (Lisbon) — design shops + street art</li>
+    <li><b>Gaia port-lodge crawl</b> — multiple cellar tastings</li>
+    <li><b>Foz do Douro</b> — Porto's ocean promenade</li>
+    <li><b>Lamego</b> — 686 steps to the sanctuary (Douro day)</li>
+  </ul></div>
 </div>
-
-<script>
-(function(){
-  var NAME_LS='portugal_fv_name', BOARD_LS='portugal_fv_board';
-  var $=function(id){return document.getElementById(id);};
-
-  var CATS=[
-    {key:'lisbon-hotel', icon:'🛏️', title:'Lisbon Hotel'},
-    {key:'douro-hotel',  icon:'🍷', title:'Douro Valley Stay'},
-    {key:'porto-hotel',  icon:'🛏️', title:'Porto Hotel'},
-    {key:'wine',         icon:'🍇', title:'Wine Experiences'},
-    {key:'dining',       icon:'🍽️', title:'Restaurants & Big Dinners'},
-    {key:'day',          icon:'🗺️', title:'Day-Trip Ideas'}
-  ];
-  var OPTS=[
-    {id:'lh-bairro',cat:'lisbon-hotel',label:'Bairro Alto Hotel',sub:'Chiado · iconic rooftop'},
-    {id:'lh-verride',cat:'lisbon-hotel',label:'Verride Palácio Santa Catarina',sub:'Bica · palace + pool rooftop'},
-    {id:'lh-memmo',cat:'lisbon-hotel',label:'Memmo Príncipe Real',sub:'leafy · design hotel'},
-    {id:'lh-fs',cat:'lisbon-hotel',label:'Four Seasons Ritz',sub:'Avenida · grand classic'},
-
-    {id:'dh-sixsenses',cat:'douro-hotel',label:'Six Senses Douro Valley',sub:'your pick · spa + vineyard pool'},
-    {id:'dh-quintanova',cat:'douro-hotel',label:'Quinta Nova (alt)',sub:'working wine estate with rooms'},
-    {id:'dh-larosa',cat:'douro-hotel',label:'Quinta de la Rosa (alt)',sub:'riverside winery stay'},
-
-    {id:'ph-yeatman',cat:'porto-hotel',label:'The Yeatman',sub:'Gaia · wine retreat + pool view'},
-    {id:'ph-albar',cat:'porto-hotel',label:'Maison Albar Le Monumental Palace',sub:'central · Belle Époque'},
-    {id:'ph-torel',cat:'porto-hotel',label:'Torel Avantgarde',sub:'center · design + river views'},
-
-    {id:'w-douro',cat:'wine',label:'Private Douro Valley wine day',sub:'quinta tastings + lunch'},
-    {id:'w-cruise',cat:'wine',label:'Douro river cruise',sub:'classic wooden boat'},
-    {id:'w-grahams',cat:'wine',label:"Graham's port lodge tasting (Gaia)",sub:'tawny + vintage'},
-    {id:'w-quintanova',cat:'wine',label:'Quinta Nova visit & tasting',sub:'"9 must-see wineries"'},
-    {id:'w-napoles',cat:'wine',label:'Quinta de Nápoles (Niepoort)',sub:'private tour + tasting'},
-
-    {id:'d-belcanto',cat:'dining',label:'Belcanto ★★ (Lisbon)',sub:'José Avillez tasting'},
-    {id:'d-alma',cat:'dining',label:'Alma ★★ (Lisbon)',sub:'Sá Pessoa tasting'},
-    {id:'d-ramiro',cat:'dining',label:'Cervejaria Ramiro (Lisbon)',sub:'legendary seafood'},
-    {id:'d-otrevo',cat:'dining',label:'O Trevo (Lisbon)',sub:'bifanas · Bourdain favorite'},
-    {id:'d-manteigaria',cat:'dining',label:'Manteigaria (Lisbon)',sub:'your favorite pastéis de nata'},
-    {id:'d-karater',cat:'dining',label:'Karater (Lisbon)',sub:'Georgian bistro'},
-    {id:'d-carolina',cat:'dining',label:'Taberna Carolina (Lisbon)',sub:'Chiado tasca'},
-    {id:'d-galeto',cat:'dining',label:'Galeto (Lisbon)',sub:'iconic 24-hr diner'},
-    {id:'d-zubir',cat:'dining',label:'Zubir (Lisbon)',sub:'grilled chicken churrasqueira'},
-    {id:'d-doc',cat:'dining',label:'DOC by Rui Paula (Douro)',sub:'riverside vineyard lunch'},
-    {id:'d-yeatman',cat:'dining',label:'The Yeatman ★★ (Porto)',sub:'wine-paired tasting'},
-    {id:'d-cozinha',cat:'dining',label:'Cozinha das Flores (Porto)',sub:'your Beli · Nuno Mendes'},
-    {id:'d-lemonument',cat:'dining',label:'Le Monument (Porto)',sub:'your Beli · French-Portuguese'},
-    {id:'d-pedrolemos',cat:'dining',label:'Pedro Lemos ★ (Porto)',sub:'your Beli · Foz'},
-
-    {id:'day-sintra',cat:'day',label:'Sintra palaces day',sub:'Pena + Regaleira'},
-    {id:'day-guincho',cat:'day',label:'Praia do Guincho beach',sub:'wild Atlantic beach by Cascais'},
-    {id:'day-cascais',cat:'day',label:'Cascais + Cabo da Roca',sub:'seaside + westernmost point'},
-    {id:'day-lx',cat:'day',label:'LX Factory (Lisbon)',sub:'design shops + street art'},
-    {id:'day-bars',cat:'day',label:'Lisbon cocktail crawl',sub:'Baz, Boavista Social Club, Vago…'},
-    {id:'day-gaia',cat:'day',label:'Gaia port-lodge crawl',sub:'multiple cellar tastings'},
-    {id:'day-foz',cat:'day',label:'Foz do Douro (Porto seaside)',sub:'ocean promenade'}
-  ];
-
-  // No external server: votes live in this browser (localStorage) and sync across the
-  // family through a share link that carries the merged state. Works everywhere, no setup.
-  var STATE_LS='portugal_fv_state';
-  var state={options:{}, ideas:{}, requests:{}, comments:{}};
-  function me(){return localStorage.getItem(NAME_LS)||'';}
-  function keyOf(n){return (n||'').toLowerCase().replace(/[^a-z0-9]/g,'')||'anon';}
-  function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,7);}
-  function norm(s){s=s||{}; s.options=s.options||{}; s.ideas=s.ideas||{}; s.requests=s.requests||{}; s.comments=s.comments||{}; return s;}
-
-  function loadLocal(){try{return norm(JSON.parse(localStorage.getItem(STATE_LS)||'{}'));}catch(e){return norm({});}}
-  function save(){try{localStorage.setItem(STATE_LS, JSON.stringify(state));}catch(e){}}
-  function mutate(fn){fn(state); save(); render();}
-
-  function mergeInto(dst,src){
-    dst=norm(dst); src=norm(src);
-    Object.keys(src.options).forEach(function(id){
-      dst.options[id]=dst.options[id]||{};
-      Object.keys(src.options[id]).forEach(function(k){ dst.options[id][k]=src.options[id][k]; });
-    });
-    ['ideas','requests','comments'].forEach(function(coll){
-      Object.keys(src[coll]).forEach(function(pid){ if(!dst[coll][pid]) dst[coll][pid]=src[coll][pid]; });
-    });
-    return dst;
-  }
-  function encodeState(){ return btoa(unescape(encodeURIComponent(JSON.stringify(state)))); }
-  function decodeState(str){ return JSON.parse(decodeURIComponent(escape(atob(str)))); }
-  function shareURL(){ return location.origin+location.pathname+'#b='+encodeState(); }
-
-  function votesFor(id){var v=state.options[id]; return v?Object.keys(v).map(function(k){return v[k];}):[];}
-  function iVoted(id){var v=state.options[id]; return !!(v && v[keyOf(me())]);}
-
-  function toggleVote(id){
-    var k=keyOf(me());
-    mutate(function(s){ s.options[id]=s.options[id]||{}; if(s.options[id][k]) delete s.options[id][k]; else s.options[id][k]=me(); });
-  }
-
-  function optEl(o){
-    var wrap=document.createElement('div'); wrap.className='fv-opt';
-    var lbl=document.createElement('div'); lbl.className='lbl';
-    lbl.innerHTML=o.label+(o.sub?('<small>'+o.sub+'</small>'):'');
-    var vote=document.createElement('div'); vote.className='fv-vote';
-    var cnt=document.createElement('span'); cnt.className='fv-cnt'; cnt.textContent=votesFor(o.id).length;
-    var btn=document.createElement('button'); btn.className='fv-btn'+(iVoted(o.id)?' on':'');
-    btn.textContent=iVoted(o.id)?'👍 Voted':'👍 Vote';
-    btn.onclick=function(){toggleVote(o.id);};
-    vote.appendChild(cnt); vote.appendChild(btn);
-    wrap.appendChild(lbl); wrap.appendChild(vote);
-    var holder=document.createElement('div');
-    holder.appendChild(wrap);
-    var names=votesFor(o.id);
-    if(names.length){var n=document.createElement('div'); n.className='fv-names'; n.textContent='✓ '+names.join(', '); holder.appendChild(n);}
-    return holder;
-  }
-
-  function render(){
-    var board=$('fv-board'); board.innerHTML='';
-    // merge custom ideas into options list
-    var all=OPTS.slice();
-    Object.keys(state.ideas).forEach(function(pid){
-      var it=state.ideas[pid];
-      if(it&&it.label) all.push({id:'idea_'+pid,cat:it.cat||'day',label:it.label,sub:'added by '+(it.by||'family')});
-    });
-    CATS.forEach(function(c){
-      var items=all.filter(function(o){return o.cat===c.key;});
-      if(!items.length) return;
-      var h=document.createElement('div'); h.className='fv-cat'; h.textContent=c.icon+' '+c.title;
-      board.appendChild(h);
-      // sort by votes desc
-      items.sort(function(a,b){return votesFor(b.id).length-votesFor(a.id).length;});
-      items.forEach(function(o){board.appendChild(optEl(o));});
-    });
-    // requests
-    var rl=$('fv-reqs'); rl.innerHTML='';
-    var keys=Object.keys(state.requests).sort(function(a,b){return (state.requests[b].ts||0)-(state.requests[a].ts||0);});
-    if(!keys.length){rl.innerHTML='<p class="sub" style="color:var(--muted);font-size:13.5px">No requests yet — be the first.</p>';}
-    keys.forEach(function(pid){
-      var r=state.requests[pid]; if(!r) return;
-      var id='req_'+pid;
-      var box=document.createElement('div'); box.className='fv-req';
-      var meta=document.createElement('div'); meta.className='meta';
-      meta.innerHTML='<b>'+(r.by||'Family')+'</b> · '+(r.ts?new Date(r.ts).toLocaleDateString():'');
-      var txt=document.createElement('div'); txt.textContent=r.text||'';
-      var vrow=document.createElement('div'); vrow.className='fv-vote'; vrow.style.marginTop='8px';
-      var cnt=document.createElement('span'); cnt.className='fv-cnt'; cnt.textContent=votesFor(id).length;
-      var btn=document.createElement('button'); btn.className='fv-btn'+(iVoted(id)?' on':''); btn.textContent=iVoted(id)?'👍 Voted':'👍';
-      btn.onclick=function(){toggleVote(id);};
-      vrow.appendChild(cnt); vrow.appendChild(btn);
-      box.appendChild(meta); box.appendChild(txt); box.appendChild(vrow);
-      var nm=votesFor(id); if(nm.length){var n=document.createElement('div'); n.className='fv-names'; n.style.marginTop='4px'; n.textContent='✓ '+nm.join(', '); box.appendChild(n);}
-      rl.appendChild(box);
-    });
-    // comments
-    var cl=$('fv-cmts'); cl.innerHTML='';
-    var ck=Object.keys(state.comments).sort(function(a,b){return (state.comments[a].ts||0)-(state.comments[b].ts||0);});
-    if(!ck.length){cl.innerHTML='<p class="sub" style="color:var(--muted);font-size:13.5px">No comments yet — start the conversation.</p>';}
-    ck.forEach(function(pid){
-      var c=state.comments[pid]; if(!c) return;
-      var box=document.createElement('div'); box.className='fv-req'; box.style.borderLeftColor='var(--gold)';
-      var meta=document.createElement('div'); meta.className='meta';
-      meta.innerHTML='<b style="color:var(--gold)">'+(c.by||'Family')+'</b> · '+(c.ts?new Date(c.ts).toLocaleString():'');
-      var txt=document.createElement('div'); txt.textContent=c.text||'';
-      box.appendChild(meta); box.appendChild(txt); cl.appendChild(box);
-    });
-    var voters={}; Object.keys(state.options).forEach(function(id){Object.keys(state.options[id]).forEach(function(k){voters[k]=1;});});
-    var nv=Object.keys(voters).length;
-    $('fv-status').innerHTML='💾 Saved on this device'+(nv?(' · '+nv+' '+(nv===1?'person has':'people have')+' voted here'):'')+' · tap <b>📤 share with family</b> to sync everyone';
-  }
-
-  function fillCatSelect(){var s=$('fv-idea-cat'); s.innerHTML=''; CATS.forEach(function(c){var o=document.createElement('option'); o.value=c.key; o.textContent=c.icon+' '+c.title; s.appendChild(o);});}
-
-  function copy(t){if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){},function(){prompt('Copy this link to share:',t);});}else{prompt('Copy this link to share:',t);}}
-  function doShare(){
-    var url=shareURL();
-    $('fv-invite-url').value=url; $('fv-invitebox').style.display='block';
-    if(navigator.share){navigator.share({title:'Portugal trip — family vote',url:url}).catch(function(){copy(url);});}
-    else{copy(url);}
-    $('fv-copied').textContent='Copied!'; setTimeout(function(){$('fv-copied').textContent='';},2500);
-  }
-
-  function start(){
-    $('fv-setup').style.display='none'; $('fv-app').style.display='block';
-    $('fv-mename').textContent=me();
-    fillCatSelect();
-    state=loadLocal();
-    render();
-  }
-  function showSetup(){
-    $('fv-app').style.display='none'; $('fv-setup').style.display='block'; $('fv-name').value=me();
-    var s=$('fv-status2'); if(s) s.textContent='Ready ✓ — enter your name and tap Start.';
-  }
-
-  // safe binding: a missing element can never break initialization
-  function on(id,fn){var el=$(id); if(el){el.onclick=fn;}}
-  function key(id,fn){var el=$(id); if(el){el.addEventListener('keydown',fn);}}
-
-  on('fv-start',function(){
-    var n=$('fv-name').value.trim(); if(!n){$('fv-name').focus(); return;}
-    localStorage.setItem(NAME_LS,n); start();
-  });
-  on('fv-change',function(){showSetup();});
-  on('fv-invite',doShare);
-  on('fv-invite-copy',function(){copy(shareURL()); $('fv-copied').textContent='Copied!'; setTimeout(function(){$('fv-copied').textContent='';},2500);});
-
-  on('fv-idea-add',function(){
-    var label=$('fv-idea-label').value.trim(); if(!label) return; var cat=$('fv-idea-cat').value;
-    mutate(function(s){s.ideas[uid()]={cat:cat,label:label,by:me()};}); $('fv-idea-label').value='';
-  });
-  key('fv-idea-label',function(e){if(e.key==='Enter'){e.preventDefault(); $('fv-idea-add').click();}});
-
-  on('fv-req-add',function(){
-    var t=$('fv-req-text').value.trim(); if(!t) return;
-    mutate(function(s){s.requests[uid()]={text:t,by:me(),ts:Date.now()};}); $('fv-req-text').value='';
-  });
-  on('fv-cmt-add',function(){
-    var t=$('fv-cmt-text').value.trim(); if(!t) return;
-    mutate(function(s){s.comments[uid()]={text:t,by:me(),ts:Date.now()};}); $('fv-cmt-text').value='';
-  });
-  key('fv-cmt-text',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault(); $('fv-cmt-add').click();}});
-
-  // boot — a shared link (#b=...) carries everyone's merged votes; merge it into this device
-  function boot(){
-    try{
-      state=loadLocal();
-      var m=(location.hash||'').match(/[#&]b=([^&]+)/);
-      if(m){
-        try{
-          var incoming=decodeState(decodeURIComponent(m[1]));
-          state=mergeInto(state, incoming); save();
-          try{history.replaceState(null,'',location.pathname+location.search+'#vote');}catch(e){}
-        }catch(e){}
-      }
-      if(me()) start(); else showSetup();
-    }catch(err){
-      var s=$('fv-status2'); if(s) s.textContent='⚠️ '+((err&&err.message)||err);
-      var a=$('fv-app'); if(a) a.style.display='none';
-      var su=$('fv-setup'); if(su) su.style.display='block';
-    }
-  }
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',boot); else boot();
-})();
-</script>
-
 <!-- ===================== AI EDIT CHATBOT ===================== -->
 <style>
   #gb-fab{position:fixed;right:18px;bottom:18px;z-index:50;background:linear-gradient(160deg,var(--rust),var(--deep));
