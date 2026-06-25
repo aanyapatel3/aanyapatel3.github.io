@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portugal Trip · Option 2 (Faro → Porto)</title>
+<style>
+  :root{
+    --rust:#c2562c;
+    --deep:#8a3417;
+    --sea:#fdeee4;
+    --sand:#fbf6ef;
+    --ink:#2c2622;
+    --muted:#6b5d52;
+    --line:#ecddcd;
+    --accent:#1f7a8c;
+    --gold:#b07d2b;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    color:var(--ink);background:var(--sand);line-height:1.6;
+  }
+  a{color:var(--rust);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:780px;margin:0 auto;padding:0 18px 80px}
+
+  .switch{display:flex;justify-content:center;gap:8px;background:var(--deep);padding:8px 10px;flex-wrap:wrap}
+  .switch a{font-size:12.5px;font-weight:700;color:#fff;opacity:.7;padding:5px 12px;border-radius:20px}
+  .switch a.on{background:rgba(255,255,255,.2);opacity:1}
+  .switch a:hover{opacity:1;text-decoration:none}
+
+  /* Hero */
+  .hero{
+    background:linear-gradient(160deg,var(--rust),var(--deep));
+    color:#fff;text-align:center;padding:46px 20px 44px;
+  }
+  .hero .eyebrow{letter-spacing:3px;text-transform:uppercase;font-size:12px;opacity:.85;margin:0}
+  .hero h1{margin:8px 0 6px;font-size:38px;line-height:1.1}
+  .hero p{margin:0;opacity:.92;font-size:16px}
+  .hero .dates{display:inline-block;margin-top:16px;background:rgba(255,255,255,.15);
+    padding:7px 16px;border-radius:30px;font-size:14px;font-weight:600}
+
+  /* Nav */
+  .nav{position:sticky;top:0;z-index:20;background:rgba(251,246,239,.95);
+    backdrop-filter:blur(6px);border-bottom:1px solid var(--line);
+    display:flex;gap:6px;overflow-x:auto;padding:10px 12px}
+  .nav a{white-space:nowrap;font-size:13px;font-weight:600;color:var(--deep);
+    padding:6px 11px;border-radius:20px;background:var(--sea)}
+  .nav a:hover{background:#fbded0;text-decoration:none}
+
+  h2{font-size:24px;margin:38px 0 4px;color:var(--deep)}
+  h2 .ic{margin-right:8px}
+  .sub{color:var(--muted);margin:0 0 16px;font-size:15px}
+  h3{font-size:18px;margin:22px 0 8px;color:var(--ink)}
+
+  .card{background:#fff;border:1px solid var(--line);border-radius:14px;
+    padding:16px 18px;margin:12px 0;box-shadow:0 1px 3px rgba(120,60,30,.05)}
+  .day{border-left:5px solid var(--rust)}
+  .day .tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:1px;
+    text-transform:uppercase;color:#fff;background:var(--rust);padding:3px 9px;border-radius:20px}
+  .day h3{margin:10px 0 6px}
+
+  .pill{display:inline-block;background:var(--sea);color:var(--deep);font-size:12px;
+    font-weight:600;padding:3px 10px;border-radius:20px;margin:2px 4px 2px 0}
+  .pill.boat{background:#e3f1f5;color:#176b7a}
+  .pill.wine{background:#f3e6ef;color:#8a3b6b}
+
+  table{width:100%;border-collapse:collapse;margin:10px 0;font-size:14.5px}
+  th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--deep);font-size:13px;text-transform:uppercase;letter-spacing:.5px}
+  .book{white-space:nowrap;font-weight:600}
+
+  .note{background:#fff8ec;border:1px solid #f3e2bf;border-radius:12px;
+    padding:12px 16px;margin:14px 0;font-size:14.5px}
+  .note b{color:#9a6a00}
+
+  .star{color:var(--gold)}
+  .foot{text-align:center;color:var(--muted);font-size:13px;margin-top:40px;
+    border-top:1px solid var(--line);padding-top:20px}
+
+  .gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:14px 0}
+  .gallery figure{margin:0}
+  .gallery img{width:100%;height:120px;object-fit:cover;border-radius:10px;display:none}
+  .gallery figcaption{font-size:12px;color:var(--muted);text-align:center;margin-top:3px;font-weight:600}
+  .dayphoto{width:100%;height:170px;object-fit:cover;border-radius:10px;margin:2px 0 10px;display:none}
+
+  .tl{list-style:none;padding-left:0;margin:6px 0 0}
+  .tl li{position:relative;padding:7px 0 7px 72px;border-bottom:1px dashed var(--line);font-size:14px;line-height:1.45}
+  .tl li:last-child{border-bottom:none}
+  .tl .t{position:absolute;left:0;top:7px;font-weight:700;color:var(--rust);font-size:12.5px}
+  .tl .dist{color:var(--muted);font-size:12.5px}
+  .tl .fud{color:var(--accent);font-weight:700}
+</style>
+</head>
+<body>
+
+<div class="switch">
+  <a href="portugal-trip.html">Option 1 · Lisbon → Douro → Porto (9 days)</a>
+  <a href="portugal-trip-2.html" class="on">Option 2 · Faro → Algarve → Porto (10 days)</a>
+</div>
+
+<div class="hero">
+  <p class="eyebrow">Option 2 · In Faro, out Porto</p>
+  <h1>🇵🇹 Portugal, 10 Days</h1>
+  <p>Algarve · Lisbon · Sintra · Douro Valley · Porto</p>
+  <span class="dates">9 nights &nbsp;·&nbsp; South → North, no backtracking</span>
+</div>
+
+<div class="nav">
+  <a href="#overview">Overview</a>
+  <a href="#itinerary">Itinerary</a>
+  <a href="#stay">Hotels</a>
+  <a href="#eat">Dining</a>
+  <a href="#do">Activities</a>
+  <a href="#transport">Getting Around</a>
+  <a href="#tips">Tips</a>
+</div>
+
+<div class="wrap" id="trip-content">
+
+  <!-- OVERVIEW -->
+  <h2 id="overview"><span class="ic">🧭</span>At a Glance</h2>
+  <p class="sub">Start relaxed on the Algarve coast, then run clean south-to-north — Lisbon, the Douro, and a longer finish in Porto — flying home from Porto.</p>
+  <div class="card">
+    <span class="pill">✈️ Arrive Faro (FAO)</span>
+    <span class="pill boat">🏖️ Algarve · 2 nights</span>
+    <span class="pill">🏛️ Lisbon · 2 nights</span>
+    <span class="pill wine">🍷 Six Senses Douro · 2 nights</span>
+    <span class="pill">🏙️ Porto · 3 nights</span>
+    <span class="pill">✈️ Fly home · Porto (OPO)</span>
+  </div>
+  <div class="note"><b>Why it works:</b> the Algarve is the far south, so doing it <b>first</b> (fly into <b>Faro</b>) keeps the whole trip a straight line up to <b>Porto</b> — no backtracking, open-jaw FAO→OPO. You start with beach time to beat jet lag, then build into cities + wine. You unpack four times (Algarve, Lisbon, Douro, Porto). <a href="portugal-trip.html">Prefer fewer stops? See Option 1 →</a></div>
+
+  <div class="gallery">
+    <figure><img data-wiki="Benagil" alt="Algarve"><figcaption>Algarve</figcaption></figure>
+    <figure><img data-wiki="Lisbon" alt="Lisbon"><figcaption>Lisbon</figcaption></figure>
+    <figure><img data-wiki="Douro" alt="Douro Valley"><figcaption>Douro Valley</figcaption></figure>
+    <figure><img data-wiki="Porto" alt="Porto"><figcaption>Porto</figcaption></figure>
+  </div>
+
+  <!-- ITINERARY -->
+  <h2 id="itinerary"><span class="ic">📅</span>Day by Day</h2>
+
+  <div class="card day">
+    <span class="tag">Day 1</span>
+    <h3>🏖️ Arrive Faro → Algarve</h3>
+    <img class="dayphoto" data-wiki="Lagos, Portugal" alt="Algarve">
+    <ul class="tl">
+      <li><span class="t">Midday</span> Land at <b>Faro (FAO)</b>, pick up a rental car. <span class="dist">~45–55 min to Lagos / Carvoeiro / Portimão</span></li>
+      <li><span class="t">Afternoon</span> Check in &amp; settle into the resort — pool, spa, decompress after the flight.</li>
+      <li><span class="t">5:00pm</span> First beach: <b>Praia Dona Ana</b> or <b>Praia da Marinha</b> — golden cliffs &amp; turquoise water.</li>
+      <li><span class="t">8:30pm</span> <span class="fud">🍽️ Dinner:</span> <b>Vista</b> (your #1 Algarve Beli, at Bela Vista) or grilled fish on the Portimão marina.</li>
+    </ul>
+    <div class="note">🚗 A <b>rental car</b> is worth it in the Algarve — the beaches &amp; best tables are spread along the coast and not walkable. Drop it at Faro... actually keep it only here: you'll go car-free for the rest of the trip.</div>
+  </div>
+
+  <div class="card day">
+    <span class="tag">Day 2</span>
+    <h3>⛵ Benagil Caves &amp; Cliffs</h3>
+    <img class="dayphoto" data-wiki="Benagil" alt="Benagil Cave">
+    <ul class="tl">
+      <li><span class="t">9:30am</span> <b>Boat tour to the Benagil Sea Cave</b> — the famous domed cave with the sky-hole, plus hidden grottoes (kayak/SUP tours can land inside).</li>
+      <li><span class="t">12:00pm</span> Swim &amp; sunbathe at <b>Praia da Marinha</b> (one of Europe's most beautiful beaches).</li>
+      <li><span class="t">2:00pm</span> <span class="fud">🍽️ Lunch:</span> cliffside seafood in Carvoeiro or at <b>Restaurante F</b> (Praia da Rocha, your Beli).</li>
+      <li><span class="t">4:30pm</span> <b>Ponta da Piedade</b> (Lagos) — ochre rock arches &amp; the cliff boardwalk; sunset drinks.</li>
+      <li><span class="t">8:30pm</span> <span class="fud">🍽️ Dinner:</span> <b>Vila Joya</b> (2★) or <b>Bon Bon</b> (1★) — the Algarve's destination tables.</li>
+    </ul>
+    <div class="note">⛵ <b>Do Benagil at 9–10am</b> to beat the midday boat traffic &amp; actually get inside the cave.</div>
+  </div>
+
+  <div class="card day">
+    <span class="tag">Day 3</span>
+    <h3>Algarve → Lisbon</h3>
+    <img class="dayphoto" data-wiki="Alfama" alt="Lisbon">
+    <ul class="tl">
+      <li><span class="t">Morning</span> Return the car at Faro, then <b>train Faro → Lisboa</b> (~3h) — or a quick flight. <span class="dist">Comfortable intercity train, scenic</span></li>
+      <li><span class="t">Afternoon</span> Check in, then wander <b>Chiado &amp; Príncipe Real</b> — a first <b>bifana at O Trevo</b> &amp; a <b>Manteigaria</b> nata.</li>
+      <li><span class="t">6:30pm</span> Sunset at <b>Miradouro de São Pedro de Alcântara</b> with a glass of white port.</li>
+      <li><span class="t">8:30pm</span> <span class="fud">🍽️ Dinner:</span> Belcanto (2★) or Cervejaria Ramiro — then a nightcap at <b>Boavista Social Club</b>.</li>
+    </ul>
+  </div>
+
+  <div class="card day">
+    <span class="tag">Day 4</span>
+    <h3>Lisbon — Alfama &amp; Belém</h3>
+    <img class="dayphoto" data-wiki="Belém Tower" alt="Belém Tower">
+    <ul class="tl">
+      <li><span class="t">9:00am</span> <b>Alfama</b> — ride <b>Tram 28</b>, climb to <b>Castelo de São Jorge</b> for the river view.</li>
+      <li><span class="t">12:00pm</span> <span class="fud">🍽️ Lunch:</span> chicken at <b>A Valenciana</b> — or piri-piri takeaway from <b>Frangasqueira Nacional</b>.</li>
+      <li><span class="t">1:30pm</span> <b>Belém</b> — <b>Jerónimos Monastery</b> &amp; <b>Belém Tower</b>, warm <b>Pastéis de Belém</b> + a bake at <b>Maruoko</b>.</li>
+      <li><span class="t">4:00pm</span> <b>MAAT</b> riverfront + <b>LX Factory</b> (design shops &amp; street art).</li>
+      <li><span class="t">8:30pm</span> <span class="fud">🍽️ Dinner:</span> Alma (2★) — or casual at <b>Karater</b> (Georgian) / <b>Taberna Carolina</b>.</li>
+    </ul>
+    <div class="note">🏰 <b>Love Sintra?</b> With only two Lisbon days it's a tight squeeze — swap this city day for a <b>Sintra day trip</b> (Pena Palace + Quinta da Regaleira) if the palaces matter more than Belém. Option 1 builds Sintra in fully.</div>
+  </div>
+
+  <div class="card day">
+    <span class="tag">Day 5</span>
+    <h3>🍷 Lisbon → Douro Valley</h3>
+    <img class="dayphoto" data-wiki="Douro" alt="Douro Valley">
+    <ul class="tl">
+      <li><span class="t">9:00am</span> <b>Alfa Pendular train Lisboa → Porto</b> (~2h50), then a scenic transfer to the <b>Douro Valley</b>. <span class="dist">~1h30 more</span></li>
+      <li><span class="t">2:30pm</span> Check in at <b>Six Senses Douro Valley</b> — terrace lunch, vineyard infinity pool, a glass of white port.</li>
+      <li><span class="t">4:30pm</span> Guided tasting in the <b>Wine Library</b> + an estate stroll.</li>
+      <li><span class="t">8:00pm</span> <span class="fud">🍽️ Dinner</span> at the resort (Vale de Abraão), relaxed after the travel day.</li>
+    </ul>
+  </div>
+
+  <div class="card day">
+    <span class="tag">Day 6</span>
+    <h3>🍇 Douro Wine Day — Pinhão</h3>
+    <img class="dayphoto" data-wiki="Pinhão" alt="Pinhão, Douro">
+    <ul class="tl">
+      <li><span class="t">10:00am</span> 🚂 <b>Scenic train Régua → Pinhão</b> — one of the world's prettiest rail rides (sit river side).</li>
+      <li><span class="t">10:30am</span> Explore <b>Pinhão</b> &amp; its <b>azulejo-tiled train station</b>; a private driver meets you here.</li>
+      <li><span class="t">11:15am</span> <b>Quinta tour &amp; tasting</b> — Quinta do Bomfim (Dow's) or Quinta Nova.</li>
+      <li><span class="t">1:00pm</span> <span class="fud">🍽️ Vineyard lunch</span> with wine pairing — Quinta de la Rosa or Quinta do Bomfim.</li>
+      <li><span class="t">3:30pm</span> ⛵ <b>Rabelo boat tour</b> from Pinhão + the <b>Casal de Loivos</b> viewpoint.</li>
+      <li><span class="t">8:00pm</span> <span class="fud">🍽️ Dinner:</span> Six Senses sommelier pairings, or <b>DOC by Rui Paula</b> on the river.</li>
+    </ul>
+  </div>
+
+  <div class="card day">
+    <span class="tag">Day 7</span>
+    <h3>Douro → Porto</h3>
+    <img class="dayphoto" data-wiki="Ribeira, Porto" alt="Ribeira, Porto">
+    <ul class="tl">
+      <li><span class="t">10:30am</span> Slow morning at the resort, then transfer to <b>Porto</b>. <span class="dist">~1h30</span></li>
+      <li><span class="t">1:00pm</span> Check in, then <span class="fud">🍽️ lunch in the Ribeira</span> — <b>Taberna dos Mercadores</b> (your Beli) by the <b>Dom Luís I Bridge</b>.</li>
+      <li><span class="t">4:00pm</span> <b>Livraria Lello</b> &amp; <b>São Bento</b> station's azulejo hall.</li>
+      <li><span class="t">6:00pm</span> Cross to <b>Vila Nova de Gaia</b> for a <b>port cellar tasting</b> (Graham's / Taylor's) at golden hour.</li>
+      <li><span class="t">8:30pm</span> <span class="fud">🍽️ Dinner:</span> <b>Cozinha das Flores</b> or <b>Euskalduna Studio</b> (your Beli).</li>
+    </ul>
+  </div>
+
+  <div class="card day">
+    <span class="tag">Day 8</span>
+    <h3>Porto at Leisure</h3>
+    <img class="dayphoto" data-wiki="Foz do Douro" alt="Foz do Douro, Porto">
+    <ul class="tl">
+      <li><span class="t">9:30am</span> Brunch (Zenith / do Norte), then the <b>Bolsa Palace</b> &amp; <b>Clérigos Tower</b>.</li>
+      <li><span class="t">12:30pm</span> <span class="fud">🍽️ Lunch:</span> the famous <b>francesinha</b> at Café Santiago — or your Beli: <b>Gruta</b> / <b>MISTU</b>.</li>
+      <li><span class="t">2:30pm</span> Tram to <b>Foz do Douro</b> — where the river meets the Atlantic; oceanfront promenade.</li>
+      <li><span class="t">5:00pm</span> <b>Cedofeita</b> design shops &amp; galleries (peek at <b>Apego</b> / <b>Atrevo</b>).</li>
+      <li><span class="t">8:30pm</span> <span class="fud">🍽️ Dinner:</span> The Yeatman (2★) or Pedro Lemos (1★) in Foz.</li>
+    </ul>
+  </div>
+
+  <div class="card day">
+    <span class="tag">Day 9</span>
+    <h3>Porto — Bonus Day</h3>
+    <img class="dayphoto" data-wiki="Guimarães" alt="Guimarães">
+    <ul class="tl">
+      <li><span class="t">Morning</span> Your call: the <b>Serralves</b> museum &amp; gardens, more Gaia cellars, or a half-day trip to <b>Guimarães</b> (Portugal's birthplace) or <b>Braga</b>. <span class="dist">~45–60 min by train</span></li>
+      <li><span class="t">1:00pm</span> <span class="fud">🍽️ Lunch</span> out — a Beli spot like <b>Pata Gorda</b> or <b>InDiferente</b>.</li>
+      <li><span class="t">4:00pm</span> A <b>Douro river cruise</b> from the Ribeira (the Six Bridges loop), or last shopping.</li>
+      <li><span class="t">8:30pm</span> <span class="fud">🍽️ Last dinner:</span> <b>Le Monument</b> or <b>Antiqvvm</b> (your Beli).</li>
+    </ul>
+    <div class="note">🗺️ The 3rd Porto night gives you a flexible <b>bonus day</b> — pick a day trip, a museum, or just a slow Porto day. Save the easiest plan for last so the flight day is stress-free.</div>
+  </div>
+
+  <div class="card day">
+    <span class="tag">Day 10</span>
+    <h3>Fly Home ✈️ — from Porto</h3>
+    <ul class="tl">
+      <li><span class="t">Morning</span> Last <i>pastel de nata</i>, then to <b>Porto Airport (OPO)</b>. <span class="dist">~25–30 min by Uber/Bolt or metro</span></li>
+      <li><span class="t">Midday</span> ✈️ Fly home from Porto. 🎉</li>
+    </ul>
+  </div>
+
+  <!-- HOTELS -->
+  <h2 id="stay"><span class="ic">🛏️</span>Where to Stay</h2>
+  <table>
+    <tr><th>Base</th><th>Picks</th></tr>
+    <tr><td>🏖️ <b>Algarve</b> (2 nts)</td><td><a href="https://www.booking.com/searchresults.html?ss=Bela+Vista+Hotel+Spa+Portimao&group_adults=2&no_rooms=1&group_children=0" target="_blank">Bela Vista</a> (home of Vista) · <a href="https://www.booking.com/searchresults.html?ss=Vila+Vita+Parc+Algarve&group_adults=2&no_rooms=1&group_children=0" target="_blank">Vila Vita Parc</a> · <a href="https://www.booking.com/searchresults.html?ss=Conrad+Algarve+Quinta+do+Lago&group_adults=2&no_rooms=1&group_children=0" target="_blank">Conrad Algarve</a></td></tr>
+    <tr><td>🏛️ <b>Lisbon</b> (2 nts)</td><td><a href="https://www.booking.com/searchresults.html?ss=Bairro+Alto+Hotel+Lisbon&group_adults=2&no_rooms=1&group_children=0" target="_blank">Bairro Alto Hotel</a> · <a href="https://www.booking.com/searchresults.html?ss=Verride+Palacio+Santa+Catarina+Lisbon&group_adults=2&no_rooms=1&group_children=0" target="_blank">Verride</a> · <a href="https://www.booking.com/searchresults.html?ss=Memmo+Principe+Real+Lisbon&group_adults=2&no_rooms=1&group_children=0" target="_blank">Memmo Príncipe Real</a></td></tr>
+    <tr><td>🍷 <b>Douro</b> (2 nts)</td><td><a href="https://www.sixsenses.com/en/resorts/douro-valley" target="_blank">Six Senses Douro Valley</a> · <a href="https://www.booking.com/searchresults.html?ss=Quinta+Nova+Douro&group_adults=2&no_rooms=1&group_children=0" target="_blank">Quinta Nova</a> (alt)</td></tr>
+    <tr><td>🏙️ <b>Porto</b> (3 nts)</td><td><a href="https://www.booking.com/searchresults.html?ss=The+Yeatman+Porto&group_adults=2&no_rooms=1&group_children=0" target="_blank">The Yeatman</a> · <a href="https://www.booking.com/searchresults.html?ss=Torel+Avantgarde+Porto&group_adults=2&no_rooms=1&group_children=0" target="_blank">Torel Avantgarde</a> · <a href="https://www.booking.com/searchresults.html?ss=Maison+Albar+Le+Monumental+Palace+Porto&group_adults=2&no_rooms=1&group_children=0" target="_blank">Maison Albar</a></td></tr>
+  </table>
+
+  <!-- DINING -->
+  <h2 id="eat"><span class="ic">🍽️</span>Dining Highlights</h2>
+  <p class="sub">The headline picks per stop — your full Beli lists, menus &amp; map links live on <a href="portugal-trip.html#eat">Option 1's dining plan →</a></p>
+  <table>
+    <tr><th>Stop</th><th>Eat here</th></tr>
+    <tr><td>🏖️ Algarve</td><td><b>Vista</b> ★ (your #1 Beli) · <b>Vila Joya</b> ★★ · <b>Bon Bon</b> ★ · Restaurante F · NUMA · NoSoloÁgua</td></tr>
+    <tr><td>🏛️ Lisbon</td><td><b>Belcanto</b> ★★ · <b>Alma</b> ★★ · Cervejaria Ramiro · O Trevo (bifana) · A Valenciana / Frangasqueira (chicken) · Manteigaria · Karater</td></tr>
+    <tr><td>🍷 Douro</td><td>Six Senses · <b>DOC by Rui Paula</b> ★ · Quinta de la Rosa · Castas e Pratos</td></tr>
+    <tr><td>🏙️ Porto</td><td><b>The Yeatman</b> ★★ · Cozinha das Flores · Euskalduna · Pedro Lemos ★ · Le Monument · Antiqvvm</td></tr>
+  </table>
+
+  <!-- ACTIVITIES -->
+  <h2 id="do"><span class="ic">🎟️</span>Activities to Book</h2>
+  <table>
+    <tr><th>Activity</th><th>When</th><th class="book">Book</th></tr>
+    <tr><td>⛵ Benagil Cave boat tour</td><td>Day 2</td><td class="book"><a href="https://www.getyourguide.com/s/?q=Benagil%20cave%20boat%20tour" target="_blank">GetYourGuide</a></td></tr>
+    <tr><td>🚣 Benagil kayak / SUP</td><td>Day 2</td><td class="book"><a href="https://www.getyourguide.com/s/?q=Benagil%20kayak" target="_blank">GetYourGuide</a></td></tr>
+    <tr><td>🚂 Scenic train Régua → Pinhão</td><td>Day 6</td><td class="book"><a href="https://www.cp.pt/passageiros/en" target="_blank">CP.pt</a></td></tr>
+    <tr><td>🍇 Private Douro wine tour + rabelo boat</td><td>Day 6</td><td class="book"><a href="https://www.getyourguide.com/s/?q=Douro%20Valley%20private%20wine%20tour" target="_blank">GetYourGuide</a></td></tr>
+    <tr><td>🍷 Port cellar tasting (Gaia)</td><td>Day 7</td><td class="book"><a href="https://www.getyourguide.com/s/?q=Porto%20port%20cellar%20tasting" target="_blank">GetYourGuide</a></td></tr>
+    <tr><td>🏰 Sintra day trip (if you swap Day 4)</td><td>Day 4</td><td class="book"><a href="https://www.getyourguide.com/s/?q=Sintra%20day%20tour%20from%20Lisbon" target="_blank">GetYourGuide</a></td></tr>
+    <tr><td>🚐 Guimarães / Braga half-day (optional)</td><td>Day 9</td><td class="book"><a href="https://www.getyourguide.com/s/?q=Guimaraes%20Braga%20from%20Porto" target="_blank">GetYourGuide</a></td></tr>
+  </table>
+
+  <!-- TRANSPORT -->
+  <h2 id="transport"><span class="ic">🚆</span>Getting Around</h2>
+  <table>
+    <tr><th>Leg</th><th>Best way</th><th>Time</th></tr>
+    <tr><td>Faro airport → Algarve base</td><td><b>Rental car</b></td><td>~45–55 min</td></tr>
+    <tr><td>Around the Algarve</td><td>Rental car</td><td>—</td></tr>
+    <tr><td>Algarve (Faro) → Lisbon</td><td>Intercity train (or short flight)</td><td>~3h</td></tr>
+    <tr><td>Lisbon → Porto</td><td><b>Alfa Pendular train</b></td><td>~2h50</td></tr>
+    <tr><td>Porto ↔ Douro Valley</td><td>Resort transfer / private car</td><td>~1h30</td></tr>
+    <tr><td>Around the cities</td><td>Uber / Bolt + walking</td><td>—</td></tr>
+    <tr><td>Porto center → airport (OPO)</td><td>Uber/Bolt or metro (line E)</td><td>~25–30 min</td></tr>
+  </table>
+  <p>Book trains on <a href="https://www.cp.pt/passageiros/en" target="_blank">CP.pt</a> · return the rental car at Faro before the Lisbon train · ask Six Senses to arrange the Douro transfers.</p>
+
+  <!-- TIPS -->
+  <h2 id="tips"><span class="ic">💡</span>Quick Tips</h2>
+  <div class="card">
+    <ul>
+      <li><b>Open-jaw flight:</b> in <b>Faro (FAO)</b>, out <b>Porto (OPO)</b> — no backtracking.</li>
+      <li><b>Rent the car only for the Algarve</b>; return it at Faro and go car-free (trains + Uber/Bolt) after.</li>
+      <li><b>Benagil at 9–10am</b> beats the crowds; book the cave boat ahead.</li>
+      <li><b>Two Lisbon days is tight</b> — decide between a city day (Belém) and a Sintra day trip.</li>
+      <li><b>Book the marquee tables &amp; Six Senses early</b> (Belcanto, Alma, Vila Joya, The Yeatman).</li>
+      <li><b>Shoulder season (May/Jun, Sep/Oct)</b> is ideal — warm coast, gorgeous Douro, fewer crowds.</li>
+    </ul>
+  </div>
+
+  <div class="foot">
+    Option 2 · 10-day Portugal family trip · Algarve → Lisbon → Douro → Porto<br>
+    Restaurant picks from your <a href="https://beliapp.co/app/aanyap" target="_blank">Beli</a> + Find Us Lost &amp; Our Travel Passport · <a href="portugal-trip.html">← Back to Option 1</a>
+  </div>
+
+</div>
+
+<!-- ===================== AUTO-LINKER: makes every place a link ===================== -->
+<script>
+(function(){
+  function maps(q){return 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(q+' Portugal');}
+  var L={
+    // Algarve
+    'Faro':maps('Faro Airport'),'Lagos':maps('Lagos Algarve'),'Carvoeiro':maps('Carvoeiro Algarve'),'Portimão':maps('Portimao Algarve'),
+    'Praia Dona Ana':maps('Praia Dona Ana Lagos'),'Praia da Marinha':maps('Praia da Marinha Algarve'),'Benagil':maps('Benagil cave Algarve'),
+    'Ponta da Piedade':maps('Ponta da Piedade Lagos'),'Praia da Rocha':maps('Praia da Rocha Portimao'),
+    'Vista':'https://www.vistarestaurante.com/en/','Vila Joya':'https://www.vilajoya.com/en/','Bon Bon':'https://www.bonbon.pt/en/',
+    'Restaurante F':'https://www.google.com/search?q=Restaurante+F+Praia+da+Rocha','NUMA':'https://www.google.com/search?q=NUMA+Restaurante+Portimao','NoSoloÁgua':'https://www.google.com/search?q=NoSoloAgua+Portimao',
+    // Lisbon
+    'Chiado':maps('Chiado Lisbon'),'Príncipe Real':maps('Principe Real Lisbon'),'Alfama':maps('Alfama Lisbon'),'Tram 28':maps('Tram 28 Lisbon'),
+    'Castelo de São Jorge':maps('Castelo de Sao Jorge Lisbon'),'Belém':maps('Belem Lisbon'),'Jerónimos Monastery':maps('Jeronimos Monastery Lisbon'),
+    'Belém Tower':maps('Belem Tower Lisbon'),'MAAT':maps('MAAT museum Lisbon'),'LX Factory':maps('LX Factory Lisbon'),
+    'Miradouro de São Pedro de Alcântara':maps('Miradouro de Sao Pedro de Alcantara Lisbon'),
+    'Belcanto':'https://www.belcanto.pt/en/','Alma':'https://www.almalisboa.pt/en/','Cervejaria Ramiro':'https://www.cervejariaramiro.com/',
+    'O Trevo':'https://www.google.com/search?q=O+Trevo+Lisbon','Manteigaria':'https://www.google.com/search?q=Manteigaria+Lisbon',
+    'A Valenciana':'https://www.google.com/search?q=A+Valenciana+restaurant+Lisbon','Frangasqueira Nacional':'https://www.google.com/search?q=Frangasqueira+Nacional+Lisbon',
+    'Karater':'https://www.google.com/search?q=Karater+Georgian+Lisbon','Taberna Carolina':'https://www.google.com/search?q=Taberna+Carolina+Chiado+Lisbon',
+    'Maruoko':maps('Maruoko Belem Lisbon'),'Boavista Social Club':maps('Boavista Social Club Lisbon'),
+    // Sintra
+    'Sintra':maps('Sintra'),'Pena Palace':maps('Pena Palace Sintra'),'Quinta da Regaleira':maps('Quinta da Regaleira Sintra'),
+    // Douro
+    'Douro Valley':maps('Douro Valley'),'Pinhão':maps('Pinhao Douro'),'Régua':maps('Peso da Regua'),
+    'Quinta do Bomfim':'https://www.bomfim1896.com/','Quinta Nova':'https://www.quintanova.com/en/','Quinta de la Rosa':'https://www.quintadelarosa.com/',
+    'DOC by Rui Paula':'https://ruipaula.pt/restaurante/doc/','Six Senses Douro Valley':'https://www.sixsenses.com/en/resorts/douro-valley',
+    'Casal de Loivos':maps('Miradouro de Casal de Loivos'),'Castas e Pratos':'https://www.google.com/search?q=Castas+e+Pratos+Regua',
+    // Porto
+    'Ribeira':maps('Ribeira Porto'),'Dom Luís I Bridge':maps('Dom Luis I Bridge Porto'),'Livraria Lello':'https://www.livrarialello.pt/en/',
+    'São Bento':maps('Sao Bento railway station Porto'),'Vila Nova de Gaia':maps('Vila Nova de Gaia'),'Bolsa Palace':maps('Palacio da Bolsa Porto'),
+    'Clérigos Tower':maps('Clerigos Tower Porto'),'Foz do Douro':maps('Foz do Douro Porto'),'Cedofeita':maps('Cedofeita Porto'),
+    'Serralves':maps('Serralves Porto'),'Guimarães':maps('Guimaraes'),'Braga':maps('Braga'),
+    'The Yeatman':'https://www.the-yeatman-hotel.com/en/','Cozinha das Flores':'http://cozinhadasflores.com/','Euskalduna Studio':'http://www.euskaldunastudio.pt/',
+    'Pedro Lemos':'https://www.pedrolemos.net/','Le Monument':'https://www.maison-albar-hotels-le-monumental-palace.com/pt/page/le-monument.3809.html',
+    'Antiqvvm':'http://www.antiqvvm.pt/','Taberna dos Mercadores':'https://tabernadosmercadores.shop/','Café Santiago':'https://www.google.com/search?q=Cafe+Santiago+Porto',
+    'Gruta':'http://grutaporto.com/','MISTU':'http://mistu.pt/','Pata Gorda':'https://www.instagram.com/patagorda.porto/','InDiferente':'https://indiferente.pt/',
+    'Apego':'https://www.apegorestaurante.com/','Atrevo':'https://atrevorestaurante.com/'
+  };
+  var keys=Object.keys(L).sort(function(a,b){return b.length-a.length;});
+  function linkify(root){
+    if(!root) return;
+    var walker=document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {acceptNode:function(n){
+      if(!n.nodeValue||!n.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+      var p=n.parentNode;
+      while(p&&p!==root){var t=p.tagName; if(t==='A'||t==='SCRIPT'||t==='STYLE'||t==='H2') return NodeFilter.FILTER_REJECT; p=p.parentNode;}
+      return NodeFilter.FILTER_ACCEPT;
+    }});
+    var nodes=[],n; while((n=walker.nextNode())) nodes.push(n);
+    var done={};
+    nodes.forEach(function(node){
+      for(var i=0;i<keys.length;i++){
+        var key=keys[i]; if(done[key]) continue;
+        var idx=node.nodeValue.indexOf(key); if(idx<0) continue;
+        var before=node.nodeValue[idx-1], after=node.nodeValue[idx+key.length];
+        if(before&&/[A-Za-zÀ-ÿ]/.test(before)) continue;
+        if(after&&/[A-Za-zÀ-ÿ]/.test(after)) continue;
+        var a=document.createElement('a'); a.href=L[key]; a.target='_blank'; a.rel='noopener'; a.textContent=key;
+        var post=node.splitText(idx); post.nodeValue=post.nodeValue.slice(key.length);
+        node.parentNode.insertBefore(a, post); done[key]=1; return;
+      }
+    });
+  }
+  function run(){ linkify(document.getElementById('trip-content')); }
+  if(document.readyState!=='loading') setTimeout(run,300); else document.addEventListener('DOMContentLoaded',function(){setTimeout(run,300);});
+})();
+</script>
+
+<!-- Photo loader: pulls real images from Wikipedia at load time -->
+<script>
+(function(){
+  function load(img){
+    var title=img.getAttribute('data-wiki');
+    var api='https://en.wikipedia.org/w/api.php?action=query&format=json&origin=*&prop=pageimages&piprop=thumbnail&pithumbsize=900&titles='+encodeURIComponent(title);
+    fetch(api).then(function(r){return r.json();}).then(function(d){
+      var pages=d.query&&d.query.pages; if(!pages) return;
+      var p=pages[Object.keys(pages)[0]];
+      if(p&&p.thumbnail&&p.thumbnail.source){ img.src=p.thumbnail.source; img.style.display='block'; }
+    }).catch(function(){});
+  }
+  function run(){ document.querySelectorAll('img[data-wiki]').forEach(load); }
+  if(document.readyState!=='loading') run(); else document.addEventListener('DOMContentLoaded', run);
+})();
+</script>
+</body>
+</html>
